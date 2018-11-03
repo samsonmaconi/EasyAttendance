@@ -17,6 +17,8 @@
     <color name="colorPrimaryDark">@color/colorGreyDark</color>
     <color name="colorAccent">@color/colorOrange</color>
 
+    <color name="colorRed_pressed">#ec021f</color>
+    <color name="colorGreen_pressed">#569f00</color>
     <color name="colorOrange_pressed">#ff5722</color>
     <color name="colorBlue_pressed">#186499</color>
     <color name="colorGrey_pressed">@color/colorCream</color>
