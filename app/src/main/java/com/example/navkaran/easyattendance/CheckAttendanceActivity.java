@@ -20,7 +20,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class check_attendance extends AppCompatActivity {
+public class CheckAttendanceActivity extends AppCompatActivity {
 
     private Runnable runnable;
     private ArrayList<String> classList;
