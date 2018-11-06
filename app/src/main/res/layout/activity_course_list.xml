@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CourseListActivity"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        android:text="Select Course"
+        android:textSize="20sp"
+        android:textColor="#124e78"
+        android:textStyle="bold"/>
+
+    <ListView
+        android:id="@+id/lvCourses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textDescription"
+        android:layout_centerHorizontal="true">
+
+    </ListView>
+
+</RelativeLayout>
