@@ -28,7 +28,6 @@ public class check_attendance extends AppCompatActivity {
     private String classID;
     private Button refresh;
     private Button sign_attendance;
-    // dropdown list
     private Spinner spinner;
 
     @Override
