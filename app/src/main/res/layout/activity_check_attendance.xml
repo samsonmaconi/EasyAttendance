@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".check_attendance">
+
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="16dp"
+        android:text="F5" />
+
+    <TextView
+        android:id="@+id/lable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn"
+        android:padding="16dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        android:text="Select Course"/>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/lable"
+        android:background="@color/colorOrange"/>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_margin="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line"/>
+
+    <Button
+        android:id="@+id/btn_iamhere"
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:layout_marginTop="222dp"
+        android:layout_below="@id/spinner"
+        android:background="@drawable/ic_fiber_manual_record"
+        android:text="SIGN ATTENDANCE"
+        android:textColor="@color/colorWhite"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"/>
+
+
+</RelativeLayout>
