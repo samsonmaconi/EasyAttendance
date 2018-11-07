@@ -8,7 +8,7 @@
         android:id="@+id/imageView"
         android:layout_width="64dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_how_to_reg" />
+        android:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/action_bar_title"
