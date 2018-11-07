@@ -23,6 +23,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_select_user_type"
             android:theme="@style/FullscreenTheme"></activity>
+
+      <activity android:name=".CheckAttendanceActivity"></activity>
+      <activity android:name=".TakeAttendanceActivity"></activity>
     </application>
 
 </manifest>
