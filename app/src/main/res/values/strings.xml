@@ -25,7 +25,7 @@
     <string name="student">I am a Student</string>
     <string name="app_Title">Start</string>
 
-    <string name="title_activity_select_user_type">select_user_type</string>
+    <string name="title_activity_select_user_type">Select User</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
