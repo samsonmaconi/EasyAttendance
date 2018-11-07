@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#124E78</color>
-    <color name="colorPrimaryDark">#0e3e60</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="colorNothing">#00ffffff</color>
-    <color name="colorOrange">#D74E09</color>
-    <color name="colorWhite">#ffffff</color>
+    <color name="colorOrange">#d74e09</color>
+    <color name="colorBlue">#124e78</color>
+    <color name="colorGold">#F2BB05</color>
+    <color name="colorCream">#F0F0C9</color>
+    <color name="colorGreyDark">#424242</color>
+    <color name="colorGreyMedium">#9B9B9B</color>
+    <color name="colorGreyLight">#e0e0e0</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteFaded">#99ffffff</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorRed">#E00</color>
+    <color name="colorGreen">#417505</color>
+    <color name="colorRed">#D0021B</color>
+
+    <color name="colorPrimary">@color/colorBlue</color>
+    <color name="colorPrimaryDark">@color/colorGreyDark</color>
+    <color name="colorAccent">@color/colorOrange</color>
+
+    <color name="colorRed_pressed">#ec021f</color>
+    <color name="colorGreen_pressed">#569f00</color>
+    <color name="colorOrange_pressed">#ff5722</color>
+    <color name="colorBlue_pressed">#186499</color>
+    <color name="colorGrey_pressed">@color/colorCream</color>
+
+    <color name="colorNavBar_hasFocus">@color/colorWhite</color>
+    <color name="colorNavBar_lostFocus">@color/colorWhiteFaded</color>
+    <color name="colorBottomNavBar">@color/colorPrimaryDark</color>
+
+
+    <color name="colorBlue_bg_shade1">#a7cbe6</color>
+    <color name="colorBlue_bg_shade2">#4285b4</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

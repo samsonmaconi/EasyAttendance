@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">EasyAttendance</string>
+
+    <string name="action_done">Done</string>
+    <string name="action_save">Save</string>
+    <string name="action_i_am_a_teacher">I am a teacher</string>
+    <string name="action_i_am_a_student">I am a student</string>
+    <string name="action_start_attendance">Start Attendance</string>
+    <string name="action_stop_attendance">Stop Attendance</string>
+    <string name="action_mark_attendance">Mark Attendance</string>
+
+    <string name="label_select_course">Select Course</string>
+    <string name="label_staff_id">Staff ID</string>
+    <string name="label_student_id">Student ID</string>
+
+    <string name="hint_select_a_course">Please select a course</string>
+    <string name="hint_example_id">e.g B00801169</string>
+
+    <string name="formatString_checked_in">%1$d of %2$d checked-in</string>
+    <string name="formatString_in_attendance">%1$d of %2$d in attendance</string>
+    <string name="formatString_alert_success">You have successfully marked your attendance for %1$s</string>
+    <string name="formatString_alert_failure_distance">Unable to mark attendance for %1$s. Please ensure you are within the vicinity of the teacher.</string>
+    <string name="formatString_alert_failure_availability">Unable to mark attendance for %1$s. Not currently available.</string>
+    <string name="teacher">I am a Teacher</string>
+    <string name="student">I am a Student</string>
+    <string name="app_Title">Start</string>
+
+    <string name="title_activity_select_user_type">Select User</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
 </resources>

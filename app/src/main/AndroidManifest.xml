@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.navkaran.easyattendance">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,8 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CheckAttendanceActivity"></activity>
-        <activity android:name=".TakeAttendanceActivity"></activity>
+        <activity
+            android:name=".select_user_type"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_select_user_type"
+            android:theme="@style/FullscreenTheme"></activity>
+
+      <activity android:name=".CheckAttendanceActivity"></activity>
+      <activity android:name=".TakeAttendanceActivity"></activity>
     </application>
 
 </manifest>
