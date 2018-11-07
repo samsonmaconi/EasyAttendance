@@ -52,7 +52,7 @@
         android:id="@+id/bt_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bt_welcome_round"
+        android:background="@drawable/round_button_red"
         android:layout_below="@+id/et_userId"
         android:layout_marginTop="30dp"
         android:text="Save"

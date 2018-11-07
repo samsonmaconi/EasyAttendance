@@ -30,4 +30,6 @@
 
     <color name="colorBlue_bg_shade1">#a7cbe6</color>
     <color name="colorBlue_bg_shade2">#4285b4</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

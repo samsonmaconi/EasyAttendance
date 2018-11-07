@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".select_user_type">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/app_details"
+            android:layout_width="match_parent"
+            android:layout_height="185dp"
+            android:gravity="center"
+            android:keepScreenOn="true"
+            android:text="@string/app_Title"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="185dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="80dp"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+
+            <Button
+                android:id="@+id/teacher"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="250dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorWhite"
+                android:text="@string/teacher" />
+
+            <Button
+                android:id="@+id/student"
+                style="?metaButtonBarButtonStyle"
+                android:layout_marginLeft="60dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:textColor="@color/colorWhite"
+                android:text="@string/student" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>
