@@ -40,9 +40,9 @@ public class CourseAdapter extends ArrayAdapter<CourseItem> {
         }
 
         if(position % 2 == 0) {
-            v.setBackgroundColor(v.getResources().getColor(R.color.colorNothing));
+            v.setBackgroundColor(v.getResources().getColor(R.color.colorGreyLight));
         } else {
-            v.setBackgroundColor(v.getResources().getColor(R.color.colorWhite));
+            v.setBackgroundColor(v.getResources().getColor(R.color.colorWhiteFaded));
         }
 
         return v;
