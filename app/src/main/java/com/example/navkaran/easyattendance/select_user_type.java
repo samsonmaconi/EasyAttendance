@@ -1,4 +1,4 @@
-package com.example.navkaran.tamisproject;
+package com.example.navkaran.easyattendance;
 
 import android.annotation.SuppressLint;
 import android.support.v7.app.ActionBar;
