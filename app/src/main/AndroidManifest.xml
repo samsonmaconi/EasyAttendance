@@ -16,8 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CheckAttendanceActivity"></activity>
-        <activity android:name=".AttendanceDetailsActivity"></activity>
+        <activity android:name=".WelcomeActivity"></activity>
     </application>
 
 </manifest>
