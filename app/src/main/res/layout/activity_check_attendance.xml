@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".check_attendance">
+    android:background="@drawable/gradient_background_white_blue"
+    tools:context=".CheckAttendanceActivity">
 
 
     <Button
@@ -47,7 +47,7 @@
         android:layout_height="256dp"
         android:layout_marginTop="222dp"
         android:layout_below="@id/spinner"
-        android:background="@drawable/ic_fiber_manual_record"
+        android:background="@drawable/round_button_red"
         android:text="SIGN ATTENDANCE"
         android:textColor="@color/colorWhite"
         android:layout_centerHorizontal="true"
