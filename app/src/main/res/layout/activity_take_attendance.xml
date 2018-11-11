@@ -24,6 +24,7 @@
             android:text="CSCI5412"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginBottom="16dp"
             android:textColor="@color/colorPrimary"/>
 
         <TextView
@@ -33,7 +34,6 @@
             android:text="Moblie Computing"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginBottom="16dp"
             android:textColor="@color/colorBlack"/>
 
         <TextView
@@ -53,10 +53,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textAlignment="center"
-        android:textSize="32dp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/colorBlack"
-        android:text="0 OF 102 checked in"/>
+        android:text="0 of 102 checked in"/>
 
     <Button
         android:id="@+id/stop_btn"

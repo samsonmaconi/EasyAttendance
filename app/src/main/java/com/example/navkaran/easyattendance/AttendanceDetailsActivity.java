@@ -1,8 +1,11 @@
 package com.example.navkaran.easyattendance;
 
 
+import android.app.ActionBar;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,6 +21,8 @@ public class AttendanceDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_details);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         attendanceItemArrayList = new ArrayList<>();
         lvAttendanceList = findViewById(R.id.lvAttendanceList);
 
@@ -25,6 +30,16 @@ public class AttendanceDetailsActivity extends AppCompatActivity {
         lvAttendanceList.setAdapter(adapter);
 
         populateAttendanceList();
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void populateAttendanceList() {
