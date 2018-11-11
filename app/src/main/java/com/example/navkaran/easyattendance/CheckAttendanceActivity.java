@@ -42,7 +42,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         longitude = intent.getDoubleExtra("LONGITUDE",0);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.actionbar);
+        getSupportActionBar().setCustomView(R.layout.actionbar_ckeck_attendance);
 
         spinner = findViewById(R.id.spinner);
         sign_attendance = findViewById(R.id.btn_iamhere);
