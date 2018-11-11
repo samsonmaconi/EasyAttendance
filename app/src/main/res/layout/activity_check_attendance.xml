@@ -1,57 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background_white_blue"
-    tools:context=".CheckAttendanceActivity">
+    tools:context=".CheckAttendanceActivity"
+    android:padding="16dp"
+    android:orientation="vertical">
 
-
-    <Button
-        android:id="@+id/btn"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:padding="16dp"
-        android:text="F5" />
+        android:layout_weight="0.2">
 
-    <TextView
-        android:id="@+id/lable"
+        <TextView
+            android:id="@+id/lable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:text="Select Course"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lable"
+            android:background="@drawable/spinner_background"
+            android:orientation="horizontal"
+            android:layout_margin="16dp">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:spinnerMode="dropdown" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:paddingTop="2dp"
+                android:paddingRight="8dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_details" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn"
-        android:padding="16dp"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        android:text="Select Course"/>
+        android:layout_weight="0.8">
 
-    <View
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_below="@+id/lable"
-        android:background="@color/colorOrange"/>
+        <Button
+            android:id="@+id/btn_iamhere"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            android:background="@drawable/round_button_red"
+            android:text="@string/action_mark_attendance"
+            android:textColor="@color/colorWhite"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"/>
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_margin="32dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/line"/>
-
-    <Button
-        android:id="@+id/btn_iamhere"
-        android:layout_width="256dp"
-        android:layout_height="256dp"
-        android:layout_marginTop="222dp"
-        android:layout_below="@id/spinner"
-        android:background="@drawable/round_button_red"
-        android:text="SIGN ATTENDANCE"
-        android:textColor="@color/colorWhite"
-        android:layout_centerHorizontal="true"
-        android:textSize="16sp"/>
+    </RelativeLayout>
 
 
-</RelativeLayout>
+
+</LinearLayout>

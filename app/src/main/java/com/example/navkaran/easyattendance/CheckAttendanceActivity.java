@@ -1,8 +1,9 @@
 package com.example.navkaran.easyattendance;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,27 +27,30 @@ public class CheckAttendanceActivity extends AppCompatActivity {
     private ArrayList<String> classList;
     private ArrayAdapter<String> spinnerArrayAdapter;
     private String classID;
-    private Button refresh;
     private Button sign_attendance;
     private Spinner spinner;
+    Double latitude,longitude;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_attendance);
 
+        Intent intent = getIntent();
+        latitude = intent.getDoubleExtra("LATITUDE",0);
+        longitude = intent.getDoubleExtra("LONGITUDE",0);
+
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar_ckeck_attendance);
 
         spinner = findViewById(R.id.spinner);
-        refresh = findViewById(R.id.btn);
         sign_attendance = findViewById(R.id.btn_iamhere);
         classList = new ArrayList<>();
-        spinnerArrayAdapter = new ArrayAdapter<>(this,R.layout.spinner_item,classList);
+        spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, classList);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(spinnerArrayAdapter);
         spinner.setOnItemSelectedListener(select_class);
-        refresh.setOnClickListener(f5);
         sign_attendance.setOnClickListener(sign);
 
         runnable = new Runnable() {
@@ -56,30 +60,18 @@ public class CheckAttendanceActivity extends AppCompatActivity {
             }
         };
 
-        Thread thread = new Thread(null,runnable,"background");
+        Thread thread = new Thread(null, runnable, "background");
         thread.start();
-    }
-    View.OnClickListener f5 = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(getApplicationContext(),"Searching",Toast.LENGTH_SHORT).show();
-            runnable = new Runnable() {
-                @Override
-                public void run() {
-                    getClassList();
-                }
-            };
 
-            Thread thread = new Thread(null,runnable,"background");
-            thread.start();
-        }
-    };
+
+    }
 
     View.OnClickListener sign = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            String show = "Selected : " + classID +"\n@\n"+"lat: "+latitude+"   lon: "+longitude;
             Toast.makeText
-                    (getApplicationContext(), "Selected : " + classID, Toast.LENGTH_SHORT)
+                    (getApplicationContext(),show , Toast.LENGTH_LONG)
                     .show();
         }
     };
