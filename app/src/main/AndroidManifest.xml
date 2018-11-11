@@ -27,8 +27,13 @@
             android:label="@string/title_activity_select_user_type"
             android:theme="@style/FullscreenTheme"></activity>
 
-      <activity android:name=".CheckAttendanceActivity"></activity>
-      <activity android:name=".TakeAttendanceActivity"></activity>
+        <activity android:name=".CheckAttendanceActivity"></activity>
+        <activity android:name=".TakeAttendanceActivity"></activity>
+        <activity android:name=".AttendanceDetailsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".TakeAttendanceActivity" />
+        </activity>
     </application>
 
 </manifest>
