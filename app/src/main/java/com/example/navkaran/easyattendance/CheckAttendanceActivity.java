@@ -36,7 +36,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_check_attendance);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.actionbar);
+        getSupportActionBar().setCustomView(R.layout.actionbar_ckeck_attendance);
 
         spinner = findViewById(R.id.spinner);
         refresh = findViewById(R.id.btn);

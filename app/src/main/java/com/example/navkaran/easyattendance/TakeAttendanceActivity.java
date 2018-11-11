@@ -1,7 +1,7 @@
 package com.example.navkaran.easyattendance;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 /**
@@ -15,9 +15,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance);
 
-
-/**
- * TODO: aaa
- * **/
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.actionbar_class_attendance);
+        getSupportActionBar().setTitle("Class Attendance");
     }
 }
