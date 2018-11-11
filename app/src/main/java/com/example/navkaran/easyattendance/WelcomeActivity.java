@@ -17,5 +17,16 @@ public class WelcomeActivity extends AppCompatActivity {
 
         et_userId = findViewById(R.id.et_userId);
         bt_save = findViewById(R.id.bt_save);
+
+        /* TODO: set user's role
+
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        // putString([key],[value]);
+        editor.putString("role","student");
+        editor.commit();
+
+        */
     }
 }
