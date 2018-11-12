@@ -3,6 +3,9 @@
     package="com.example.navkaran.easyattendance">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
         android:allowBackup="true"
@@ -24,8 +27,14 @@
             android:label="@string/title_activity_select_user_type"
             android:theme="@style/FullscreenTheme"></activity>
 
-      <activity android:name=".CheckAttendanceActivity"></activity>
-      <activity android:name=".TakeAttendanceActivity"></activity>
+        <activity android:name=".CheckAttendanceActivity"></activity>
+        <activity android:name=".TakeAttendanceActivity"></activity>
+        <activity android:name=".CourseListActivity"></activity>
+        <activity android:name=".AttendanceDetailsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".TakeAttendanceActivity" />
+        </activity>
     </application>
 
 </manifest>
