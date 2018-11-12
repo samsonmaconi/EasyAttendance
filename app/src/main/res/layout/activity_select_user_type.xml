@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     android:background="@drawable/background_gradient"
     tools:context=".select_user_type">
 
@@ -11,18 +12,25 @@
          TextureView, etc. -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:id="@+id/app_details"
+        >
 
-        <TextView
-            android:id="@+id/app_details"
-            android:layout_width="match_parent"
-            android:layout_height="185dp"
-            android:gravity="center"
-            android:keepScreenOn="true"
-            android:text="@string/app_Title"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="50sp"
-            android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/logo"
+            />
+
+        <ImageView
+            android:id="@+id/iv_easyattend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/easyattendance"/>
+
     </LinearLayout>
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
@@ -39,30 +47,31 @@
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="80dp"
             android:orientation="vertical"
-            tools:ignore="UselessParent">
+            tools:ignore="UselessParent"
+            android:padding="16dp">
 
             <Button
                 android:id="@+id/teacher"
                 style="?metaButtonBarButtonStyle"
-                android:layout_width="250dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginBottom="10dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:textColor="@color/colorWhite"
-                android:text="@string/teacher" />
+                android:background="@drawable/rounded_rect_button_blue_selector"
+                android:text="@string/teacher"
+                android:textColor="@color/colorWhite" />
 
             <Button
                 android:id="@+id/student"
+                android:layout_marginTop="10dp"
                 style="?metaButtonBarButtonStyle"
-                android:layout_marginLeft="60dp"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
-                android:textColor="@color/colorWhite"
-                android:text="@string/student" />
+                android:background="@drawable/rounded_rect_button_orange_selector"
+                android:text="@string/student"
+                android:textColor="@color/colorWhite" />
 
         </LinearLayout>
     </FrameLayout>
