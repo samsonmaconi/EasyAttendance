@@ -33,13 +33,13 @@ public class WelcomeActivity extends AppCompatActivity {
         //get the data from select_uer_type Activity
         final Intent intent = getIntent();
         final String role = intent.getStringExtra("role");
-        if(role != null){
+        if (role != null) {
             if (role.equals("student")) {
                 tv_userId.setText(R.string.label_student_id);
-                bt_save.setBackgroundResource(R.drawable.rounded_rect_button_blue_selector);
+                bt_save.setBackgroundResource(R.drawable.rounded_rect_button_orange_selector);
             } else if (role.equals("staff")) {
                 tv_userId.setText(R.string.label_staff_id);
-                bt_save.setBackgroundResource(R.drawable.rounded_rect_button_orange_selector);
+                bt_save.setBackgroundResource(R.drawable.rounded_rect_button_blue_selector);
             }
         }
 
@@ -56,10 +56,15 @@ public class WelcomeActivity extends AppCompatActivity {
 
                 //close the current activity and open next activity
                 Intent intent1 = new Intent();
-                intent1.setClass(getApplicationContext(),CheckAttendanceActivity.class);
+                if(role.equals("student")){
+                    intent1.setClass(getApplicationContext(), CheckAttendanceActivity.class);
+                }else if(role.equals("staff")){
+                    intent1.setClass(getApplicationContext(), CourseListActivity.class);
+                }
+
                 Bundle bundle = new Bundle();
-                bundle.putString("role",role);
-                bundle.putString("id",id);
+                bundle.putString("role", role);
+                bundle.putString("id", id);
                 intent1.putExtras(bundle);
                 startActivity(intent1);
             }
