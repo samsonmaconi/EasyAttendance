@@ -9,22 +9,19 @@
     android:padding="16dp">
 
     <LinearLayout
-        android:layout_width="256dp"
-        android:layout_height="128dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/square"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:padding="16dp">
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/class_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CSCI5412"
-            android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginBottom="16dp"
             android:textColor="@color/colorPrimary"/>
 
         <TextView
@@ -32,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Moblie Computing"
-            android:textSize="16sp"
+            android:layout_marginTop="4dp"
             android:textStyle="bold"
             android:textColor="@color/colorBlack"/>
 
@@ -41,32 +38,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="102 Students Registered"
-            android:textSize="16sp"
             android:textColor="@color/colorBlack"/>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/check_number"
-        android:layout_marginTop="50dp"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorBlack"
-        android:text="0 of 102 checked in"/>
+        android:layout_weight="0.2">
 
-    <Button
-        android:id="@+id/stop_btn"
-        android:layout_marginTop="70dp"
-        android:layout_width="256dp"
-        android:layout_height="256dp"
-        android:background="@drawable/round"
-        android:layout_gravity="center"
-        android:text="@string/action_stop_attendance"
-        android:textSize="16sp"
-        android:textColor="@color/colorWhite"/>
+        <TextView
+            android:id="@+id/check_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="@color/colorBlack"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8">
+
+        <Button
+            android:id="@+id/stop_btn"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            android:background="@drawable/round_button_red_selector"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/action_stop_attendance"
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"/>
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>

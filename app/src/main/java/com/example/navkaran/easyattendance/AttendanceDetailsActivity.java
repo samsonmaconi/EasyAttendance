@@ -21,7 +21,7 @@ public class AttendanceDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_details);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         attendanceItemArrayList = new ArrayList<>();
         lvAttendanceList = findViewById(R.id.lvAttendanceList);

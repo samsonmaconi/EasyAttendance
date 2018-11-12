@@ -41,8 +41,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance);
 
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.actionbar_class_attendance);
+        //getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        //getSupportActionBar().setCustomView(R.layout.actionbar_class_attendance);
         getSupportActionBar().setTitle("Class Attendance");
 
         stop_btn = findViewById(R.id.stop_btn);
@@ -109,7 +109,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             check_number.setText(response.getString("students_count")
-                                    +" of 102 checked in");
+                                    +" of 102 in attendance");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
