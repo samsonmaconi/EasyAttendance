@@ -11,7 +11,6 @@
         android:layout_weight="1"
         android:layout_height="match_parent"
         android:padding="4dp"
-        android:textSize="20sp"
         android:textColor="@color/colorBlue"
         android:textStyle="bold"/>
 
@@ -27,7 +26,6 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:padding="4dp"
-            android:textSize="20sp"
             android:textColor="@color/colorBlack"
             android:textStyle="bold"/>
 
@@ -37,7 +35,6 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:padding="4dp"
-            android:textSize="20sp"
             android:textColor="@color/colorBlack"
             android:textStyle="normal"/>
 
