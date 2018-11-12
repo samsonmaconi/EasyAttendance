@@ -35,7 +35,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:hint="eg. B00809814" />
+        android:inputType="text"
+        android:hint="eg. B00809814"
+        android:maxLines="1"/>
 
     <TextView
         android:id="@+id/tv_userId"
@@ -43,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/et_userId"
         android:layout_marginBottom="8dp"
-        android:text="User ID"
+        android:text="@string/label_staff_id"
         android:textColor="@color/colorBlack"
         android:textSize="20dp"
         android:textStyle="bold" />

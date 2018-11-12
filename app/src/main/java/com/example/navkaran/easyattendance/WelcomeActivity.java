@@ -33,11 +33,16 @@ public class WelcomeActivity extends AppCompatActivity {
         //get the data from select_uer_type Activity
         final Intent intent = getIntent();
         final String role = intent.getStringExtra("role");
-        if (role.equals("student")) {
-            tv_userId.setText("Student ID");
-        } else if (role.equals("staff")) {
-            tv_userId.setText("Staff ID");
+        if(role != null){
+            if (role.equals("student")) {
+                tv_userId.setText(R.string.label_student_id);
+                bt_save.setBackgroundResource(R.drawable.rounded_rect_button_blue_selector);
+            } else if (role.equals("staff")) {
+                tv_userId.setText(R.string.label_staff_id);
+                bt_save.setBackgroundResource(R.drawable.rounded_rect_button_orange_selector);
+            }
         }
+
 
         bt_save.setOnClickListener(new View.OnClickListener() {
             @Override
