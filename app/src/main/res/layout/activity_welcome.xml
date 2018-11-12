@@ -16,10 +16,9 @@
 
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/ic_launcher_foreground"
-            />
+            android:layout_width="80dp"
+            android:layout_height="88dp"
+            android:background="@drawable/logo" />
 
         <ImageView
             android:id="@+id/iv_easyattend"
@@ -42,22 +41,23 @@
         android:id="@+id/tv_userId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User ID"
         android:layout_above="@id/et_userId"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="8dp"
+        android:text="User ID"
+        android:textColor="@color/colorBlack"
         android:textSize="20dp"
-        android:textColor="#000000"/>
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/bt_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bt_welcome_round"
         android:layout_below="@+id/et_userId"
         android:layout_marginTop="30dp"
+        android:background="@drawable/rounded_rect_button_blue_selector"
         android:text="Save"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"/>
+        android:textColor="@color/colorWhite"
+        android:textSize="20dp" />
 
 
 </RelativeLayout>
