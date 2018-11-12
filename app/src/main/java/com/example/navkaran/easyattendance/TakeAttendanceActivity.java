@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 /**
  * Created by xiaoyutian on 2018-11-06.
@@ -15,7 +14,6 @@ import android.widget.Toast;
 public class TakeAttendanceActivity extends AppCompatActivity {
 
     Button stop_btn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,4 +40,5 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         //intent.putExtra("LATITUDE", latitude);
         startActivity(intent);
     }
+
 }
