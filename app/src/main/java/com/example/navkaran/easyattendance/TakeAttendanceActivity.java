@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +35,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     private int student_num;
     private Runnable runnable;
     private Handler handler;
-
-
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void startNewIntend(Double longitude, Double latitude){
-        Intent intent = new Intent(this, CourseListActivity.class);
+        Intent intent = new Intent(this, TakeAttendanceActivity.class);
         intent.putExtra("LONGITUDE", longitude);
         intent.putExtra("LATITUDE", latitude);
         startActivity(intent);
