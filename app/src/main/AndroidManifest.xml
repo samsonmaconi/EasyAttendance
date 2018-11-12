@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".select_user_type"
+            android:name=".SelectUserType"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_select_user_type"
             android:theme="@style/FullscreenTheme"></activity>
