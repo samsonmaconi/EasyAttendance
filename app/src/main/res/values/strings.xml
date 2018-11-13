@@ -34,4 +34,8 @@
     <string name="title_attendance_home">Attendance Home</string>
     <string name="title_class_attendance">Class Attendance</string>
 
+    <!--Shared Preferences Keys-->
+    <string name="sharedPreference_user_role">com.example.navkaran.easyattendance.userid</string>
+    <string name="sharedPreference_user_id">com.example.navkaran.easyattendance.userrole</string>
+
 </resources>

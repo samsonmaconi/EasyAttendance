@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         //Retrieve the user role and ID from shared preferences. If there's no info, returns "none"
-        userRole = sharedPreferences.getString("userRole", "none");
-        userID = sharedPreferences.getString("userID", "none");
+        userRole = sharedPreferences.getString(getString(R.string.sharedPreference_user_role), "none");
+        userID = sharedPreferences.getString(getString(R.string.sharedPreference_user_id), "none");
         
         switch (userRole){
             case "teacher":
