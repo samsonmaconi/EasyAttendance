@@ -1,16 +1,19 @@
 package com.example.navkaran.easyattendance;
 
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
+// David Cui B00788648 Nov 2018
+//activity for course list, where instructors can select the course they want to enable check-in for
 public class CourseListActivity extends AppCompatActivity {
 
     private CourseAdapter adapter;
+    //the list of courses this instructor is teaching
     private ArrayList<CourseItem> courseItemArrayList;
+    //UI element
     private ListView lvCourseList;
 
     @Override
@@ -29,6 +32,7 @@ public class CourseListActivity extends AppCompatActivity {
         populateCourseList();
     }
 
+    //fake data for the sake of trying out the layout
     private void populateCourseList() {
         courseItemArrayList.add(new CourseItem("CSCI 1000", "1st Year Course", 120));
         courseItemArrayList.add(new CourseItem("CSCI 2000", "2nd Year Course", 90));
