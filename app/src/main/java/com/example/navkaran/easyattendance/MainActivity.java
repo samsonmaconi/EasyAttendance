@@ -1,112 +1,45 @@
 package com.example.navkaran.easyattendance;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button refresh;
-    private TextView testlocation;
 
-    private FusedLocationProviderClient mFusedLocationClient;
-    private String location_error = "no error";
-    private Double longitude,latitude;
-    Intent intent;
+    private SharedPreferences sharedPreferences;
+    private Intent intent;
+    private String userRole, userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        refresh = findViewById(R.id.btn);
-        testlocation = findViewById(R.id.testlocation);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        refresh.setOnClickListener(f5);
+        //Retrieve the user role and ID from shared preferences. If there's no info, returns "none"
+        userRole = sharedPreferences.getString(getString(R.string.sharedPreference_user_role), "none");
+        userID = sharedPreferences.getString(getString(R.string.sharedPreference_user_id), "none");
         
-        // Put all the code you want to add to onCreat() in the following block. 
-        // **************** start ****************
-        
-        
-        
-        
-        /* TODO: read variable
-        
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        // getString([key],[default value]);
-        String user_role = sharedPref.getString("role","XXX"); 
-        
-        switch (user_role){
-            case "instructor":
+        switch (userRole){
+            case "teacher":
                 intent = new Intent(this, CourseListActivity.class);
+                intent.putExtra("userRole", userRole);
+                intent.putExtra("userID", userID);
                 startActivity(intent);
             case "student":
                 intent = new Intent(this, CheckAttendanceActivity.class);
+                intent.putExtra("userRole", userRole);
+                intent.putExtra("userID", userID);
                 startActivity(intent);
-            case "XXX":
-                intent = new Intent(this, WelcomeActivity.class);
+            case "none":
+                intent = new Intent(this, SelectUserType.class);
                 startActivity(intent);
             default:
                 break;
         }
-        */
 
-
-
-        //****************   end   ****************
-        
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    // Got last known location. In some rare situations this can be null.
-                    if (location != null) {
-                        // save longitude and latitude to a local variable for future use
-                        longitude = location.getLongitude();
-                        latitude = location.getLatitude();
-                        startNewIntend(longitude,latitude);
-                    }else {
-                        location_error = "Unknown Location";
-                    }
-                }
-            });
-            return;
-        }else{
-            location_error = "Permission Denied";
-        }
-    }
-
-    View.OnClickListener f5 = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(getApplicationContext(),location_error,Toast.LENGTH_SHORT).show();
-            testlocation.setText("lon: "+longitude+"  lat: "+latitude);
-            System.out.println("lon: "+longitude+"  lat: "+latitude);
-        }
-    };
-
-    private void startNewIntend(Double longitude, Double latitude){
-        Intent intent = new Intent(this, SelectUserType.class);
-        intent.putExtra("LONGITUDE", longitude);
-        intent.putExtra("LATITUDE", latitude);
-        startActivity(intent);
     }
 }
