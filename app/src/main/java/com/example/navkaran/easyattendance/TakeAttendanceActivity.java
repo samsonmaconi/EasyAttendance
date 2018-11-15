@@ -51,13 +51,10 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         class_number = findViewById(R.id.class_number);
         class_name = findViewById(R.id.class_name);
         register_number = findViewById(R.id.register_number);
-        //Intent intent = getIntent();
-        //course_id = intent.getStringExtra("COURSE_ID");
-        //course_name = intent.getStringExtra("COURSE_NAME");
-        //student_num = intent.getIntExtra("STUDENT_NUMBER",-1);
-        course_id = "CSCI-5708";
-        course_name = "Advanced topic in Github";
-        student_num = 23;
+        Intent intent = getIntent();
+        course_id = intent.getStringExtra(CourseListActivity.COURSE_ID);
+        course_name = intent.getStringExtra(CourseListActivity.COURSE_NAME);
+        student_num = intent.getIntExtra(CourseListActivity.COURSE_STUDENT_COUNT, 0);
 
         class_number.setText(course_id);
         class_name.setText(course_name);
