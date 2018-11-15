@@ -65,7 +65,7 @@ public class SelectUserType extends AppCompatActivity {
                Intent intent1 = new Intent();
                intent1.setClass(getApplicationContext(),WelcomeActivity.class);
                Bundle bundle = new Bundle();
-               bundle.putString("userRole","staff");
+               bundle.putString("userRole","teacher");
                intent1.putExtras(bundle);
                startActivity(intent1);
            }
