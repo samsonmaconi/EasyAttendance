@@ -41,8 +41,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance);
 
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.actionbar_class_attendance);
+        //getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        //getSupportActionBar().setCustomView(R.layout.actionbar_class_attendance);
         getSupportActionBar().setTitle("Class Attendance");
 
         stop_btn = findViewById(R.id.stop_btn);
@@ -51,13 +51,10 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         class_number = findViewById(R.id.class_number);
         class_name = findViewById(R.id.class_name);
         register_number = findViewById(R.id.register_number);
-        //Intent intent = getIntent();
-        //course_id = intent.getStringExtra("COURSE_ID");
-        //course_name = intent.getStringExtra("COURSE_NAME");
-        //student_num = intent.getIntExtra("STUDENT_NUMBER",-1);
-        course_id = "CSCI-5708";
-        course_name = "Advanced topic in Github";
-        student_num = 23;
+        Intent intent = getIntent();
+        course_id = intent.getStringExtra(CourseListActivity.COURSE_ID);
+        course_name = intent.getStringExtra(CourseListActivity.COURSE_NAME);
+        student_num = intent.getIntExtra(CourseListActivity.COURSE_STUDENT_COUNT, 0);
 
         class_number.setText(course_id);
         class_name.setText(course_name);
@@ -109,7 +106,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             check_number.setText(response.getString("students_count")
-                                    +" of 102 checked in");
+                                    +" of 102 in attendance");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

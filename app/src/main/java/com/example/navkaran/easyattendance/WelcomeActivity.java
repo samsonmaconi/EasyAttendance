@@ -5,11 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -18,6 +22,8 @@ public class WelcomeActivity extends AppCompatActivity {
     public Button bt_save;
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
+
+    private String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +37,15 @@ public class WelcomeActivity extends AppCompatActivity {
         editor = sp.edit();
 
         //get the data from select_uer_type Activity
-        final Intent intent = getIntent();
-        final String role = intent.getStringExtra("role");
-        if(role != null){
+        Intent intent = getIntent();
+        role = intent.getStringExtra("userRole");
+        if (role != null) {
             if (role.equals("student")) {
                 tv_userId.setText(R.string.label_student_id);
-                bt_save.setBackgroundResource(R.drawable.rounded_rect_button_blue_selector);
-            } else if (role.equals("staff")) {
-                tv_userId.setText(R.string.label_staff_id);
                 bt_save.setBackgroundResource(R.drawable.rounded_rect_button_orange_selector);
+            } else if (role.equals("teacher")) {
+                tv_userId.setText(R.string.label_staff_id);
+                bt_save.setBackgroundResource(R.drawable.rounded_rect_button_blue_selector);
             }
         }
 
@@ -50,19 +56,52 @@ public class WelcomeActivity extends AppCompatActivity {
 
                 // save the data for studentID/staffID
                 String id = et_userId.getText().toString();
-                editor.putString("id", id);
-                editor.commit();
-                Toast.makeText(getApplicationContext(), "save successfully", Toast.LENGTH_SHORT).show();
 
-                //close the current activity and open next activity
-                Intent intent1 = new Intent();
-                intent1.setClass(getApplicationContext(),CheckAttendanceActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("role",role);
-                bundle.putString("id",id);
-                intent1.putExtras(bundle);
-                startActivity(intent1);
+                //Judging the accuracy of input
+                if (id.equals("")) {
+                    // if the user enter nothing
+                    Toast.makeText(getApplicationContext(), "please enter your ID first", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!isInputRight(id)) {
+                        //if the user not only enter letter or number
+                        Toast.makeText(getApplicationContext(), "please only enter letter and number for your ID", Toast.LENGTH_SHORT).show();
+                    } else {
+                        //if the user enter right, save the ID locally
+                        editor.putString(getString(R.string.sharedPreference_user_id), id);
+                        editor.commit();
+                        Toast.makeText(getApplicationContext(), "save successfully", Toast.LENGTH_SHORT).show();
+
+                        //close the current activity and open next activity based on which role
+                        Intent intent1 = new Intent();
+                        if (role.equals("student")) {
+                            intent1.setClass(getApplicationContext(), CheckAttendanceActivity.class);
+                        } else if (role.equals("teacher")) {
+                            intent1.setClass(getApplicationContext(), CourseListActivity.class);
+                        }
+                        //send the data to the next activity
+                        Bundle bundle = new Bundle();
+                        bundle.putString("userRole", role);
+                        bundle.putString("userID", id);
+                        intent1.putExtras(bundle);
+                        startActivity(intent1);
+                    }
+                }
             }
         });
+    }
+
+
+    /**
+     * judge the accuracy of the input
+     * only if user enter letters or numbers, no matter what length
+     *
+     * @param str
+     * @return
+     */
+    public boolean isInputRight(String str) {
+        String regExpression = "^[0-9a-zA-Z]+$";
+        Pattern pattern = Pattern.compile(regExpression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(str);
+        return matcher.find();
     }
 }
