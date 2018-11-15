@@ -75,7 +75,7 @@ public class WelcomeActivity extends AppCompatActivity {
                         Intent intent1 = new Intent();
                         if (role.equals("student")) {
                             intent1.setClass(getApplicationContext(), CheckAttendanceActivity.class);
-                        } else if (role.equals("teacher")) {
+                        } else if (role.equals("staff")) {
                             intent1.setClass(getApplicationContext(), CourseListActivity.class);
                         }
                         //send the data to the next activity
