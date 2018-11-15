@@ -53,7 +53,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_attendance);
 
-        Student_id = getIntent().getStringExtra("id");
+        Student_id = getIntent().getStringExtra("userID");
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar_ckeck_attendance);
