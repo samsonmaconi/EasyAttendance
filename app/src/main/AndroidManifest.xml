@@ -4,7 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-feature android:name="android.hardware.location.gps" />
 
     <application
@@ -13,29 +14,41 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:logo="@mipmap/ic_launcher">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".select_user_type"
+            android:name=".SelectUserType"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_select_user_type"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:theme="@style/FullscreenTheme">
+        </activity>
+
+        <activity
+            android:name=".WelcomeActivity"
+            android:parentActivityName=".SelectUserType">
+        </activity>
 
         <activity android:name=".CheckAttendanceActivity"></activity>
-        <activity android:name=".TakeAttendanceActivity"></activity>
+
         <activity android:name=".CourseListActivity"></activity>
-        <activity android:name=".WelcomeActivity"></activity>
-        <activity android:name=".AttendanceDetailsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".TakeAttendanceActivity" />
+
+        <activity
+            android:name=".TakeAttendanceActivity"
+            android:parentActivityName=".CourseListActivity">
         </activity>
+
+        <activity
+            android:name=".AttendanceDetailsActivity"
+            android:parentActivityName=".TakeAttendanceActivity">
+        </activity>
+
     </application>
 
 </manifest>

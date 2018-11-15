@@ -1,9 +1,13 @@
 package com.example.navkaran.easyattendance;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,6 +22,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,9 +41,11 @@ public class CheckAttendanceActivity extends AppCompatActivity {
     private Button sign_attendance;
     private Spinner spinner;
     private String lastCheck = "null";
-    private String Student_id = "B00690131";
+    private String Student_id;
     private Double latitude;
     private Double longitude;
+    private String location_error = "no error";
+    private FusedLocationProviderClient mFusedLocationClient;
 
 
     @Override
@@ -44,9 +53,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_attendance);
 
-        Intent intent = getIntent();
-        latitude = intent.getDoubleExtra("LATITUDE",0);
-        longitude = intent.getDoubleExtra("LONGITUDE",0);
+        Student_id = getIntent().getStringExtra("id");
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar_ckeck_attendance);
@@ -70,7 +77,28 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         Thread thread = new Thread(null, runnable, "background");
         thread.start();
 
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    // Got last known location. In some rare situations this can be null.
+                    if (location != null) {
+                        // save longitude and latitude to a local variable for future use
+                        longitude = location.getLongitude();
+                        latitude = location.getLatitude();
+                    }else {
+                        location_error = "Unknown Location";
+                    }
+                }
+            });
+            return;
+        }else{
+            location_error = "Permission Denied";
+        }
     }
 
     View.OnClickListener sign = new View.OnClickListener() {
@@ -129,7 +157,6 @@ public class CheckAttendanceActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
-
             }
         }
         );
@@ -149,10 +176,12 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                             for(int i=0; i<response.length(); i++){
                                 String class_id = response.getJSONObject(i).getString("class_id");
                                 String class_name = response.getJSONObject(i).getString("class_name");
-                                Double class_lon = response.getJSONObject(i).getDouble("longitude");
-                                Double class_lat = response.getJSONObject(i).getDouble("latitude");
+                                double class_lon = response.getJSONObject(i).getDouble("longitude");
+                                double class_lat = response.getJSONObject(i).getDouble("latitude");
+                                int class_state = response.getJSONObject(i).getInt("state");
+                                System.out.println("longitude: "+longitude+" latitude: "+latitude);
                                 if(new Class("("+class_id + ") " + class_name,
-                                        class_lon,class_lat,longitude,latitude,20).isAbleToCheckIn()){
+                                        class_lon,class_lat,longitude,latitude,20,class_state).isAbleToCheckIn()){
                                     classList.add("("+class_id + ") " + class_name+"*");
                                 }else{
                                     classList.add("("+class_id + ") " + class_name);
