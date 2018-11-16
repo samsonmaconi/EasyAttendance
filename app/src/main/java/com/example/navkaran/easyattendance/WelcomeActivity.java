@@ -20,9 +20,6 @@ public class WelcomeActivity extends AppCompatActivity {
     public TextView tv_userId;
     public EditText et_userId;
     public Button bt_save;
-    private SharedPreferences sp;
-    private SharedPreferences.Editor editor;
-
     private String role;
 
     @Override
@@ -33,8 +30,9 @@ public class WelcomeActivity extends AppCompatActivity {
         tv_userId = findViewById(R.id.tv_userId);
         et_userId = findViewById(R.id.et_userId);
         bt_save = findViewById(R.id.bt_save);
-        sp = this.getSharedPreferences("id_data", 0);
-        editor = sp.edit();
+
+        //sp = this.getSharedPreferences("id_data", 0);
+        //editor = sp.edit();
 
         //get the data from select_uer_type Activity
         Intent intent = getIntent();
@@ -66,18 +64,29 @@ public class WelcomeActivity extends AppCompatActivity {
                         //if the user not only enter letter or number
                         Toast.makeText(getApplicationContext(), "please only enter letter and number for your ID", Toast.LENGTH_SHORT).show();
                     } else {
+
                         //if the user enter right, save the ID locally
-                        editor.putString(getString(R.string.sharedPreference_user_id), id);
-                        editor.commit();
-                        Toast.makeText(getApplicationContext(), "save successfully", Toast.LENGTH_SHORT).show();
+                        SharedPreferences sp = getSharedPreferences("CONTAINER",Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString("userID", id);
+                        editor.putString("userRole", role);
+                        if(editor.commit()){
+                            Toast.makeText(getApplicationContext(), "save successfully", Toast.LENGTH_SHORT).show();
+                        }
 
                         //close the current activity and open next activity based on which role
                         Intent intent1 = new Intent();
+
+                        /*
                         if (role.equals("student")) {
                             intent1.setClass(getApplicationContext(), CheckAttendanceActivity.class);
                         } else if (role.equals("teacher")) {
                             intent1.setClass(getApplicationContext(), CourseListActivity.class);
                         }
+                        */
+
+                        intent1.setClass(getApplicationContext(), MainActivity.class);
+
                         //send the data to the next activity
                         Bundle bundle = new Bundle();
                         bundle.putString("userRole", role);

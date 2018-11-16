@@ -1,9 +1,7 @@
 package com.example.navkaran.easyattendance;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -44,16 +42,17 @@ public class CheckAttendanceActivity extends AppCompatActivity {
     private String Student_id;
     private Double latitude;
     private Double longitude;
-    private String location_error = "no error";
-    private FusedLocationProviderClient mFusedLocationClient;
 
+    private FusedLocationProviderClient mFusedLocationClient;
+    private String location_error = "no error";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_attendance);
 
-        Student_id = getIntent().getStringExtra("userID");
+        Intent intent = getIntent();
+        Student_id = intent.getStringExtra("userID");
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar_ckeck_attendance);
@@ -77,28 +76,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         Thread thread = new Thread(null, runnable, "background");
         thread.start();
 
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    // Got last known location. In some rare situations this can be null.
-                    if (location != null) {
-                        // save longitude and latitude to a local variable for future use
-                        longitude = location.getLongitude();
-                        latitude = location.getLatitude();
-                    }else {
-                        location_error = "Unknown Location";
-                    }
-                }
-            });
-            return;
-        }else{
-            location_error = "Permission Denied";
-        }
+        setLocation();
     }
 
     View.OnClickListener sign = new View.OnClickListener() {
@@ -179,16 +157,23 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                                 double class_lon = response.getJSONObject(i).getDouble("longitude");
                                 double class_lat = response.getJSONObject(i).getDouble("latitude");
                                 int class_state = response.getJSONObject(i).getInt("state");
+                                //int class_state = 1;
                                 System.out.println("longitude: "+longitude+" latitude: "+latitude);
                                 if(new Class("("+class_id + ") " + class_name,
                                         class_lon,class_lat,longitude,latitude,20,class_state).isAbleToCheckIn()){
-                                    classList.add("("+class_id + ") " + class_name+"*");
-                                }else{
                                     classList.add("("+class_id + ") " + class_name);
+                                }else{
+                                    //classList.add("("+class_id + ") " + class_name);
+                                }
+                                if(classList.isEmpty()){
+                                    sign_attendance.setEnabled(false);
+                                    sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
                                 }
                             }
                             spinnerArrayAdapter.notifyDataSetChanged();
                         }catch (JSONException e){
+                            sign_attendance.setEnabled(false);
+                            sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
                             e.printStackTrace();
                         }
                     }
@@ -196,11 +181,39 @@ public class CheckAttendanceActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(getApplicationContext(),"Error retrieving data",Toast.LENGTH_SHORT).show();
-
+                sign_attendance.setEnabled(false);
+                sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
             }
         }
         );
         RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
+    }
+
+    private void setLocation(){
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    // Got last known location. In some rare situations this can be null.
+                    if (location != null) {
+                        // save longitude and latitude to a local variable for future use
+                        longitude = location.getLongitude();
+                        latitude = location.getLatitude();
+                        System.out.println("************MainActivity************** longitude: "+longitude+"    latitude: "+latitude);
+                    }else {
+                        location_error = "Unknown Location";
+                        System.out.println("**************** "+location_error);
+                    }
+                }
+            });
+            return;
+        }else{
+            location_error = "Permission Denied";
+            System.out.println("**************** "+location_error);
+        }
     }
 }

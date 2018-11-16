@@ -36,6 +36,12 @@ public class AttendanceDetailsActivity extends AppCompatActivity {
     private String courseId,courseName;
     private int studentCount, attendanceCount;
 
+    public static final String COURSE_ID = "COURSE_ID";
+    public static final String COURSE_NAME = "COURSE_NAME";
+    public static final String COURSE_STUDENT_COUNT = "COURSE_STUDENT_COUNT";
+    public static final String ATTENDANCE_COUNT = "ATTENDANCE_COUNT";
+
+
     private final String TAG = "AttendanceDetails";
     private final String FETCH_URL = "https://web.cs.dal.ca/~stang/csci5708/end_attendance.php?class_id=";
 
@@ -48,15 +54,15 @@ public class AttendanceDetailsActivity extends AppCompatActivity {
         actionBar.setTitle(R.string.title_attendance_list);
 
         intent = getIntent();
-        courseId = intent.getStringExtra("course_id");
-        courseName = intent.getStringExtra("course_name");
+        courseId = intent.getStringExtra(COURSE_ID);
+        courseName = intent.getStringExtra(COURSE_NAME);
         //TODO: Change Default Values back to 0
-        studentCount = intent.getIntExtra("student_count", 89);
-        attendanceCount = intent.getIntExtra("attendance_count", 7);
+        studentCount = intent.getIntExtra(COURSE_STUDENT_COUNT, 0);
+        attendanceCount = intent.getIntExtra(ATTENDANCE_COUNT, 0);
 
         //TODO: Remove next 2 Temp Lines
-        courseId = courseId == null ? "CSCI-5708" : courseId;
-        courseName = courseName == null ? "Not Mobile Computing" : courseName;
+        //courseId = courseId == null ? "CSCI-5708" : courseId;
+        //courseName = courseName == null ? "Not Mobile Computing" : courseName;
 
         lvAttendanceList = findViewById(R.id.lvAttendanceList);
         btnDone = findViewById(R.id.btnDone);
@@ -117,7 +123,7 @@ public class AttendanceDetailsActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "No Student attend this class", Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -125,6 +131,5 @@ public class AttendanceDetailsActivity extends AppCompatActivity {
 
         RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
     }
-
 }
 
