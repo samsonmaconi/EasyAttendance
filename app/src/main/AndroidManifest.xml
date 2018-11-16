@@ -45,9 +45,10 @@
         </activity>
 
         <activity
-            android:name=".AttendanceDetailsActivity"
-            android:parentActivityName=".TakeAttendanceActivity">
+            android:name=".AttendanceDetailsActivity">
+            <!-- android:parentActivityName=".TakeAttendanceActivity" -->
         </activity>
+
 
     </application>
 
