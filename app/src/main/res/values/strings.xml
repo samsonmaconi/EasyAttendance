@@ -33,6 +33,7 @@
     <string name="title_welcome">Welcome</string>
     <string name="title_attendance_home">Attendance Home</string>
     <string name="title_class_attendance">Class Attendance</string>
+    <string name="title_course_list">Course List</string>
 
     <!--Shared Preferences Keys-->
     <string name="sharedPreference_user_role">com.example.navkaran.easyattendance.userid</string>
