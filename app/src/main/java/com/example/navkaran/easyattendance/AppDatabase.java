@@ -19,6 +19,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CourseItemDAO courseModel();
 
     // build a persistent database
+    // must use worker threads to operate on database, thus must be synchronized
     public static synchronized AppDatabase getInstance(Context context) {
         if (sInstance == null) {
             sInstance =
