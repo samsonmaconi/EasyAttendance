@@ -7,23 +7,29 @@ import android.content.Context;
 
 // David Cui B00788648 Nov 2018
 
+// singleton since RoomDatabase is expensive
 @Database(entities = {CourseItem.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
-    private static AppDatabase INSTANCE;
+    public static final String DATABASE_NAME = "attend-db";
+
+    // singleton instance
+    private static AppDatabase sInstance;
 
     public abstract CourseItemDAO courseModel();
 
-    public static AppDatabase getInMemoryDatabase(Context context) {
-        if (INSTANCE == null) {
-            INSTANCE =
-                    Room.inMemoryDatabaseBuilder(context.getApplicationContext(), AppDatabase.class)
+    // build a persistent database
+    public static synchronized AppDatabase getInstance(Context context) {
+        if (sInstance == null) {
+            sInstance =
+                    Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DATABASE_NAME)
                             .build();
         }
-        return INSTANCE;
+        return sInstance;
     }
 
+
     public static void destroyInstance() {
-        INSTANCE = null;
+        sInstance = null;
     }
 }

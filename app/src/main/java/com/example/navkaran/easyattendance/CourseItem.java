@@ -6,20 +6,47 @@ import android.arch.persistence.room.PrimaryKey;
 
 // David Cui B00788648 Nov 2018
 //data holder for an course item, an entity in the room database
-@Entity
+@Entity(tableName = "courses")
 public class CourseItem {
 
-    @PrimaryKey
-    public int id;
-
     //such as CSCI5100
+    @PrimaryKey
     @ColumnInfo(name = "course_id")
-    public String courseID;
+    private String courseID;
     //full name of course
     @ColumnInfo(name = "course_name")
-    public String courseName;
+    private String courseName;
     //number of students in course
     @ColumnInfo(name = "course_student_count")
-    public int studentCount;
+    private int studentCount;
 
+    public CourseItem(String courseID, String courseName, int studentCount) {
+        this.courseID = courseID;
+        this.courseName = courseName;
+        this.studentCount = studentCount;
+    }
+
+    public String getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(String courseID) {
+        this.courseID = courseID;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public int getStudentCount() {
+        return studentCount;
+    }
+
+    public void setStudentCount(int studentCount) {
+        this.studentCount = studentCount;
+    }
 }
