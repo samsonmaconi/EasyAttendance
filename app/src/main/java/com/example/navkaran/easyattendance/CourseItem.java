@@ -1,31 +1,25 @@
 package com.example.navkaran.easyattendance;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 // David Cui B00788648 Nov 2018
-//data holder for an course item
+//data holder for an course item, an entity in the room database
+@Entity
 public class CourseItem {
 
+    @PrimaryKey
+    public int id;
+
     //such as CSCI5100
-    private String courseID;
+    @ColumnInfo(name = "course_id")
+    public String courseID;
     //full name of course
-    private String courseName;
+    @ColumnInfo(name = "course_name")
+    public String courseName;
     //number of students in course
-    private int studentCount;
+    @ColumnInfo(name = "course_student_count")
+    public int studentCount;
 
-    public CourseItem(String courseID, String courseName, int studentCount) {
-        this.courseID = courseID;
-        this.courseName = courseName;
-        this.studentCount = studentCount;
-    }
-
-    public String getCourseID() {
-        return courseID;
-    }
-
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public int getStudentCount() {
-        return studentCount;
-    }
 }
