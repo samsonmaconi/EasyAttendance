@@ -30,19 +30,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class CheckAttendanceActivity extends AppCompatActivity {
 
     private Runnable runnable;
     private ArrayList<String> classList;
     private ArrayAdapter<String> spinnerArrayAdapter;
+    private LinkedList<String> classIDList;
     private String classID;
     private Button sign_attendance;
     private Spinner spinner;
     private String lastCheck = "null";
     private String Student_id;
-    private Double latitude;
-    private Double longitude;
+
+    // to prevent app from crashing when user forget to turn on location services on their device .
+    private Double latitude = 0.2333;
+    private Double longitude = 0.2333;
 
     private FusedLocationProviderClient mFusedLocationClient;
     private String location_error = "no error";
@@ -78,6 +82,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         spinner = findViewById(R.id.spinner);
         sign_attendance = findViewById(R.id.btn_iamhere);
         classList = new ArrayList<>();
+        classIDList = new LinkedList<>();
         spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, classList);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(spinnerArrayAdapter);
@@ -116,8 +121,8 @@ public class CheckAttendanceActivity extends AppCompatActivity {
     AdapterView.OnItemSelectedListener select_class = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            String selectedItemText = (String) parent.getItemAtPosition(position);
-            classID = selectedItemText.substring(1,10);
+            System.out.println(position);
+            classID = classIDList.get(position);
 
             if(lastCheck.equals(classID)){
                 sign_attendance.setEnabled(false);
@@ -174,12 +179,14 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                                 String class_name = response.getJSONObject(i).getString("class_name");
                                 double class_lon = response.getJSONObject(i).getDouble("longitude");
                                 double class_lat = response.getJSONObject(i).getDouble("latitude");
-                                int class_state = response.getJSONObject(i).getInt("state");
-                                //int class_state = 1;
+                                //int class_state = response.getJSONObject(i).getInt("state");
+                                int class_state = 1;
                                 System.out.println("longitude: "+longitude+" latitude: "+latitude);
                                 if(new Class("("+class_id + ") " + class_name,
                                         class_lon,class_lat,longitude,latitude,20,class_state).isAbleToCheckIn()){
                                     classList.add("("+class_id + ") " + class_name);
+                                    classIDList.add(class_id);
+
                                 }else{
                                     //classList.add("("+class_id + ") " + class_name);
                                 }
@@ -221,7 +228,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                         // save longitude and latitude to a local variable for future use
                         longitude = location.getLongitude();
                         latitude = location.getLatitude();
-                        System.out.println("************MainActivity************** longitude: "+longitude+"    latitude: "+latitude);
+                        System.out.println("************CheckAttendanceActivity************** longitude: "+longitude+"    latitude: "+latitude);
                     }else {
                         location_error = "Unknown Location";
                         System.out.println("**************** "+location_error);
