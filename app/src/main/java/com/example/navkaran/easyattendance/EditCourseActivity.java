@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class NewCourseActivity extends AppCompatActivity {
+public class EditCourseActivity extends AppCompatActivity {
 
     private EditText etCourseId;
     private EditText etCourseName;
@@ -24,6 +24,13 @@ public class NewCourseActivity extends AppCompatActivity {
         etCourseName = findViewById(R.id.et_courseName);
         etCourseStudentCount = findViewById(R.id.et_courseStudentCount);
         btnSave = findViewById(R.id.btn_save);
+
+        Intent intent = getIntent();
+
+        etCourseId.setText(intent.getStringExtra(CourseListActivity.COURSE_ID));
+        etCourseName.setText(intent.getStringExtra(CourseListActivity.COURSE_NAME));
+        etCourseStudentCount.setText(Integer.toString(intent
+                .getIntExtra(CourseListActivity.COURSE_STUDENT_COUNT, 0)));
 
         // gets the input and return them to the caller activity - CourseListActivity
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -48,5 +55,4 @@ public class NewCourseActivity extends AppCompatActivity {
             }
         });
     }
-
 }

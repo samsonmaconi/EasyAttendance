@@ -26,20 +26,21 @@
         <activity
             android:name=".SelectUserType"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".WelcomeActivity"
-            android:parentActivityName=".SelectUserType"></activity>
+            android:parentActivityName=".SelectUserType" />
         <activity android:name=".CheckAttendanceActivity" />
         <activity android:name=".CourseListActivity" />
         <activity
             android:name=".TakeAttendanceActivity"
-            android:parentActivityName=".CourseListActivity"></activity>
+            android:parentActivityName=".CourseListActivity" />
         <activity android:name=".AttendanceDetailsActivity">
 
             <!-- android:parentActivityName=".TakeAttendanceActivity" -->
         </activity>
-        <activity android:name=".NewCourseActivity"></activity>
+        <activity android:name=".NewCourseActivity" />
+        <activity android:name=".EditCourseActivity"></activity>
     </application>
 
 </manifest>

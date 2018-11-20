@@ -44,6 +44,7 @@ public class CourseListActivity extends AppCompatActivity {
     public static final String COURSE_STUDENT_COUNT = "COURSE_STUDENT_COUNT";
 
     public static final int NEW_COURSE_ACTIVITY_REQUEST_CODE = 1;
+    public static final int EDIT_COURSE_ACTIVITY_REQUEST_CODE = 2;
 
     private CourseItemRepository repository;
     private LiveData<List<CourseItem>> courses;
@@ -131,16 +132,20 @@ public class CourseListActivity extends AppCompatActivity {
 
         switch (menuItemName) {
             case "Edit":
-                ;
+                Intent intent = new Intent(CourseListActivity.this, EditCourseActivity.class);
+                intent.putExtra(COURSE_ID, courseSelected.getCourseID());
+                intent.putExtra(COURSE_NAME, courseSelected.getCourseName());
+                intent.putExtra(COURSE_STUDENT_COUNT, courseSelected.getStudentCount());
+                startActivityForResult(intent, EDIT_COURSE_ACTIVITY_REQUEST_CODE);
                 break;
             case "Delete":
                 repository.delete(courseSelected);
                 break;
             case "History":
-                ;
+                //TODO
                 break;
         }
-        return false;
+        return true;
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -151,11 +156,16 @@ public class CourseListActivity extends AppCompatActivity {
             String courseName = data.getStringExtra(COURSE_NAME);
             int courseStudentCount = data.getIntExtra(COURSE_STUDENT_COUNT, 0);
             repository.insert(new CourseItem(courseId, courseName, courseStudentCount));
+        } else if (requestCode == EDIT_COURSE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            String courseId = data.getStringExtra(COURSE_ID);
+            String courseName = data.getStringExtra(COURSE_NAME);
+            int courseStudentCount = data.getIntExtra(COURSE_STUDENT_COUNT, 0);
+            repository.update(new CourseItem(courseId, courseName, courseStudentCount));
         } else {
-            Toast.makeText(
-                    getApplicationContext(),
-                    "Cancelled",
-                    Toast.LENGTH_SHORT).show();
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Cancelled",
+                        Toast.LENGTH_SHORT).show();
         }
     }
 
