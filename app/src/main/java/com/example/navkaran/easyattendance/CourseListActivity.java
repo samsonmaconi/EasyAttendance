@@ -56,10 +56,6 @@ public class CourseListActivity extends AppCompatActivity {
     private ListView lvCourseList;
     private CourseAdapter adapter;
 
-    private FusedLocationProviderClient mFusedLocationClient;
-    private String location_error = "no error";
-    private double latitude;
-    private double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,12 +118,12 @@ public class CourseListActivity extends AppCompatActivity {
                 intent.putExtra(COURSE_ID, course.getCourseID());
                 intent.putExtra(COURSE_NAME, course.getCourseName());
                 intent.putExtra(COURSE_STUDENT_COUNT, course.getStudentCount());
-startAttendance(course.getCourseID(),course.getCourseName(),longitude,latitude);
+
                 startActivity(intent);
             }
         });
 
-setLocation();
+
     }
 
     @Override
@@ -189,53 +185,5 @@ setLocation();
         }
     }
 
-    private void startAttendance(String course_id, String course_name, double lon, double lat){
-        final String url = "https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_info="+course_id+","+course_name+","+lon+","+lat;
-        System.out.println(url);
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
 
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Toast.makeText(getApplicationContext(),"CourseListActivity Error",Toast.LENGTH_SHORT).show();
-
-            }
-        }
-        );
-        RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
-    }
-
-    private void setLocation(){
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    // Got last known location. In some rare situations this can be null.
-                    if (location != null) {
-                        // save longitude and latitude to a local variable for future use
-                        longitude = location.getLongitude();
-                        latitude = location.getLatitude();
-                        System.out.println("************MainActivity************** longitude: "+longitude+"    latitude: "+latitude);
-                    }else {
-                        location_error = "Unknown Location";
-                        System.out.println("**************** "+location_error);
-                    }
-                }
-            });
-            return;
-        }else{
-            location_error = "Permission Denied";
-            System.out.println("**************** "+location_error);
-        }
-    }
 }

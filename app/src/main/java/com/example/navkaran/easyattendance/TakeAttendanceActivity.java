@@ -48,6 +48,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     private Handler handler;
     private String attendanceCount;
 
+    private boolean clicked;
+    private Button colorChanger;
     private FusedLocationProviderClient mFusedLocationClient;
     private String location_error = "no error";
     private double latitude;
@@ -59,6 +61,27 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_take_attendance);
 
         getSupportActionBar().setTitle("Class Attendance");
+
+        colorChanger = findViewById(R.id.stop_btn);
+        clicked = false;
+
+        colorChanger.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                if(!clicked){
+
+                    colorChanger.setText(getResources().getText(R.string.action_stop_attendance));
+                    colorChanger.setBackground(getResources().getDrawable(R.drawable.round_button_red_selector));
+                    //colorChanger.setBackgroundColor(getResources().getColor(R.color.colorRed,getResources().newTheme()));
+                    clicked = true;
+                } else{
+                    colorChanger.setText(getResources().getText(R.string.action_start_attendance));
+                    colorChanger.setBackground(getResources().getDrawable(R.drawable.round_button_green_selector));
+                    //colorChanger.setBackgroundColor(getResources().getColor(R.color.colorGreen,getResources().newTheme()));
+                    clicked = false;
+                }
+            }
+        });
+
 
         stop_btn = findViewById(R.id.stop_btn);
         stop_btn.setOnClickListener(stop);
@@ -92,6 +115,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
             }
         }, 0);
 
+        //startAttendance(course.getCourseID(),course.getCourseName(),longitude,latitude);
+        //setLocation();
     }
 
 
