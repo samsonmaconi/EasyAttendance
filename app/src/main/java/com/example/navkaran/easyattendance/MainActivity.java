@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,22 +23,29 @@ public class MainActivity extends AppCompatActivity {
         userID = sp.getString("userID", "none");
         //userRole = sp.getString("a", "student");
 
+        //check user role and send them to the right activity
+        chechUserRole();
 
+    }
+
+    private void chechUserRole(){
         if(userRole.equals("teacher")){
             intent = new Intent(this, CourseListActivity.class);
             intent.putExtra("userRole", userRole);
             intent.putExtra("userID", userID);
+            finish();
             startActivity(intent);
         }else if(userRole.equals("student")){
             intent = new Intent(this, CheckAttendanceActivity.class);
             intent.putExtra("userRole", userRole);
             intent.putExtra("userID", userID);
+            finish();
             startActivity(intent);
         }else{
             intent = new Intent(this, SelectUserType.class);
+            finish();
             startActivity(intent);
         }
-
-
     }
+
 }
