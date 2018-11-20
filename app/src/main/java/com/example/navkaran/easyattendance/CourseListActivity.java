@@ -12,6 +12,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -47,6 +50,7 @@ public class CourseListActivity extends AppCompatActivity {
 
     //UI element
     private ListView lvCourseList;
+    private CourseAdapter adapter;
 
     private FusedLocationProviderClient mFusedLocationClient;
     private String location_error = "no error";
@@ -66,8 +70,9 @@ public class CourseListActivity extends AppCompatActivity {
 
         lvCourseList = findViewById(R.id.lvCourses);
 
-        final CourseAdapter adapter = new CourseAdapter(this, R.layout.course_list_item, courses.getValue());
+        adapter = new CourseAdapter(this, R.layout.course_list_item, courses.getValue());
         lvCourseList.setAdapter(adapter);
+        registerForContextMenu(lvCourseList);
 
         courses.observe(this, new Observer<List<CourseItem>>() {
             @Override
@@ -102,6 +107,40 @@ public class CourseListActivity extends AppCompatActivity {
         });
 
         setLocation();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        if (v.getId()==R.id.lvCourses) {
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+            menu.setHeaderTitle(adapter.getCourseList().get(info.position).getCourseID());
+            String[] menuItems = getResources().getStringArray(R.array.stringArray_course_list_menu);
+            for (int i = 0; i<menuItems.length; i++) {
+                menu.add(Menu.NONE, i, i, menuItems[i]);
+            }
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        int menuItemIndex = item.getItemId();
+        String[] menuItems = getResources().getStringArray(R.array.stringArray_course_list_menu);
+        String menuItemName = menuItems[menuItemIndex];
+        CourseItem courseSelected = adapter.getCourseList().get(info.position);
+
+        switch (menuItemName) {
+            case "Edit":
+                ;
+                break;
+            case "Delete":
+                repository.delete(courseSelected);
+                break;
+            case "History":
+                ;
+                break;
+        }
+        return false;
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

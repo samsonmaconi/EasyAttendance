@@ -45,4 +45,11 @@
     <string name="sharedPreference_user_role">com.example.navkaran.easyattendance.userid</string>
     <string name="sharedPreference_user_id">com.example.navkaran.easyattendance.userrole</string>
 
+    <!--String array for context menu-->
+    <string-array name="stringArray_course_list_menu">
+        <item>Edit</item>
+        <item>Delete</item>
+        <item>History</item>
+    </string-array>
+
 </resources>

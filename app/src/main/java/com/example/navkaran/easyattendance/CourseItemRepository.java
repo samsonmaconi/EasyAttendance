@@ -38,6 +38,14 @@ public class CourseItemRepository {
         new InsertAsyncTask(courseDAO).execute(course);
     }
 
+    public void update (CourseItem course) {
+        new UpdateAsyncTask(courseDAO).execute(course);
+    }
+
+    public void delete (CourseItem course) {
+        new DeleteAsyncTask(courseDAO).execute(course);
+    }
+
     // AsyncTask that does insert operations on another thread
     private static class InsertAsyncTask extends AsyncTask<CourseItem, Void, Void> {
 
@@ -50,6 +58,36 @@ public class CourseItemRepository {
         @Override
         protected  Void doInBackground(final CourseItem... params) {
             asyncTaskDAO.insertCourse(params[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateAsyncTask extends AsyncTask<CourseItem, Void, Void> {
+
+        private CourseItemDAO asyncTaskDAO;
+
+        UpdateAsyncTask(CourseItemDAO dao) {
+            asyncTaskDAO = dao;
+        }
+
+        @Override
+        protected  Void doInBackground(final CourseItem... params) {
+            asyncTaskDAO.updateCourse(params[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAsyncTask extends AsyncTask<CourseItem, Void, Void> {
+
+        private CourseItemDAO asyncTaskDAO;
+
+        DeleteAsyncTask(CourseItemDAO dao) {
+            asyncTaskDAO = dao;
+        }
+
+        @Override
+        protected  Void doInBackground(final CourseItem... params) {
+            asyncTaskDAO.deleteCourse(params[0]);
             return null;
         }
     }
