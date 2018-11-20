@@ -134,4 +134,25 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         );
         RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
     }
+    private void startAttendance(String course_id, String course_name, double lon, double lat){
+        final String url = "https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_info="+course_id+","+course_name+","+lon+","+lat;
+        System.out.println(url);
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(getApplicationContext(),"CourseListActivity Error",Toast.LENGTH_SHORT).show();
+
+            }
+        }
+        );
+        RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
+    }
 }

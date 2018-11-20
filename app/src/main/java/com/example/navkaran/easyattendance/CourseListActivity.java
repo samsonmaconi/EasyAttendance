@@ -56,10 +56,10 @@ public class CourseListActivity extends AppCompatActivity {
     private ListView lvCourseList;
     private CourseAdapter adapter;
 
-private FusedLocationProviderClient mFusedLocationClient;
-private String location_error = "no error";
-private double latitude;
-private double longitude;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private String location_error = "no error";
+    private double latitude;
+    private double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
