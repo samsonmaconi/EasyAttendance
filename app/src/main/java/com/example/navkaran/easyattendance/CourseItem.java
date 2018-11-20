@@ -3,6 +3,7 @@ package com.example.navkaran.easyattendance;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 // David Cui B00788648 Nov 2018
 //data holder for an course item, an entity in the room database
@@ -11,6 +12,7 @@ public class CourseItem {
 
     //such as CSCI5100
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "course_id")
     private String courseID;
     //full name of course

@@ -15,11 +15,13 @@ import java.util.List;
 @Dao
 public interface CourseItemDAO {
 
-    @Query("SELECT * FROM courses")
+    // LiveData library class makes data observation easier, so updating view when data changes
+    // is easier, reducing dependency
+    @Query("SELECT * FROM courses ORDER BY course_id")
     LiveData<List<CourseItem>> getAllCourses();
 
     // insert parameters into database in a single transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     void insertCourse(CourseItem course);
 
     // update matches the entities by the primary key

@@ -84,16 +84,6 @@ public class CourseListActivity extends AppCompatActivity {
         setLocation();
     }
 
-    //fake data for the sake of trying out the layout
-    private void populateCourseList() {
-        courseItemArrayList.add(new CourseItem("CSCI-1010", "1st Year Course", 120));
-        courseItemArrayList.add(new CourseItem("CSCI-2132", "2nd Year Course", 90));
-        courseItemArrayList.add(new CourseItem("CSCI-3171", "3rd Year Course", 60));
-        courseItemArrayList.add(new CourseItem("CSCI-4790", "4th Year Course", 30));
-        courseItemArrayList.add(new CourseItem("CSCI-5708", "Grad Course 1", 90));
-        courseItemArrayList.add(new CourseItem("CSCI-5100", "Grad Course 2", 30));
-    }
-
     private void startAttendance(String course_id, String course_name, double lon, double lat){
         final String url = "https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_info="+course_id+","+course_name+","+lon+","+lat;
         System.out.println(url);
