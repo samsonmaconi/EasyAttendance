@@ -35,7 +35,6 @@ public class CourseListActivity extends AppCompatActivity {
     public static final String COURSE_NAME = "COURSE_NAME";
     public static final String COURSE_STUDENT_COUNT = "COURSE_STUDENT_COUNT";
 
-    private CourseAdapter adapter;
     //the list of courses this instructor is teaching
     private ArrayList<CourseItem> courseItemArrayList;
     //UI element
@@ -57,10 +56,8 @@ public class CourseListActivity extends AppCompatActivity {
         courseItemArrayList = new ArrayList<>();
         lvCourseList = findViewById(R.id.lvCourses);
 
-        adapter = new CourseAdapter(this, R.layout.course_list_item, courseItemArrayList);
+        CourseAdapter adapter = new CourseAdapter(this, R.layout.course_list_item, courseItemArrayList);
         lvCourseList.setAdapter(adapter);
-
-        populateCourseList();
 
         //TODO
         // get extra from intent (instructor id)

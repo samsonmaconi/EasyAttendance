@@ -31,15 +31,15 @@ public class CourseItemRepository {
 
     // database operation must happen on worker threads, done with AsyncTask
     public void insert (CourseItem course) {
-        new insertAsyncTask(courseDAO).execute(course);
+        new InsertAsyncTask(courseDAO).execute(course);
     }
 
     // AsyncTask that does insert operations on another thread
-    private static class insertAsyncTask extends AsyncTask<CourseItem, Void, Void> {
+    private static class InsertAsyncTask extends AsyncTask<CourseItem, Void, Void> {
 
         private CourseItemDAO asyncTaskDAO;
 
-        insertAsyncTask(CourseItemDAO dao) {
+        InsertAsyncTask(CourseItemDAO dao) {
             asyncTaskDAO = dao;
         }
 

@@ -15,10 +15,16 @@
     <string name="label_staff_id">Staff ID</string>
     <string name="label_student_id">Student ID</string>
     <string name="label_status">Status</string>
+    <string name="label_course_id">Course ID</string>
+    <string name="label_course_name">Course Name</string>
+    <string name="label_course_student_count">Course Name</string>
 
     <!--Hints-->
     <string name="hint_select_a_course">Please select a course</string>
     <string name="hint_example_id">e.g B00801169</string>
+    <string name="hint_course_id">e.g CSCI 5708</string>
+    <string name="hint_course_name">e.g Mobile Computing</string>
+    <string name="hint_course_student_count">A postive integer</string>
 
     <!--Formatted Strings-->
     <string name="formatString_checked_in">%1$d of %2$d checked-in</string>
