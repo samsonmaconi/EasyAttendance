@@ -25,8 +25,12 @@ public class CourseItemRepository {
         courses = courseDAO.getAllCourses();
     }
 
-    LiveData<List<CourseItem>> getCourses() {
+    public LiveData<List<CourseItem>> getCourses() {
         return courses;
+    }
+
+    public List<CourseItem> getCoursesSync() {
+        return courseDAO.getAllCoursesSync();
     }
 
     // database operation must happen on worker threads, done with AsyncTask
