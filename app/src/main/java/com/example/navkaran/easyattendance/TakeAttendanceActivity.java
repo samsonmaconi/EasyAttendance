@@ -115,8 +115,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
             }
         }, 0);
 
-        //startAttendance(course.getCourseID(),course.getCourseName(),longitude,latitude);
-        //setLocation();
+        startAttendance(course_id,course_name,longitude,latitude);
+        setLocation();
     }
 
 
