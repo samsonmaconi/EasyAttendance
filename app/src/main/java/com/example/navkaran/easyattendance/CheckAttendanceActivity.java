@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
@@ -43,6 +44,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
     private Spinner spinner;
     private String lastCheck = "null";
     private String Student_id;
+    private Handler handler;
 
     // to prevent app from crashing when user forget to turn on location services on their device .
     private Double latitude = 0.2333;
@@ -89,7 +91,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(select_class);
         sign_attendance.setOnClickListener(sign);
 
-        runnable = new Runnable() {
+        /*runnable = new Runnable() {
             @Override
             public void run() {
                 getClassList();
@@ -97,7 +99,23 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         };
 
         Thread thread = new Thread(null, runnable, "background");
-        thread.start();
+        thread.start();*/
+
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        getClassList();
+                    }
+                };
+                Thread thread = new Thread(null, runnable, "background");
+                thread.start();
+                handler.postDelayed(this, 2000);
+            }
+        }, 0);
 
         setLocation();
     }
