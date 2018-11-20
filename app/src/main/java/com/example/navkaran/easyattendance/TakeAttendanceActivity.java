@@ -13,6 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.location.FusedLocationProviderClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +42,11 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     private Handler handler;
     private String attendanceCount;
 
+    private FusedLocationProviderClient mFusedLocationClient;
+    private String location_error = "no error";
+    private double latitude;
+    private double longitude;
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

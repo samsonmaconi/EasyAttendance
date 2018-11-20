@@ -1,6 +1,8 @@
 package com.example.navkaran.easyattendance;
 
 public class AttendanceItem{
+    private static int checkedInCount = 0;
+    private static int totalCount = 0;
     private String studentId;
     private Boolean hasCheckedIn;
     private static final String[] status = {"Not Checked-in", "Checked-in"};
@@ -8,6 +10,10 @@ public class AttendanceItem{
     public AttendanceItem(String studentId, Boolean hasCheckedIn) {
         this.studentId = studentId;
         this.hasCheckedIn = hasCheckedIn;
+        if(hasCheckedIn){
+            checkedInCount++;
+        }
+        totalCount++;
     }
 
     public String getStatus() {
@@ -20,5 +26,13 @@ public class AttendanceItem{
 
     public Boolean hasCheckedIn() {
         return hasCheckedIn;
+    }
+
+    public static int getCheckedInCount() {
+        return checkedInCount;
+    }
+
+    public static int getTotalCount() {
+        return totalCount;
     }
 }
