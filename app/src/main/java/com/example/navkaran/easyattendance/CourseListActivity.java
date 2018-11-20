@@ -211,31 +211,31 @@ setLocation();
         RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
-private void setLocation(){
-    mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+    private void setLocation(){
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-            Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-        mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                // Got last known location. In some rare situations this can be null.
-                if (location != null) {
-                    // save longitude and latitude to a local variable for future use
-                    longitude = location.getLongitude();
-                    latitude = location.getLatitude();
-                    System.out.println("************MainActivity************** longitude: "+longitude+"    latitude: "+latitude);
-                }else {
-                    location_error = "Unknown Location";
-                    System.out.println("**************** "+location_error);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    // Got last known location. In some rare situations this can be null.
+                    if (location != null) {
+                        // save longitude and latitude to a local variable for future use
+                        longitude = location.getLongitude();
+                        latitude = location.getLatitude();
+                        System.out.println("************MainActivity************** longitude: "+longitude+"    latitude: "+latitude);
+                    }else {
+                        location_error = "Unknown Location";
+                        System.out.println("**************** "+location_error);
+                    }
                 }
-            }
-        });
-        return;
-    }else{
-        location_error = "Permission Denied";
-        System.out.println("**************** "+location_error);
+            });
+            return;
+        }else{
+            location_error = "Permission Denied";
+            System.out.println("**************** "+location_error);
+        }
     }
-}
 }

@@ -70,11 +70,11 @@
             android:id="@+id/stop_btn"
             android:layout_width="256dp"
             android:layout_height="256dp"
-            android:background="@drawable/round_button_red_selector"
+            android:background="@drawable/round_button_green_selector"
             android:layout_gravity="center"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="@string/action_stop_attendance"
+            android:text="@string/action_start_attendance"
             android:textSize="16sp"
             android:textColor="@color/colorWhite"/>
 
