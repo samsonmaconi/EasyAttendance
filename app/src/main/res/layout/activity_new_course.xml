@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NewCourseActivity"
+    android:padding="16dp"
+    android:background="@drawable/gradient_background_white_blue">
+
+    <TextView
+        android:id="@+id/tv_courseId"
+        android:labelFor="@id/et_courseId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_course_id"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_courseId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_course_id"
+        android:inputType="text"
+        android:maxLines="1" />
+
+    <TextView
+        android:id="@+id/tv_courseName"
+        android:labelFor="@id/et_courseName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/label_course_name"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_courseName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_course_name"
+        android:inputType="text"
+        android:maxLines="1" />
+
+    <TextView
+        android:id="@+id/tv_courseStudentCount"
+        android:labelFor="@id/et_courseStudentCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/label_course_student_count"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_courseStudentCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_course_student_count"
+        android:inputType="number"
+        android:maxLines="1" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/action_save"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/rounded_rect_button_blue_selector" />
+
+</LinearLayout>

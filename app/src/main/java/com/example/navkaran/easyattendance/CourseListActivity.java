@@ -1,12 +1,20 @@
 package com.example.navkaran.easyattendance;
 
 import android.Manifest;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -24,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // David Cui B00788648 Nov 2018
 //activity for course list, where instructors can select the course they want to enable check-in for
@@ -34,11 +43,15 @@ public class CourseListActivity extends AppCompatActivity {
     public static final String COURSE_NAME = "COURSE_NAME";
     public static final String COURSE_STUDENT_COUNT = "COURSE_STUDENT_COUNT";
 
-    private CourseAdapter adapter;
-    //the list of courses this instructor is teaching
-    private ArrayList<CourseItem> courseItemArrayList;
+    public static final int NEW_COURSE_ACTIVITY_REQUEST_CODE = 1;
+    public static final int EDIT_COURSE_ACTIVITY_REQUEST_CODE = 2;
+
+    private CourseItemRepository repository;
+    private LiveData<List<CourseItem>> courses;
+
     //UI element
     private ListView lvCourseList;
+    private CourseAdapter adapter;
 
     private FusedLocationProviderClient mFusedLocationClient;
     private String location_error = "no error";
@@ -50,19 +63,34 @@ public class CourseListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_list);
 
-        getSupportActionBar().setTitle("Course List");
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.actionbar_course_list);
 
-        courseItemArrayList = new ArrayList<>();
+        repository = new CourseItemRepository(getApplication());
+        courses = repository.getCourses();
+
         lvCourseList = findViewById(R.id.lvCourses);
 
-        adapter = new CourseAdapter(this, R.layout.course_list_item, courseItemArrayList);
+        adapter = new CourseAdapter(this, R.layout.course_list_item, courses.getValue());
         lvCourseList.setAdapter(adapter);
+        registerForContextMenu(lvCourseList);
 
-        populateCourseList();
+        courses.observe(this, new Observer<List<CourseItem>>() {
+            @Override
+            public void onChanged(@Nullable List<CourseItem> courseItems) {
+                if(courseItems != null)
+                adapter.setCourseList(courseItems);
+            }
+        });
 
-        //TODO
-        // get extra from intent (instructor id)
-        // get course list from file or database instead of hard coding
+        FloatingActionButton fab = findViewById(R.id.fabNewCourse);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CourseListActivity.this, NewCourseActivity.class);
+                startActivityForResult(intent, NEW_COURSE_ACTIVITY_REQUEST_CODE);
+            }
+        });
 
         lvCourseList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -70,7 +98,7 @@ public class CourseListActivity extends AppCompatActivity {
 
                 Intent intent = new Intent();
                 intent.setClass(view.getContext(), TakeAttendanceActivity.class);
-                CourseItem course = courseItemArrayList.get(i);
+                CourseItem course = adapter.getCourseList().get(i);
                 intent.putExtra(COURSE_ID, course.getCourseID());
                 intent.putExtra(COURSE_NAME, course.getCourseName());
                 intent.putExtra(COURSE_STUDENT_COUNT, course.getStudentCount());
@@ -82,14 +110,63 @@ public class CourseListActivity extends AppCompatActivity {
         setLocation();
     }
 
-    //fake data for the sake of trying out the layout
-    private void populateCourseList() {
-        courseItemArrayList.add(new CourseItem("CSCI-1010", "1st Year Course", 120));
-        courseItemArrayList.add(new CourseItem("CSCI-2132", "2nd Year Course", 90));
-        courseItemArrayList.add(new CourseItem("CSCI-3171", "3rd Year Course", 60));
-        courseItemArrayList.add(new CourseItem("CSCI-4790", "4th Year Course", 30));
-        courseItemArrayList.add(new CourseItem("CSCI-5708", "Grad Course 1", 90));
-        courseItemArrayList.add(new CourseItem("CSCI-5100", "Grad Course 2", 30));
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        if (v.getId()==R.id.lvCourses) {
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+            menu.setHeaderTitle(adapter.getCourseList().get(info.position).getCourseID());
+            String[] menuItems = getResources().getStringArray(R.array.stringArray_course_list_menu);
+            for (int i = 0; i<menuItems.length; i++) {
+                menu.add(Menu.NONE, i, i, menuItems[i]);
+            }
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        int menuItemIndex = item.getItemId();
+        String[] menuItems = getResources().getStringArray(R.array.stringArray_course_list_menu);
+        String menuItemName = menuItems[menuItemIndex];
+        CourseItem courseSelected = adapter.getCourseList().get(info.position);
+
+        switch (menuItemName) {
+            case "Edit":
+                Intent intent = new Intent(CourseListActivity.this, EditCourseActivity.class);
+                intent.putExtra(COURSE_ID, courseSelected.getCourseID());
+                intent.putExtra(COURSE_NAME, courseSelected.getCourseName());
+                intent.putExtra(COURSE_STUDENT_COUNT, courseSelected.getStudentCount());
+                startActivityForResult(intent, EDIT_COURSE_ACTIVITY_REQUEST_CODE);
+                break;
+            case "Delete":
+                repository.delete(courseSelected);
+                break;
+            case "History":
+                //TODO
+                break;
+        }
+        return true;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == NEW_COURSE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            String courseId = data.getStringExtra(COURSE_ID);
+            String courseName = data.getStringExtra(COURSE_NAME);
+            int courseStudentCount = data.getIntExtra(COURSE_STUDENT_COUNT, 0);
+            repository.insert(new CourseItem(courseId, courseName, courseStudentCount));
+        } else if (requestCode == EDIT_COURSE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            String courseId = data.getStringExtra(COURSE_ID);
+            String courseName = data.getStringExtra(COURSE_NAME);
+            int courseStudentCount = data.getIntExtra(COURSE_STUDENT_COUNT, 0);
+            repository.update(new CourseItem(courseId, courseName, courseStudentCount));
+        } else {
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Cancelled",
+                        Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void startAttendance(String course_id, String course_name, double lon, double lat){
