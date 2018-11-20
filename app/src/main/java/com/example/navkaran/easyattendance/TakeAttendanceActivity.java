@@ -3,7 +3,6 @@ package com.example.navkaran.easyattendance;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +23,12 @@ import org.json.JSONObject;
 
 public class TakeAttendanceActivity extends AppCompatActivity {
 
+    //for accessing extras
+    public static final String COURSE_ID = "COURSE_ID";
+    public static final String COURSE_NAME = "COURSE_NAME";
+    public static final String COURSE_STUDENT_COUNT = "COURSE_STUDENT_COUNT";
+    public static final String ATTENDANCE_COUNT = "ATTENDANCE_COUNT";
+
     Button stop_btn;
     private TextView class_number;
     private TextView class_name;
@@ -34,15 +39,13 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     private int student_num;
     private Runnable runnable;
     private Handler handler;
-
+    private String attendanceCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance);
 
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.actionbar_class_attendance);
         getSupportActionBar().setTitle("Class Attendance");
 
         stop_btn = findViewById(R.id.stop_btn);
@@ -51,13 +54,11 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         class_number = findViewById(R.id.class_number);
         class_name = findViewById(R.id.class_name);
         register_number = findViewById(R.id.register_number);
-        //Intent intent = getIntent();
-        //course_id = intent.getStringExtra("COURSE_ID");
-        //course_name = intent.getStringExtra("COURSE_NAME");
-        //student_num = intent.getIntExtra("STUDENT_NUMBER",-1);
-        course_id = "CSCI-5708";
-        course_name = "Advanced topic in Github";
-        student_num = 23;
+
+        Intent intent = getIntent();
+        course_id = intent.getStringExtra(COURSE_ID);
+        course_name = intent.getStringExtra(COURSE_NAME);
+        student_num = intent.getIntExtra(COURSE_STUDENT_COUNT, 0);
 
         class_number.setText(course_id);
         class_name.setText(course_name);
@@ -81,6 +82,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
 
     }
 
+
     View.OnClickListener stop = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -93,13 +95,14 @@ public class TakeAttendanceActivity extends AppCompatActivity {
 
     private void startNewIntend(){
         Intent intent = new Intent(this, AttendanceDetailsActivity.class);
-
-        //intent.putExtra("LONGITUDE", longitude);
-        //intent.putExtra("LATITUDE", latitude);
+        intent.putExtra(COURSE_ID, course_id);
+        intent.putExtra(COURSE_NAME, course_name);
+        intent.putExtra(COURSE_STUDENT_COUNT, student_num);
+        intent.putExtra(ATTENDANCE_COUNT, attendanceCount);
         startActivity(intent);
     }
 
-    public void checkAttendance(){
+    private void checkAttendance(){
         final String url = "https://web.cs.dal.ca/~stang/csci5708/count.php?class_id="+course_id;
         System.out.println(url);
         JsonObjectRequest request = new JsonObjectRequest(
@@ -108,8 +111,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            check_number.setText(response.getString("students_count")
-                                    +" of 102 checked in");
+                            attendanceCount = response.getString("students_count");
+                            check_number.setText(attendanceCount+" of "+student_num+" in attendance");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
