@@ -59,7 +59,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/hint_course_student_count"
         android:inputType="number"
-        android:digits="0123456789"
         android:maxLines="1" />
 
     <Button
