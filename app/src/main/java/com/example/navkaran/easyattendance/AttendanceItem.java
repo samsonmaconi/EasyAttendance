@@ -1,12 +1,40 @@
 package com.example.navkaran.easyattendance;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
+import android.support.annotation.NonNull;
+
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
+// Converted to a database entity for LectureID and StudentID
+@Entity(tableName = "attendances",
+        primaryKeys = {"student_id","lecture_id"},
+        foreignKeys = {
+                @ForeignKey(onDelete = CASCADE,
+                        entity = Lecture.class,
+                        parentColumns = "lecture_id",
+                        childColumns = "lecture_id")},
+        indices = {@Index(value="lecture_id")})
 public class AttendanceItem{
+    @Ignore
     private static int checkedInCount = 0;
+    @Ignore
     private static int totalCount = 0;
+    @ColumnInfo(name = "student_id")
+    @NonNull
     private String studentId;
+    @ColumnInfo(name = "lecture_id")
+    @NonNull
+    private long lectureId;
+    @Ignore
     private Boolean hasCheckedIn;
+    @Ignore
     private static final String[] status = {"Not Checked-in", "Checked-in"};
 
+    @Ignore
     public AttendanceItem(String studentId, Boolean hasCheckedIn) {
         this.studentId = studentId;
         this.hasCheckedIn = hasCheckedIn;
@@ -16,12 +44,29 @@ public class AttendanceItem{
         totalCount++;
     }
 
+    public AttendanceItem(String studentId, long lectureId) {
+        this.studentId = studentId;
+        this.lectureId = lectureId;
+    }
+
+    public long getLectureId() {
+        return lectureId;
+    }
+
+    public void setLectureId(long lectureId) {
+        this.lectureId = lectureId;
+    }
+
     public String getStatus() {
         return this.hasCheckedIn ? status[1] : status[0];
     }
 
-    public String getStudentId() {
+    public @NonNull String getStudentId() {
         return studentId;
+    }
+
+    public void setStudentId(@NonNull String studentId) {
+        this.studentId = studentId;
     }
 
     public Boolean hasCheckedIn() {
