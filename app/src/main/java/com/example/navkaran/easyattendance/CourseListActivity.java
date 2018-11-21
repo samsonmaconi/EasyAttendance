@@ -125,7 +125,12 @@ public class CourseListActivity extends AppCompatActivity {
                 repository.delete(courseSelected);
                 break;
             case "History":
-                //TODO
+                Intent hisintent = new Intent(CourseListActivity.this, AttendanceHistory.class);
+                hisintent.putExtra(EasyAttendanceConstants.COURSE_KEY, courseSelected.getCourseKey());
+                hisintent.putExtra(EasyAttendanceConstants.COURSE_ID, courseSelected.getCourseID());
+                hisintent.putExtra(EasyAttendanceConstants.COURSE_NAME, courseSelected.getCourseName());
+                hisintent.putExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, courseSelected.getStudentCount());
+                startActivity(hisintent);
                 break;
         }
         return true;
