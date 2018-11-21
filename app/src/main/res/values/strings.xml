@@ -15,9 +15,11 @@
     <string name="label_staff_id">Staff ID</string>
     <string name="label_student_id">Student ID</string>
     <string name="label_status">Status</string>
+    <string name="label_select_date">Select Date</string>
     <string name="label_course_id">Course ID</string>
     <string name="label_course_name">Course Name</string>
     <string name="label_course_student_count">Student Count</string>
+
 
     <!--Hints-->
     <string name="hint_select_a_course">Please select a course</string>
