@@ -1,5 +1,6 @@
 package com.example.navkaran.easyattendance;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -12,7 +13,7 @@ import java.util.List;
 public interface AttendanceItemDAO {
 
     @Query("SELECT * FROM attendances WHERE attendances.lecture_id = :lectureId")
-    List<AttendanceItem> getAttendances(long lectureId);
+    LiveData<List<AttendanceItem>> getAttendances(long lectureId);
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     void insertAttendance(AttendanceItem attendance);
