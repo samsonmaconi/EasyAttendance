@@ -40,7 +40,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     private Runnable runnable;
     private Handler handler;
     private String attendanceCount;
-  
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
