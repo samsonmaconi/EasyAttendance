@@ -55,11 +55,11 @@ public class AttendanceDetailsActivity extends AppCompatActivity{
         actionBar.setTitle(R.string.title_attendance_list);
 
         intent = getIntent();
-        courseKey = intent.getIntExtra(CourseListActivity.COURSE_KEY, -1);
-        courseId = intent.getStringExtra(CourseListActivity.COURSE_ID);
-        courseName = intent.getStringExtra(CourseListActivity.COURSE_NAME);
+        courseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);
+        courseId = intent.getStringExtra(EasyAttendanceConstants.COURSE_ID);
+        courseName = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
         //TODO: Change Default Values back to 0
-        studentCount = intent.getIntExtra(CourseListActivity.COURSE_STUDENT_COUNT, 0);
+        studentCount = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
         attendanceCount = intent.getIntExtra(ATTENDANCE_COUNT, 0);
 
         //TODO: Remove next 2 Temp Lines
