@@ -79,7 +79,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         Student_id = intent.getStringExtra("userID");
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.actionbar_ckeck_attendance);
+        getSupportActionBar().setCustomView(R.layout.actionbar_check_attendance);
 
         spinner = findViewById(R.id.spinner);
         sign_attendance = findViewById(R.id.btn_iamhere);
