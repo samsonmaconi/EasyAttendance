@@ -12,5 +12,6 @@ public class EasyAttendanceConstants {
     public static final int NEW_COURSE_ACTIVITY_REQUEST_CODE = 1;
     public static final int EDIT_COURSE_ACTIVITY_REQUEST_CODE = 2;
     public static final String ATTENDANCE_COUNT = "ATTENDANCE_COUNT";
+    public static final String LECTURE_ID = "LECTURE_ID";
 
 }
