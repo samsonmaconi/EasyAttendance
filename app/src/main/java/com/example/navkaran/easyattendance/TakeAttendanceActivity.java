@@ -32,8 +32,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
 
     //for accessing extras
     public static final String ATTENDANCE_COUNT = "ATTENDANCE_COUNT";
-
-    Button stop_btn;
+    // attribute need
+    private Button stop_btn;
     private TextView class_number;
     private TextView class_name;
     private TextView register_number;
@@ -59,14 +59,14 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_take_attendance);
 
         getSupportActionBar().setTitle("Class Attendance");
-
+        //connect with UI
         stop_btn = findViewById(R.id.stop_btn);
         stop_btn.setOnClickListener(stop);
         check_number = findViewById(R.id.check_number);
         class_number = findViewById(R.id.class_number);
         class_name = findViewById(R.id.class_name);
         register_number = findViewById(R.id.register_number);
-
+        //get database connection
         Intent intent = getIntent();
         courseKey = intent.getIntExtra(CourseListActivity.COURSE_KEY, -1);
         course_id = intent.getStringExtra(CourseListActivity.COURSE_ID);
@@ -116,7 +116,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
             }
         }
     };
-
+    /**
+     * stop Attendance fuction*/
     private void stopAttendance(){
         Intent intent = new Intent(this, AttendanceDetailsActivity.class);
         intent.putExtra(CourseListActivity.COURSE_KEY, courseKey);
@@ -126,7 +127,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         intent.putExtra(ATTENDANCE_COUNT, attendanceCount);
         startActivity(intent);
     }
-
+    /**
+     * check how many student account already taked attendance*/
     private void checkAttendance(){
         final String url = "https://web.cs.dal.ca/~stang/csci5708/count.php?class_id="+course_id;
         System.out.println(url);
@@ -153,7 +155,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         );
         RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
     }
-
+    /**
+     * start attendance*/
     private void startAttendance(String course_id, String course_name, double lon, double lat){
         final String url = "https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_info="+course_id+","+course_name+","+lon+","+lat;
         System.out.println(url);
@@ -176,6 +179,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
+    /**
+     * set instrctor localtion with GPS feature*/
     private void setLocation(){
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 

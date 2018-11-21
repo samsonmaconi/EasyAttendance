@@ -138,8 +138,7 @@ public class AttendanceDetailsActivity extends AppCompatActivity{
                         e.printStackTrace();
                     }
                 }
-
-                tvAttendanceSummary.setText(String.format(getString(R.string.formatString_in_attendance), AttendanceItem.getTotalCount(), studentCount));
+                tvAttendanceSummary.setText(String.format(getString(R.string.formatString_in_attendance), attendanceCount, studentCount));
                 attendanceAdapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
