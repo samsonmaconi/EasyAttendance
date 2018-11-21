@@ -27,11 +27,11 @@ public class EditCourseActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        final int courseKey = intent.getIntExtra(CourseListActivity.COURSE_KEY, -1);
-        etCourseId.setText(intent.getStringExtra(CourseListActivity.COURSE_ID));
-        etCourseName.setText(intent.getStringExtra(CourseListActivity.COURSE_NAME));
+        final int courseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);
+        etCourseId.setText(intent.getStringExtra(EasyAttendanceConstants.COURSE_ID));
+        etCourseName.setText(intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME));
         etCourseStudentCount.setText(Integer.toString(intent
-                .getIntExtra(CourseListActivity.COURSE_STUDENT_COUNT, 0)));
+                .getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0)));
 
         // gets the input and return them to the caller activity - CourseListActivity
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -47,10 +47,10 @@ public class EditCourseActivity extends AppCompatActivity {
                     String courseId = etCourseId.getText().toString();
                     String courseName = etCourseName.getText().toString();
                     int studentCount = Integer.parseInt(etCourseStudentCount.getText().toString());
-                    replyIntent.putExtra(CourseListActivity.COURSE_KEY, courseKey);
-                    replyIntent.putExtra(CourseListActivity.COURSE_ID, courseId);
-                    replyIntent.putExtra(CourseListActivity.COURSE_NAME, courseName);
-                    replyIntent.putExtra(CourseListActivity.COURSE_STUDENT_COUNT, studentCount);
+                    replyIntent.putExtra(EasyAttendanceConstants.COURSE_KEY, courseKey);
+                    replyIntent.putExtra(EasyAttendanceConstants.COURSE_ID, courseId);
+                    replyIntent.putExtra(EasyAttendanceConstants.COURSE_NAME, courseName);
+                    replyIntent.putExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, studentCount);
                     setResult(RESULT_OK, replyIntent);
                 }
                 finish();
