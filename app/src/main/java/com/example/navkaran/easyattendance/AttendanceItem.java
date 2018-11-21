@@ -4,6 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.support.annotation.NonNull;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
@@ -15,7 +16,8 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
                 @ForeignKey(onDelete = CASCADE,
                         entity = Lecture.class,
                         parentColumns = "lecture_id",
-                        childColumns = "lecture_id")})
+                        childColumns = "lecture_id")},
+        indices = {@Index(value="lecture_id")})
 public class AttendanceItem{
     @Ignore
     private static int checkedInCount = 0;

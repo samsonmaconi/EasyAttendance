@@ -42,6 +42,7 @@ public class CourseListActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
     //for accessing extras
+    public static final String COURSE_KEY = "COURSE_KEY";
     public static final String COURSE_ID = "COURSE_ID";
     public static final String COURSE_NAME = "COURSE_NAME";
     public static final String COURSE_STUDENT_COUNT = "COURSE_STUDENT_COUNT";
@@ -67,18 +68,9 @@ public class CourseListActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-
-            // Permission is not granted
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-            } else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-            }
-        } else {
-            // Permission has already been granted
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
 
         repository = new CourseItemRepository(getApplication());
@@ -114,6 +106,7 @@ public class CourseListActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(view.getContext(), TakeAttendanceActivity.class);
                 CourseItem course = adapter.getCourseList().get(i);
+                intent.putExtra(COURSE_KEY, course.getCourseKey());
                 intent.putExtra(COURSE_ID, course.getCourseID());
                 intent.putExtra(COURSE_NAME, course.getCourseName());
                 intent.putExtra(COURSE_STUDENT_COUNT, course.getStudentCount());
@@ -145,6 +138,7 @@ public class CourseListActivity extends AppCompatActivity {
         switch (menuItemName) {
             case "Edit":
                 Intent intent = new Intent(CourseListActivity.this, EditCourseActivity.class);
+                intent.putExtra(COURSE_KEY, courseSelected.getCourseKey());
                 intent.putExtra(COURSE_ID, courseSelected.getCourseID());
                 intent.putExtra(COURSE_NAME, courseSelected.getCourseName());
                 intent.putExtra(COURSE_STUDENT_COUNT, courseSelected.getStudentCount());
@@ -169,10 +163,11 @@ public class CourseListActivity extends AppCompatActivity {
             int courseStudentCount = data.getIntExtra(COURSE_STUDENT_COUNT, 0);
             repository.insert(new CourseItem(courseId, courseName, courseStudentCount));
         } else if (requestCode == EDIT_COURSE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            int courseKey = data.getIntExtra(COURSE_KEY, -1);
             String courseId = data.getStringExtra(COURSE_ID);
             String courseName = data.getStringExtra(COURSE_NAME);
             int courseStudentCount = data.getIntExtra(COURSE_STUDENT_COUNT, 0);
-            repository.update(new CourseItem(courseId, courseName, courseStudentCount));
+            repository.update(new CourseItem(courseKey, courseId, courseName, courseStudentCount));
         } else {
                 Toast.makeText(
                         getApplicationContext(),
