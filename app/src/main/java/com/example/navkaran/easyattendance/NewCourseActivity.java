@@ -39,9 +39,9 @@ public class NewCourseActivity extends AppCompatActivity {
                     String courseId = etCourseId.getText().toString();
                     String courseName = etCourseName.getText().toString();
                     int studentCount = Integer.parseInt(etCourseStudentCount.getText().toString());
-                    replyIntent.putExtra(CourseListActivity.COURSE_ID, courseId);
-                    replyIntent.putExtra(CourseListActivity.COURSE_NAME, courseName);
-                    replyIntent.putExtra(CourseListActivity.COURSE_STUDENT_COUNT, studentCount);
+                    replyIntent.putExtra(EasyAttendanceConstants.COURSE_ID, courseId);
+                    replyIntent.putExtra(EasyAttendanceConstants.COURSE_NAME, courseName);
+                    replyIntent.putExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, studentCount);
                     setResult(RESULT_OK, replyIntent);
                 }
                 finish();

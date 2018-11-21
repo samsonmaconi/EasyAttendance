@@ -66,7 +66,7 @@ public class SelectUserType extends AppCompatActivity {
             // Permission is not granted
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    CourseListActivity.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                    EasyAttendanceConstants.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         } else {
             // Permission has already been granted
         }
