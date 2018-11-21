@@ -40,7 +40,8 @@ package="com.example.navkaran.easyattendance">
 
         <!-- android:parentActivityName=".TakeAttendanceActivity" -->
     </activity>
-    <activity android:name=".AttendanceHistory"></activity>
+    <activity android:name=".AttendanceHistory"
+        android:parentActivityName=".CourseListActivity"></activity>
     <activity android:name=".NewCourseActivity" />
     <activity android:name=".EditCourseActivity"></activity>
 </application>
