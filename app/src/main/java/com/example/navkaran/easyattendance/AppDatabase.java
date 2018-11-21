@@ -9,7 +9,7 @@ import android.content.Context;
 
 // Room database simplifies using SQLite, reduces boilerplate code
 // singleton since RoomDatabase is expensive and we don't need different copies
-@Database(entities = {CourseItem.class}, version = 1)
+@Database(entities = {CourseItem.class, AttendanceItem.class, Lecture.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "attend-db";
@@ -18,6 +18,8 @@ public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase sInstance;
 
     public abstract CourseItemDAO courseItemDAO();
+    public abstract AttendanceItemDAO attendanceItemDAO();
+    public abstract LectureDAO lectureDAO();
 
     // build a persistent database
     // must use worker threads to operate on database, thus must be synchronized

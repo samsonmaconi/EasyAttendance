@@ -35,8 +35,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     public static final String COURSE_NAME = "COURSE_NAME";
     public static final String COURSE_STUDENT_COUNT = "COURSE_STUDENT_COUNT";
     public static final String ATTENDANCE_COUNT = "ATTENDANCE_COUNT";
-
-    Button stop_btn;
+    // attribute need
+    private Button stop_btn;
     private TextView class_number;
     private TextView class_name;
     private TextView register_number;
@@ -46,50 +46,29 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     private int student_num;
     private Runnable runnable;
     private Handler handler;
-    private String attendanceCount;
+    private int attendanceCount;
+    private boolean shouldStop = false;
+    private boolean shouldCheck = false;
 
-    private boolean clicked;
-    private Button colorChanger;
     private FusedLocationProviderClient mFusedLocationClient;
     private String location_error = "no error";
     private double latitude;
     private double longitude;
-  
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance);
 
         getSupportActionBar().setTitle("Class Attendance");
-
-        colorChanger = findViewById(R.id.stop_btn);
-        clicked = false;
-
-        colorChanger.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                if(!clicked){
-
-                    colorChanger.setText(getResources().getText(R.string.action_stop_attendance));
-                    colorChanger.setBackground(getResources().getDrawable(R.drawable.round_button_red_selector));
-                    //colorChanger.setBackgroundColor(getResources().getColor(R.color.colorRed,getResources().newTheme()));
-                    clicked = true;
-                } else{
-                    colorChanger.setText(getResources().getText(R.string.action_start_attendance));
-                    colorChanger.setBackground(getResources().getDrawable(R.drawable.round_button_green_selector));
-                    //colorChanger.setBackgroundColor(getResources().getColor(R.color.colorGreen,getResources().newTheme()));
-                    clicked = false;
-                }
-            }
-        });
-
-
+        //connect with UI
         stop_btn = findViewById(R.id.stop_btn);
         stop_btn.setOnClickListener(stop);
         check_number = findViewById(R.id.check_number);
         class_number = findViewById(R.id.class_number);
         class_name = findViewById(R.id.class_name);
         register_number = findViewById(R.id.register_number);
-
+        //get database connection
         Intent intent = getIntent();
         course_id = intent.getStringExtra(COURSE_ID);
         course_name = intent.getStringExtra(COURSE_NAME);
@@ -97,6 +76,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
 
         class_number.setText(course_id);
         class_name.setText(course_name);
+        check_number.setText("not yet started");
         register_number.setText(student_num+" Students Registered");
 
         handler = new Handler();
@@ -106,7 +86,9 @@ public class TakeAttendanceActivity extends AppCompatActivity {
                 runnable = new Runnable() {
                     @Override
                     public void run() {
-                        checkAttendance();
+                        if(shouldCheck){
+                            checkAttendance();
+                        }
                     }
                 };
                 Thread thread = new Thread(null, runnable, "background");
@@ -115,7 +97,6 @@ public class TakeAttendanceActivity extends AppCompatActivity {
             }
         }, 0);
 
-        startAttendance(course_id,course_name,longitude,latitude);
         setLocation();
     }
 
@@ -124,13 +105,21 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            handler.removeCallbacksAndMessages(null);
-
-            startNewIntend();
+            if(shouldStop){
+                handler.removeCallbacksAndMessages(null);
+                stopAttendance();
+            }else {
+                startAttendance(course_id,course_name,longitude,latitude);
+                stop_btn.setText(R.string.action_stop_attendance);
+                stop_btn.setBackgroundResource(R.drawable.round_button_red_selector);
+                shouldCheck = true;
+                shouldStop = true;
+            }
         }
     };
-
-    private void startNewIntend(){
+    /**
+     * stop Attendance fuction*/
+    private void stopAttendance(){
         Intent intent = new Intent(this, AttendanceDetailsActivity.class);
         intent.putExtra(COURSE_ID, course_id);
         intent.putExtra(COURSE_NAME, course_name);
@@ -138,7 +127,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         intent.putExtra(ATTENDANCE_COUNT, attendanceCount);
         startActivity(intent);
     }
-
+    /**
+     * check how many student account already taked attendance*/
     private void checkAttendance(){
         final String url = "https://web.cs.dal.ca/~stang/csci5708/count.php?class_id="+course_id;
         System.out.println(url);
@@ -148,7 +138,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            attendanceCount = response.getString("students_count");
+                            attendanceCount = response.getInt("students_count");
                             check_number.setText(attendanceCount+" of "+student_num+" in attendance");
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -165,6 +155,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         );
         RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
     }
+    /**
+     * start attendance*/
     private void startAttendance(String course_id, String course_name, double lon, double lat){
         final String url = "https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_info="+course_id+","+course_name+","+lon+","+lat;
         System.out.println(url);
@@ -187,6 +179,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
+    /**
+     * set instrctor localtion with GPS feature*/
     private void setLocation(){
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -201,7 +195,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
                         // save longitude and latitude to a local variable for future use
                         longitude = location.getLongitude();
                         latitude = location.getLatitude();
-                        System.out.println("************MainActivity************** longitude: "+longitude+"    latitude: "+latitude);
+                        System.out.println("************CourseListActivity************** longitude: "+longitude+"    latitude: "+latitude);
                     }else {
                         location_error = "Unknown Location";
                         System.out.println("**************** "+location_error);

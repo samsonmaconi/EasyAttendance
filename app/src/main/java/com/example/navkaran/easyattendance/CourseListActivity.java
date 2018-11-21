@@ -56,7 +56,6 @@ public class CourseListActivity extends AppCompatActivity {
     private ListView lvCourseList;
     private CourseAdapter adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,12 +117,9 @@ public class CourseListActivity extends AppCompatActivity {
                 intent.putExtra(COURSE_ID, course.getCourseID());
                 intent.putExtra(COURSE_NAME, course.getCourseName());
                 intent.putExtra(COURSE_STUDENT_COUNT, course.getStudentCount());
-
                 startActivity(intent);
             }
         });
-
-
     }
 
     @Override
@@ -184,6 +180,5 @@ public class CourseListActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
         }
     }
-
 
 }
