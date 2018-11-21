@@ -21,34 +21,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
 
 // David Cui B00788648 Nov 2018
 //activity for course list, where instructors can select the course they want to enable check-in for
 public class CourseListActivity extends AppCompatActivity {
-
-    public static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-
-    //for accessing extras
-    public static final String COURSE_KEY = "COURSE_KEY";
-    public static final String COURSE_ID = "COURSE_ID";
-    public static final String COURSE_NAME = "COURSE_NAME";
-    public static final String COURSE_STUDENT_COUNT = "COURSE_STUDENT_COUNT";
-
-    public static final int NEW_COURSE_ACTIVITY_REQUEST_CODE = 1;
-    public static final int EDIT_COURSE_ACTIVITY_REQUEST_CODE = 2;
 
     private CourseItemRepository repository;
     private LiveData<List<CourseItem>> courses;
@@ -70,7 +47,7 @@ public class CourseListActivity extends AppCompatActivity {
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                    EasyAttendanceConstants.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
 
         repository = new CourseItemRepository(getApplication());
@@ -95,7 +72,7 @@ public class CourseListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CourseListActivity.this, NewCourseActivity.class);
-                startActivityForResult(intent, NEW_COURSE_ACTIVITY_REQUEST_CODE);
+                startActivityForResult(intent, EasyAttendanceConstants.NEW_COURSE_ACTIVITY_REQUEST_CODE);
             }
         });
 
@@ -106,10 +83,10 @@ public class CourseListActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(view.getContext(), TakeAttendanceActivity.class);
                 CourseItem course = adapter.getCourseList().get(i);
-                intent.putExtra(COURSE_KEY, course.getCourseKey());
-                intent.putExtra(COURSE_ID, course.getCourseID());
-                intent.putExtra(COURSE_NAME, course.getCourseName());
-                intent.putExtra(COURSE_STUDENT_COUNT, course.getStudentCount());
+                intent.putExtra(EasyAttendanceConstants.COURSE_KEY, course.getCourseKey());
+                intent.putExtra(EasyAttendanceConstants.COURSE_ID, course.getCourseID());
+                intent.putExtra(EasyAttendanceConstants.COURSE_NAME, course.getCourseName());
+                intent.putExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, course.getStudentCount());
                 startActivity(intent);
             }
         });
@@ -138,11 +115,11 @@ public class CourseListActivity extends AppCompatActivity {
         switch (menuItemName) {
             case "Edit":
                 Intent intent = new Intent(CourseListActivity.this, EditCourseActivity.class);
-                intent.putExtra(COURSE_KEY, courseSelected.getCourseKey());
-                intent.putExtra(COURSE_ID, courseSelected.getCourseID());
-                intent.putExtra(COURSE_NAME, courseSelected.getCourseName());
-                intent.putExtra(COURSE_STUDENT_COUNT, courseSelected.getStudentCount());
-                startActivityForResult(intent, EDIT_COURSE_ACTIVITY_REQUEST_CODE);
+                intent.putExtra(EasyAttendanceConstants.COURSE_KEY, courseSelected.getCourseKey());
+                intent.putExtra(EasyAttendanceConstants.COURSE_ID, courseSelected.getCourseID());
+                intent.putExtra(EasyAttendanceConstants.COURSE_NAME, courseSelected.getCourseName());
+                intent.putExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, courseSelected.getStudentCount());
+                startActivityForResult(intent, EasyAttendanceConstants.EDIT_COURSE_ACTIVITY_REQUEST_CODE);
                 break;
             case "Delete":
                 repository.delete(courseSelected);
@@ -157,16 +134,16 @@ public class CourseListActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == NEW_COURSE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            String courseId = data.getStringExtra(COURSE_ID);
-            String courseName = data.getStringExtra(COURSE_NAME);
-            int courseStudentCount = data.getIntExtra(COURSE_STUDENT_COUNT, 0);
+        if (requestCode == EasyAttendanceConstants.NEW_COURSE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            String courseId = data.getStringExtra(EasyAttendanceConstants.COURSE_ID);
+            String courseName = data.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
+            int courseStudentCount = data.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
             repository.insert(new CourseItem(courseId, courseName, courseStudentCount));
-        } else if (requestCode == EDIT_COURSE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            int courseKey = data.getIntExtra(COURSE_KEY, -1);
-            String courseId = data.getStringExtra(COURSE_ID);
-            String courseName = data.getStringExtra(COURSE_NAME);
-            int courseStudentCount = data.getIntExtra(COURSE_STUDENT_COUNT, 0);
+        } else if (requestCode == EasyAttendanceConstants.EDIT_COURSE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            int courseKey = data.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);
+            String courseId = data.getStringExtra(EasyAttendanceConstants.COURSE_ID);
+            String courseName = data.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
+            int courseStudentCount = data.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
             repository.update(new CourseItem(courseKey, courseId, courseName, courseStudentCount));
         } else {
                 Toast.makeText(

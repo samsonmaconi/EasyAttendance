@@ -31,7 +31,7 @@ import org.json.JSONObject;
 public class TakeAttendanceActivity extends AppCompatActivity {
 
     //for accessing extras
-    public static final String ATTENDANCE_COUNT = "ATTENDANCE_COUNT";
+
     // attribute need
     private Button stop_btn;
     private TextView class_number;
@@ -68,10 +68,10 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         register_number = findViewById(R.id.register_number);
         //get database connection
         Intent intent = getIntent();
-        courseKey = intent.getIntExtra(CourseListActivity.COURSE_KEY, -1);
-        course_id = intent.getStringExtra(CourseListActivity.COURSE_ID);
-        course_name = intent.getStringExtra(CourseListActivity.COURSE_NAME);
-        student_num = intent.getIntExtra(CourseListActivity.COURSE_STUDENT_COUNT, 0);
+        courseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);
+        course_id = intent.getStringExtra(EasyAttendanceConstants.COURSE_ID);
+        course_name = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
+        student_num = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
 
         class_number.setText(course_id);
         class_name.setText(course_name);
@@ -120,11 +120,11 @@ public class TakeAttendanceActivity extends AppCompatActivity {
      * stop Attendance fuction*/
     private void stopAttendance(){
         Intent intent = new Intent(this, AttendanceDetailsActivity.class);
-        intent.putExtra(CourseListActivity.COURSE_KEY, courseKey);
-        intent.putExtra(CourseListActivity.COURSE_ID, course_id);
-        intent.putExtra(CourseListActivity.COURSE_NAME, course_name);
-        intent.putExtra(CourseListActivity.COURSE_STUDENT_COUNT, student_num);
-        intent.putExtra(ATTENDANCE_COUNT, attendanceCount);
+        intent.putExtra(EasyAttendanceConstants.COURSE_KEY, courseKey);
+        intent.putExtra(EasyAttendanceConstants.COURSE_ID, course_id);
+        intent.putExtra(EasyAttendanceConstants.COURSE_NAME, course_name);
+        intent.putExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, student_num);
+        intent.putExtra(EasyAttendanceConstants.ATTENDANCE_COUNT, attendanceCount);
         startActivity(intent);
     }
     /**
