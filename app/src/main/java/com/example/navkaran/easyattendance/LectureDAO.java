@@ -13,6 +13,7 @@ public interface LectureDAO {
     @Query("SELECT * FROM lectures WHERE lectures.course_id = :courseId")
     Lecture getLecturesSync(String courseId);
 
+    // returns the database auto generated primary key as long
     @Insert(onConflict = OnConflictStrategy.ABORT)
     long insertLecture(Lecture lecture);
 
