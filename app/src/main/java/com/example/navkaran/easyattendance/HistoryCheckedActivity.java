@@ -49,11 +49,11 @@ public class HistoryCheckedActivity extends AppCompatActivity {
 
         //get course data from last intent
         Intent intent = getIntent();
-        lectureId = intent.getLongExtra("lectureId",0);
-        courseId = intent.getStringExtra("courseId");
-        courseName = intent.getStringExtra("courseName");
-        studentAccountRegister = intent.getIntExtra("studentAccountRegister",0);
-        studentAcountChecked = intent.getIntExtra("studentAcountChecked",0);
+        lectureId = intent.getLongExtra(EasyAttendanceConstants.LECTURE_ID,0);
+        courseId = intent.getStringExtra(EasyAttendanceConstants.COURSE_ID);
+        courseName = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
+        studentAccountRegister = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT,0);
+        studentAcountChecked = intent.getIntExtra(EasyAttendanceConstants.ATTENDANCE_COUNT,0);
 
 
         // get student check in information from database
