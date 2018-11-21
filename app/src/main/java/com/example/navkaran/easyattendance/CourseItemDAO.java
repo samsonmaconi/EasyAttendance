@@ -25,7 +25,7 @@ public interface CourseItemDAO {
 
     // insert parameters into database in a single transaction
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    void insertCourse(CourseItem course);
+    long insertCourse(CourseItem course);
 
     // update matches the entities by the primary key
     @Update(onConflict = OnConflictStrategy.REPLACE)

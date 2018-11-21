@@ -10,8 +10,8 @@ import android.arch.persistence.room.Query;
 @Dao
 public interface LectureDAO {
 
-    @Query("SELECT * FROM lectures WHERE lectures.course_id = :courseId")
-    Lecture getLecturesSync(String courseId);
+    @Query("SELECT * FROM lectures WHERE lectures.course_key = :courseKey")
+    Lecture getLecturesSync(int courseKey);
 
     // returns the database auto generated primary key as long
     @Insert(onConflict = OnConflictStrategy.ABORT)
