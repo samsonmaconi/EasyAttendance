@@ -7,11 +7,13 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
+import java.util.List;
+
 @Dao
 public interface LectureDAO {
 
     @Query("SELECT * FROM lectures WHERE lectures.course_key = :courseKey")
-    Lecture getLecturesSync(int courseKey);
+    LiveData<List<Lecture>> getLecturesSync(int courseKey);
 
     // returns the database auto generated primary key as long
     @Insert(onConflict = OnConflictStrategy.ABORT)

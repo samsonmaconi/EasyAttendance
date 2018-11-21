@@ -44,6 +44,17 @@ public class AttendanceItem{
         totalCount++;
     }
 
+    @Ignore
+    public AttendanceItem(long lectureId, String studentId, Boolean hasCheckedIn) {
+        this.lectureId = lectureId;
+        this.studentId = studentId;
+        this.hasCheckedIn = hasCheckedIn;
+        if(hasCheckedIn){
+            checkedInCount++;
+        }
+        totalCount++;
+    }
+
     public AttendanceItem(String studentId, long lectureId) {
         this.studentId = studentId;
         this.lectureId = lectureId;
