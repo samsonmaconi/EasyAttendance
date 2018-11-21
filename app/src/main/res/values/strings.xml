@@ -9,6 +9,7 @@
     <string name="action_start_attendance">Start Attendance</string>
     <string name="action_stop_attendance">Stop Attendance</string>
     <string name="action_mark_attendance">Mark Attendance</string>
+    <string name="action_delete">Delete</string>
 
     <!--Labels-->
     <string name="label_select_course">Select Course</string>
