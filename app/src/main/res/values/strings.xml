@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">EasyAttendance</string>
 
+    <!--Button Text-->
     <string name="action_done">Done</string>
     <string name="action_save">Save</string>
     <string name="action_i_am_a_teacher">I am a teacher</string>
@@ -9,24 +10,46 @@
     <string name="action_stop_attendance">Stop Attendance</string>
     <string name="action_mark_attendance">Mark Attendance</string>
 
+    <!--Labels-->
     <string name="label_select_course">Select Course</string>
     <string name="label_staff_id">Staff ID</string>
     <string name="label_student_id">Student ID</string>
+    <string name="label_status">Status</string>
+    <string name="label_course_id">Course ID</string>
+    <string name="label_course_name">Course Name</string>
+    <string name="label_course_student_count">Student Count</string>
 
+    <!--Hints-->
     <string name="hint_select_a_course">Please select a course</string>
     <string name="hint_example_id">e.g B00801169</string>
+    <string name="hint_course_id">e.g CSCI 5708</string>
+    <string name="hint_course_name">e.g Mobile Computing</string>
+    <string name="hint_course_student_count">A postive integer</string>
 
+    <!--Formatted Strings-->
     <string name="formatString_checked_in">%1$d of %2$d checked-in</string>
     <string name="formatString_in_attendance">%1$d of %2$d in attendance</string>
+    <string name="formatString_students_registered">%1$d Students Registered</string>
     <string name="formatString_alert_success">You have successfully marked your attendance for %1$s</string>
     <string name="formatString_alert_failure_distance">Unable to mark attendance for %1$s. Please ensure you are within the vicinity of the teacher.</string>
     <string name="formatString_alert_failure_availability">Unable to mark attendance for %1$s. Not currently available.</string>
-    <string name="teacher">I am a Teacher</string>
-    <string name="student">I am a Student</string>
-    <string name="app_Title">Start</string>
 
-    <string name="title_activity_select_user_type">Select User</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!--Activity Titles-->
+    <string name="title_attendance_list">Attendance List</string>
+    <string name="title_welcome">Welcome</string>
+    <string name="title_attendance_home">Attendance Home</string>
+    <string name="title_class_attendance">Class Attendance</string>
+    <string name="title_course_list">Course List</string>
+
+    <!--Shared Preferences Keys-->
+    <string name="sharedPreference_user_role">com.example.navkaran.easyattendance.userid</string>
+    <string name="sharedPreference_user_id">com.example.navkaran.easyattendance.userrole</string>
+
+    <!--String array for context menu-->
+    <string-array name="stringArray_course_list_menu">
+        <item>Edit</item>
+        <item>Delete</item>
+        <item>History</item>
+    </string-array>
 
 </resources>

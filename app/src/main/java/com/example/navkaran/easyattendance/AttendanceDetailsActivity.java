@@ -1,63 +1,135 @@
 package com.example.navkaran.easyattendance;
 
 
-import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
 public class AttendanceDetailsActivity extends AppCompatActivity {
 
-    private AttendanceAdapter adapter;
-    private ArrayList<AttendanceItem> attendanceItemArrayList;
     private ListView lvAttendanceList;
+    private Button btnDone;
+    private TextView tvCourseId, tvCourseName, tvStudentCount, tvAttendanceSummary;
+
+    private ArrayList<AttendanceItem> attendanceItemArrayList;
+    private AttendanceAdapter attendanceAdapter;
+    private Runnable runnable;
+
+    private Intent intent;
+    private String courseId,courseName;
+    private int studentCount, attendanceCount;
+
+    public static final String COURSE_ID = "COURSE_ID";
+    public static final String COURSE_NAME = "COURSE_NAME";
+    public static final String COURSE_STUDENT_COUNT = "COURSE_STUDENT_COUNT";
+    public static final String ATTENDANCE_COUNT = "ATTENDANCE_COUNT";
+
+
+    private final String TAG = "AttendanceDetails";
+    private final String FETCH_URL = "https://web.cs.dal.ca/~stang/csci5708/end_attendance.php?class_id=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_details);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(R.string.title_attendance_list);
+
+        intent = getIntent();
+        courseId = intent.getStringExtra(COURSE_ID);
+        courseName = intent.getStringExtra(COURSE_NAME);
+        //TODO: Change Default Values back to 0
+        studentCount = intent.getIntExtra(COURSE_STUDENT_COUNT, 0);
+        attendanceCount = intent.getIntExtra(ATTENDANCE_COUNT, 0);
+
+        //TODO: Remove next 2 Temp Lines
+        //courseId = courseId == null ? "CSCI-5708" : courseId;
+        //courseName = courseName == null ? "Not Mobile Computing" : courseName;
+
+        lvAttendanceList = findViewById(R.id.lvAttendanceList);
+        btnDone = findViewById(R.id.btnDone);
+        tvCourseId = findViewById(R.id.tvCourseId);
+        tvCourseName = findViewById(R.id.tvCourseName);
+        tvStudentCount = findViewById(R.id.tvStudentCount);
+        tvAttendanceSummary = findViewById(R.id.tvAttendanceSummary);
+
+        tvCourseId.setText(courseId);
+        tvCourseName.setText(courseName);
+        tvStudentCount.setText(String.format(getString(R.string.formatString_students_registered), studentCount));
+        tvAttendanceSummary.setText(String.format(getString(R.string.formatString_in_attendance), attendanceCount, studentCount));
 
         attendanceItemArrayList = new ArrayList<>();
-        lvAttendanceList = findViewById(R.id.lvAttendanceList);
+        attendanceAdapter = new AttendanceAdapter(this, R.layout.attendance_list_item, attendanceItemArrayList);
+        lvAttendanceList.setAdapter(attendanceAdapter);
 
-        adapter = new AttendanceAdapter(this, R.layout.attendance_list_item, attendanceItemArrayList);
-        lvAttendanceList.setAdapter(adapter);
+        btnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), CourseListActivity.class);
+                startActivity(i);
+            }
+        });
 
-        populateAttendanceList();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                fetchAttendanceLog();
+            }
+        };
+
+        new Thread(null, runnable, "Runnable_AttendanceDetails").start();
+
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+    private void fetchAttendanceLog() {
+        String url = FETCH_URL + courseId;
+        Log.d(TAG, "Request URL: " + url);
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                String studentId;
+                for(int i = 0; i <response.length(); i++ ){
+                    try {
+                        studentId = response.getJSONObject(i).getString("student_id");
+                        Log.d(TAG, "JSONResponse Loop: Student ID: " + studentId);
+                        attendanceItemArrayList.add(new AttendanceItem(studentId, true));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                tvAttendanceSummary.setText(String.format(getString(R.string.formatString_in_attendance), AttendanceItem.getTotalCount(), studentCount));
+                attendanceAdapter.notifyDataSetChanged();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(getApplicationContext(), "No Student attend this class", Toast.LENGTH_SHORT).show();
+
+            }
         }
-    }
+        );
 
-    private void populateAttendanceList() {
-        attendanceItemArrayList.add(new AttendanceItem("B00283344", true));
-        attendanceItemArrayList.add(new AttendanceItem("B04542373", false));
-        attendanceItemArrayList.add(new AttendanceItem("B00283434", true));
-        attendanceItemArrayList.add(new AttendanceItem("B00675632", false));
-        attendanceItemArrayList.add(new AttendanceItem("B00656554", false));
-        attendanceItemArrayList.add(new AttendanceItem("B00211234", true));
-        attendanceItemArrayList.add(new AttendanceItem("B00118223", false));
-        attendanceItemArrayList.add(new AttendanceItem("B00903930", false));
-        attendanceItemArrayList.add(new AttendanceItem("B00930323", false));
-        attendanceItemArrayList.add(new AttendanceItem("B00224944", true));
-        attendanceItemArrayList.add(new AttendanceItem("B00858749", false));
-        attendanceItemArrayList.add(new AttendanceItem("B00455540", false));
-        attendanceItemArrayList.add(new AttendanceItem("B00995043", true));
-        attendanceItemArrayList.add(new AttendanceItem("B00383494", false));
-        attendanceItemArrayList.add(new AttendanceItem("B00801169", true));
+        RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
     }
 }
 

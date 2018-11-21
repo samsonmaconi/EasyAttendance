@@ -1,6 +1,7 @@
 package com.example.navkaran.easyattendance;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,11 +40,11 @@ public class AttendanceAdapter extends ArrayAdapter<AttendanceItem> {
             tvStatus.setText(i.getStatus());
             tvSN.setText(String.valueOf(position + 1));
 
-            if(i.hasCheckedIn()){
-                tvStatus.setTextColor(v.getResources().getColor(R.color.colorGreen));
-            }else
-                tvStatus.setTextColor(v.getResources().getColor(R.color.colorRed));
-            }
+            if (i.hasCheckedIn()) {
+                tvStatus.setTextColor(ContextCompat.getColor(this.getContext(), R.color.colorGreen));
+            } else
+                tvStatus.setTextColor(ContextCompat.getColor(this.getContext(), R.color.colorRed));
+        }
 
         return v;
     }
