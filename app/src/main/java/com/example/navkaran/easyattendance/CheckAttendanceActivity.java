@@ -91,7 +91,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(select_class);
         sign_attendance.setOnClickListener(sign);
 
-        /*runnable = new Runnable() {
+        runnable = new Runnable() {
             @Override
             public void run() {
                 getClassList();
@@ -99,8 +99,9 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         };
 
         Thread thread = new Thread(null, runnable, "background");
-        thread.start();*/
+        thread.start();
 
+        /*
         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -115,7 +116,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                 thread.start();
                 handler.postDelayed(this, 2000);
             }
-        }, 0);
+        }, 0);*/
 
         setLocation();
     }
