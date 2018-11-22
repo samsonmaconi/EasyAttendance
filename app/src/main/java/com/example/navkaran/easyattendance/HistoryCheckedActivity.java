@@ -53,8 +53,6 @@ public class HistoryCheckedActivity extends AppCompatActivity {
         courseId = intent.getStringExtra(EasyAttendanceConstants.COURSE_ID);
         courseName = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
         studentAccountRegister = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT,0);
-
-        // u dont get this from intent, u have to get the list of attendances from the db and check its size.
         studentAcountChecked = intent.getIntExtra(EasyAttendanceConstants.ATTENDANCE_COUNT,0);
 
 
