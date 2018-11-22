@@ -91,6 +91,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(select_class);
         sign_attendance.setOnClickListener(sign);
 
+        /*
         runnable = new Runnable() {
             @Override
             public void run() {
@@ -100,8 +101,8 @@ public class CheckAttendanceActivity extends AppCompatActivity {
 
         Thread thread = new Thread(null, runnable, "background");
         thread.start();
+        */
 
-        /*
         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -116,7 +117,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                 thread.start();
                 handler.postDelayed(this, 2000);
             }
-        }, 0);*/
+        }, 0);
 
         setLocation();
     }
@@ -210,14 +211,17 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                                     //classList.add("("+class_id + ") " + class_name);
                                 }
                                 if(classList.isEmpty()){
+                                    classIDList.clear();
                                     sign_attendance.setEnabled(false);
                                     sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
                                 }
                             }
                             spinnerArrayAdapter.notifyDataSetChanged();
                         }catch (JSONException e){
+                            classIDList.clear();
                             sign_attendance.setEnabled(false);
                             sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
+                            spinnerArrayAdapter.notifyDataSetChanged();
                             e.printStackTrace();
                         }
                     }
@@ -225,8 +229,10 @@ public class CheckAttendanceActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                classIDList.clear();
                 sign_attendance.setEnabled(false);
                 sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
+                spinnerArrayAdapter.notifyDataSetChanged();
             }
         }
         );
