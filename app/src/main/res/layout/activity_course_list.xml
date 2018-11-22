@@ -30,6 +30,7 @@
                 android:text="@string/label_select_course"
                 android:textAlignment="textStart"
                 android:textColor="@color/colorBlue"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <ListView

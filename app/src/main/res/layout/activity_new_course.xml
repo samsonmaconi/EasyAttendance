@@ -10,12 +10,13 @@
 
     <TextView
         android:id="@+id/tv_courseId"
-        android:labelFor="@id/et_courseId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:labelFor="@id/et_courseId"
         android:text="@string/label_course_id"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp" />
+        android:textColor="@color/colorBlue"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et_courseId"
@@ -27,13 +28,14 @@
 
     <TextView
         android:id="@+id/tv_courseName"
-        android:labelFor="@id/et_courseName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:labelFor="@id/et_courseName"
         android:text="@string/label_course_name"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp" />
+        android:textColor="@color/colorBlue"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et_courseName"
@@ -45,13 +47,14 @@
 
     <TextView
         android:id="@+id/tv_courseStudentCount"
-        android:labelFor="@id/et_courseStudentCount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:labelFor="@id/et_courseStudentCount"
         android:text="@string/label_course_student_count"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp" />
+        android:textColor="@color/colorBlue"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et_courseStudentCount"

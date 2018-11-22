@@ -34,13 +34,13 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1" />
 
     <LinearLayout
         android:id="@+id/fullscreen_content_controls"
         android:layout_width="match_parent"
-        android:layout_height="208dp"
+        android:layout_height="0dp"
         android:layout_gravity="bottom"
         android:layout_weight="1"
         android:orientation="vertical"
@@ -56,7 +56,8 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_rect_button_blue_selector"
             android:text="@string/action_i_am_a_teacher"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/student"
@@ -68,7 +69,8 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_rect_button_orange_selector"
             android:text="@string/action_i_am_a_student"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
