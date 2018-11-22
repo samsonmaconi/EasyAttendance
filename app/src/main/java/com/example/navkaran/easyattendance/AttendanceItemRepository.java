@@ -15,10 +15,25 @@ public class AttendanceItemRepository {
         attendanceItemDAO = db.attendanceItemDAO();
     }
 
-    public LiveData<List<AttendanceItem>> getAttendancesWithLectureId(long lectureId) {
-        return attendanceItemDAO.getAttendances(lectureId);
+    public List<AttendanceItem> getAttendancesWithLectureId(long lectureId) throws Exception {
+        return new GetAttendancesAsyncTask(attendanceItemDAO).execute(lectureId).get();
     }
 
+    private static class GetAttendancesAsyncTask extends AsyncTask<Long, Void, List<AttendanceItem>> {
+
+        private AttendanceItemDAO asyncTaskDAO;
+
+        GetAttendancesAsyncTask(AttendanceItemDAO dao) {
+            asyncTaskDAO = dao;
+        }
+
+        @Override
+        protected List<AttendanceItem> doInBackground(final Long... lectureId) {
+            return asyncTaskDAO.getAttendancesByLectureId(lectureId[0]);
+        }
+    }
+
+    // gets an array of AttendanceItem because varargs is used for batch insertion
     public void insert (AttendanceItem[] attendances) {
         new InsertAsyncTask(attendanceItemDAO).execute(attendances);
     }
@@ -32,8 +47,8 @@ public class AttendanceItemRepository {
         }
 
         @Override
-        protected  Void doInBackground(final AttendanceItem[]... params) {
-            asyncTaskDAO.insertAttendances(params[0]);
+        protected  Void doInBackground(final AttendanceItem[]... attendanceArrays) {
+            asyncTaskDAO.insertAttendances(attendanceArrays[0]);
             return null;
         }
     }
