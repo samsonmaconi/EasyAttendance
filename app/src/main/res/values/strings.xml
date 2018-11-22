@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EasyAttendance</string>
+    <string name="app_name">Easy Attendance</string>
 
     <!--Button Text-->
     <string name="action_done">Done</string>
@@ -21,13 +21,12 @@
     <string name="label_course_name">Course Name</string>
     <string name="label_course_student_count">Student Count</string>
 
-
     <!--Hints-->
     <string name="hint_select_a_course">Please select a course</string>
     <string name="hint_example_id">e.g B00801169</string>
     <string name="hint_course_id">e.g CSCI 5708</string>
     <string name="hint_course_name">e.g Mobile Computing</string>
-    <string name="hint_course_student_count">A postive integer</string>
+    <string name="hint_course_student_count">How many students are taking this course?</string>
 
     <!--Formatted Strings-->
     <string name="formatString_checked_in">%1$d of %2$d checked-in</string>
@@ -43,10 +42,6 @@
     <string name="title_attendance_home">Attendance Home</string>
     <string name="title_class_attendance">Class Attendance</string>
     <string name="title_course_list">Course List</string>
-
-    <!--Shared Preferences Keys-->
-    <string name="sharedPreference_user_role">com.example.navkaran.easyattendance.userid</string>
-    <string name="sharedPreference_user_id">com.example.navkaran.easyattendance.userrole</string>
 
     <!--String array for context menu-->
     <string-array name="stringArray_course_list_menu">

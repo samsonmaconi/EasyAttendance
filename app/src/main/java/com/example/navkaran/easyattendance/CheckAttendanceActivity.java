@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -77,9 +76,6 @@ public class CheckAttendanceActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Student_id = intent.getStringExtra("userID");
-
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.actionbar_check_attendance);
 
         spinner = findViewById(R.id.spinner);
         sign_attendance = findViewById(R.id.btn_iamhere);
