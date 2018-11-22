@@ -28,7 +28,7 @@ public interface CourseItemDAO {
     long insertCourse(CourseItem course);
 
     // update matches the entities by the primary key
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update(onConflict = OnConflictStrategy.ABORT)
     void updateCourse(CourseItem course);
 
     // use primary key to find the entity to delete

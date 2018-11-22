@@ -1,6 +1,7 @@
 package com.example.navkaran.easyattendance;
 
 import android.app.Application;
+import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import java.util.List;
@@ -11,17 +12,16 @@ public class LectureRepository {
 
     public LectureRepository(Application application) {
         AppDatabase db = AppDatabase.getInstance(application);
-        LectureDAO lectureDAO = db.lectureDAO();
+        lectureDAO = db.lectureDAO();
     }
 
-    public List<Lecture> getLecturesWithCourseKey(int courseKey) {
-        return lectureDAO.getLecturesSync(courseKey).getValue();
+    public LiveData<List<Lecture>> getLecturesWithCourseKey(int courseKey) {
+        return lectureDAO.getLecturesSync(courseKey);
     }
 
     // method wrapper
     public long insert (Lecture lecture) throws Exception {
-        Long id =  new InsertAsyncTask(lectureDAO).execute(lecture).get();
-        return id;
+        return new InsertAsyncTask(lectureDAO).execute(lecture).get();
     }
 
     // async tasks

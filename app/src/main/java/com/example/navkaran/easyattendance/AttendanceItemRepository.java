@@ -1,6 +1,7 @@
 package com.example.navkaran.easyattendance;
 
 import android.app.Application;
+import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import java.util.List;
@@ -11,18 +12,18 @@ public class AttendanceItemRepository {
 
     public AttendanceItemRepository(Application application) {
         AppDatabase db = AppDatabase.getInstance(application);
-        AttendanceItemDAO attendanceItemDAO = db.attendanceItemDAO();
+        attendanceItemDAO = db.attendanceItemDAO();
     }
 
-    public List<AttendanceItem> getAttendancesWithLectureId(long lectureId) {
-        return attendanceItemDAO.getAttendances(lectureId).getValue();
+    public LiveData<List<AttendanceItem>> getAttendancesWithLectureId(long lectureId) {
+        return attendanceItemDAO.getAttendances(lectureId);
     }
 
-    public void insert (AttendanceItem attendance) {
-        new InsertAsyncTask(attendanceItemDAO).execute(attendance);
+    public void insert (AttendanceItem[] attendances) {
+        new InsertAsyncTask(attendanceItemDAO).execute(attendances);
     }
 
-    private static class InsertAsyncTask extends AsyncTask<AttendanceItem, Void, Void> {
+    private static class InsertAsyncTask extends AsyncTask<AttendanceItem[], Void, Void> {
 
         private AttendanceItemDAO asyncTaskDAO;
 
@@ -31,8 +32,8 @@ public class AttendanceItemRepository {
         }
 
         @Override
-        protected  Void doInBackground(final AttendanceItem... params) {
-            asyncTaskDAO.insertAttendance(params[0]);
+        protected  Void doInBackground(final AttendanceItem[]... params) {
+            asyncTaskDAO.insertAttendances(params[0]);
             return null;
         }
     }

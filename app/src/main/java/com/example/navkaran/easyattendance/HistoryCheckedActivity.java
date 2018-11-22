@@ -57,7 +57,7 @@ public class HistoryCheckedActivity extends AppCompatActivity {
 
 
         // get student check in information from database
-        attendanceItemList = (ArrayList) attendanceItemRepository.getAttendancesWithLectureId(lectureId);
+        //attendanceItemList = (ArrayList) attendanceItemRepository.getAttendancesWithLectureId(lectureId);
 
 
         //set the view

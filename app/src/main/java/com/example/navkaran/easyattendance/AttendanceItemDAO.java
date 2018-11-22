@@ -16,7 +16,7 @@ public interface AttendanceItemDAO {
     LiveData<List<AttendanceItem>> getAttendances(long lectureId);
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    void insertAttendance(AttendanceItem attendance);
+    void insertAttendances(AttendanceItem... attendances);
 
     @Delete
     void deleteLecture(AttendanceItem attendance);
