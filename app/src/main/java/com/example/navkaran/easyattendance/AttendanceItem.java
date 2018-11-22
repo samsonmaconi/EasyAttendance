@@ -27,7 +27,6 @@ public class AttendanceItem{
     @NonNull
     private String studentId;
     @ColumnInfo(name = "lecture_id")
-    @NonNull
     private long lectureId;
     @Ignore
     private Boolean hasCheckedIn;
@@ -35,7 +34,7 @@ public class AttendanceItem{
     private static final String[] status = {"Not Checked-in", "Checked-in"};
 
     @Ignore
-    public AttendanceItem(String studentId, Boolean hasCheckedIn) {
+    public AttendanceItem(@NonNull String studentId, Boolean hasCheckedIn) {
         this.studentId = studentId;
         this.hasCheckedIn = hasCheckedIn;
         if(hasCheckedIn){
@@ -45,7 +44,7 @@ public class AttendanceItem{
     }
 
     @Ignore
-    public AttendanceItem(long lectureId, String studentId, Boolean hasCheckedIn) {
+    public AttendanceItem(long lectureId, @NonNull String studentId, Boolean hasCheckedIn) {
         this.lectureId = lectureId;
         this.studentId = studentId;
         this.hasCheckedIn = hasCheckedIn;
@@ -55,7 +54,7 @@ public class AttendanceItem{
         totalCount++;
     }
 
-    public AttendanceItem(String studentId, long lectureId) {
+    public AttendanceItem(@NonNull String studentId, long lectureId) {
         this.studentId = studentId;
         this.lectureId = lectureId;
     }

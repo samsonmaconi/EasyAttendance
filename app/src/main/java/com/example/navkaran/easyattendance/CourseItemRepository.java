@@ -29,10 +29,6 @@ public class CourseItemRepository {
         return courses;
     }
 
-    public List<CourseItem> getCoursesSync() {
-        return courseDAO.getAllCoursesSync();
-    }
-
     // database operation must happen on worker threads, done with AsyncTask
     public void insert (CourseItem course) {
         new InsertAsyncTask(courseDAO).execute(course);
@@ -56,8 +52,8 @@ public class CourseItemRepository {
         }
 
         @Override
-        protected  Void doInBackground(final CourseItem... params) {
-            asyncTaskDAO.insertCourse(params[0]);
+        protected  Void doInBackground(final CourseItem... courses) {
+            asyncTaskDAO.insertCourse(courses[0]);
             return null;
         }
     }
@@ -71,8 +67,8 @@ public class CourseItemRepository {
         }
 
         @Override
-        protected  Void doInBackground(final CourseItem... params) {
-            asyncTaskDAO.updateCourse(params[0]);
+        protected  Void doInBackground(final CourseItem... courses) {
+            asyncTaskDAO.updateCourse(courses[0]);
             return null;
         }
     }
@@ -86,8 +82,8 @@ public class CourseItemRepository {
         }
 
         @Override
-        protected  Void doInBackground(final CourseItem... params) {
-            asyncTaskDAO.deleteCourse(params[0]);
+        protected  Void doInBackground(final CourseItem... courses) {
+            asyncTaskDAO.deleteCourse(courses[0]);
             return null;
         }
     }

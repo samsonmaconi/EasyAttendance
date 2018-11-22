@@ -57,7 +57,12 @@ public class HistoryCheckedActivity extends AppCompatActivity {
 
 
         // get student check in information from database
-        attendanceItemList = (ArrayList) attendanceItemRepository.getAttendancesWithLectureId(lectureId);
+        try {
+            attendanceItemList = (ArrayList) attendanceItemRepository.getAttendancesWithLectureId(lectureId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
 
         //set the view
@@ -76,6 +81,7 @@ public class HistoryCheckedActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Delete the record in the database
 
+                // delete with LectureRepository's delete method, it deletes with cascade, so both lecture and attendances are deleted.
 
                 /**
                 //Boolean success = attendanceItemRepository.delete(lectureId);
