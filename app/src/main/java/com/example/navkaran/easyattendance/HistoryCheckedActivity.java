@@ -53,11 +53,18 @@ public class HistoryCheckedActivity extends AppCompatActivity {
         courseId = intent.getStringExtra(EasyAttendanceConstants.COURSE_ID);
         courseName = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
         studentAccountRegister = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT,0);
+
+        // u dont get this from intent, u have to get the list of attendances from the db and check its size.
         studentAcountChecked = intent.getIntExtra(EasyAttendanceConstants.ATTENDANCE_COUNT,0);
 
 
         // get student check in information from database
-        attendanceItemList = (ArrayList) attendanceItemRepository.getAttendancesWithLectureId(lectureId);
+        try {
+            attendanceItemList = (ArrayList) attendanceItemRepository.getAttendancesWithLectureId(lectureId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
 
         //set the view
@@ -76,6 +83,7 @@ public class HistoryCheckedActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Delete the record in the database
 
+                // delete with LectureRepository's delete method, it deletes with cascade, so both lecture and attendances are deleted.
 
                 /**
                 //Boolean success = attendanceItemRepository.delete(lectureId);
