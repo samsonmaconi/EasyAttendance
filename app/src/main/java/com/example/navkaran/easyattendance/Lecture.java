@@ -6,7 +6,6 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
-import android.support.annotation.NonNull;
 
 import java.util.Date;
 
@@ -24,13 +23,38 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 public class Lecture {
 
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     @ColumnInfo(name = "lecture_id")
-    public long lectureId;
+    private long lectureId;
     @ColumnInfo(name = "lecture_numAttendee")
-    public int numAttendee;
+    private int numAttendee;
     @ColumnInfo(name = "lecture_date")
-    public Date date;
+    private Date date;
     @ColumnInfo(name = "course_key")
-    public int courseKey;
+    private int courseKey;
+
+    public Lecture(int numAttendee, Date date, int courseKey) {
+        this.numAttendee = numAttendee;
+        this.date = date;
+        this.courseKey = courseKey;
+    }
+
+    public void setLectureId(long lectureId) {
+        this.lectureId = lectureId;
+    }
+
+    public long getLectureId() {
+        return lectureId;
+    }
+
+    public int getNumAttendee() {
+        return numAttendee;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public int getCourseKey() {
+        return courseKey;
+    }
 }

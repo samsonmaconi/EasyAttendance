@@ -20,15 +20,12 @@ public interface CourseItemDAO {
     @Query("SELECT * FROM courses ORDER BY course_id")
     LiveData<List<CourseItem>> getAllCourses();
 
-    @Query("SELECT * FROM courses ORDER BY course_id")
-    List<CourseItem> getAllCoursesSync();
-
     // insert parameters into database in a single transaction
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    long insertCourse(CourseItem course);
+    void insertCourse(CourseItem course);
 
     // update matches the entities by the primary key
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update(onConflict = OnConflictStrategy.ABORT)
     void updateCourse(CourseItem course);
 
     // use primary key to find the entity to delete
