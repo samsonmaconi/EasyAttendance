@@ -28,7 +28,10 @@
             android:layout_weight="1"
             android:padding="4dp"
             android:textColor="@color/colorBlack"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/tvStudentCount"

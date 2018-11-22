@@ -74,6 +74,8 @@ public class CheckAttendanceActivity extends AppCompatActivity {
             // Permission has already been granted
         }
 
+        getSupportActionBar().setTitle(R.string.title_attendance_home);
+
         Intent intent = getIntent();
         Student_id = intent.getStringExtra("userID");
 

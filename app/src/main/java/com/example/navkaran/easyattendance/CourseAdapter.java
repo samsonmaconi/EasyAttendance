@@ -59,7 +59,7 @@ public class CourseAdapter extends ArrayAdapter<CourseItem> {
 
             // alternate list item background color
             if(position % 2 == 0) {
-                v.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorGreyLight));
+                v.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
             } else {
                 v.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorWhiteFaded));
             }

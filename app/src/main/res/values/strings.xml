@@ -12,7 +12,7 @@
     <string name="action_delete">Delete</string>
 
     <!--Labels-->
-    <string name="label_select_course">Select Course</string>
+    <string name="label_select_course">Your Courses</string>
     <string name="label_staff_id">Staff ID</string>
     <string name="label_student_id">Student ID</string>
     <string name="label_status">Status</string>
@@ -39,9 +39,9 @@
     <!--Activity Titles-->
     <string name="title_attendance_list">Attendance List</string>
     <string name="title_welcome">Welcome</string>
-    <string name="title_attendance_home">Attendance Home</string>
+    <string name="title_attendance_home">Mark Attendance</string>
     <string name="title_class_attendance">Class Attendance</string>
-    <string name="title_course_list">Course List</string>
+    <string name="title_course_list">Select a Course</string>
 
     <!--String array for context menu-->
     <string-array name="stringArray_course_list_menu">

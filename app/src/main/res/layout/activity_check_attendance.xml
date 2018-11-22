@@ -5,13 +5,16 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background_white_blue"
     tools:context=".CheckAttendanceActivity"
-    android:padding="16dp"
     android:orientation="vertical">
+
+    <include layout="@layout/logo_banner"
+        android:id="@+id/layoutBanner"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2">
+        android:layout_weight="0.2"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/lable"
@@ -20,6 +23,7 @@
             android:textColor="@color/colorBlue"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:text="Select Course"/>
 
@@ -59,7 +63,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.8">
+        android:layout_weight="0.8"
+        android:padding="16dp">
 
         <Button
             android:id="@+id/btn_iamhere"
