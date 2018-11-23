@@ -1,4 +1,10 @@
 package com.example.navkaran.easyattendance;
+/**
+ * This class retrieves the users role and ID from shared preferences.
+ * It then redirect's the user to the relevant activity based on the role.
+ * If there is no corresponding data saved (first time user), the user
+ * is redirected to the initial setup view
+ */
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,23 +18,22 @@ public class MainActivity extends AppCompatActivity {
 
     private Intent intent;
     private String userRole, userID;
+    private final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         SharedPreferences sp = getSharedPreferences("CONTAINER",Context.MODE_PRIVATE);
-        //Retrieve the user role and ID from shared preferences. If there's no info, returns "none"
         userRole = sp.getString("userRole", "none");
         userID = sp.getString("userID", "none");
-        //userRole = sp.getString("a", "student");
 
-        //check user role and send them to the right activity
-        chechUserRole();
+        Log.d(TAG,"Role, ID: " + userRole + ", " +userID);
 
+        checkUserRole();
     }
 
-    private void chechUserRole(){
+    private void checkUserRole(){
         if(userRole.equals("teacher")){
             intent = new Intent(this, CourseListActivity.class);
             intent.putExtra("userRole", userRole);

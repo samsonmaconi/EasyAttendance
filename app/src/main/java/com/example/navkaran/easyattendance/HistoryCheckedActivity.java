@@ -29,6 +29,7 @@ public class HistoryCheckedActivity extends AppCompatActivity {
     private AttendanceAdapter attendanceAdapter;
 
     private AttendanceItemRepository attendanceItemRepository;
+    private LectureRepository lectureRepository;
 
 
     @Override
@@ -46,17 +47,18 @@ public class HistoryCheckedActivity extends AppCompatActivity {
         btnDone.setText(R.string.action_delete);
 
         attendanceItemRepository = new AttendanceItemRepository(getApplication());
+        lectureRepository = new LectureRepository(getApplication());
 
         //get course data from last intent
         Intent intent = getIntent();
-        lectureId = intent.getLongExtra(EasyAttendanceConstants.LECTURE_ID,0);
+        lectureId = intent.getLongExtra(EasyAttendanceConstants.LECTURE_ID, 0);
         courseId = intent.getStringExtra(EasyAttendanceConstants.COURSE_ID);
         courseName = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
-        studentAccountRegister = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT,0);
-        studentAcountChecked = intent.getIntExtra(EasyAttendanceConstants.ATTENDANCE_COUNT,0);
+        studentAccountRegister = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
+        studentAcountChecked = intent.getIntExtra(EasyAttendanceConstants.ATTENDANCE_COUNT, 0);
 
 
-        // get student check in information from database
+        // get student checking information from database
         try {
             attendanceItemList = (ArrayList) attendanceItemRepository.getAttendancesWithLectureId(lectureId);
         } catch (Exception e) {
@@ -64,9 +66,7 @@ public class HistoryCheckedActivity extends AppCompatActivity {
         }
 
 
-
         //set the view
-
         tvCourseId.setText(courseId);
         tvCourseName.setText(courseName);
         tvStudentCount.setText(String.format(getString(R.string.formatString_students_registered), studentAccountRegister));
@@ -75,27 +75,21 @@ public class HistoryCheckedActivity extends AppCompatActivity {
         lvAttendanceList.setAdapter(attendanceAdapter);
 
 
-
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Delete the record in the database
-
                 // delete with LectureRepository's delete method, it deletes with cascade, so both lecture and attendances are deleted.
 
-                /**
-                //Boolean success = attendanceItemRepository.delete(lectureId);
-                 if(success){
-                 Toast.makeText(getApplicationContext(),"Delete successfully",Toast.LENGTH_SHORT).show();
-                 finish();
-                 }else{
-                 Toast.makeText(getApplicationContext(),"Error, try again",Toast.LENGTH_SHORT).show();
-                 }
-
-                 **/
+                Boolean success = lectureRepository.deleteByLectureId(lectureId);
+                if (success) {
+                    Toast.makeText(getApplicationContext(), "Delete successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error, try again", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
 
     }
 

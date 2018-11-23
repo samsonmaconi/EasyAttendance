@@ -1,12 +1,8 @@
 package com.example.navkaran.easyattendance;
 
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -24,9 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class AttendanceDetailsActivity extends AppCompatActivity{
 
@@ -55,8 +49,7 @@ public class AttendanceDetailsActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_details);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.title_attendance_list);
+        getSupportActionBar().setTitle(R.string.title_attendance_list);
 
         intent = getIntent();
         courseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);

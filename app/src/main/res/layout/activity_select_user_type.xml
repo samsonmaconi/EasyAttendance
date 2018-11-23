@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp"
     android:background="@drawable/background_gradient"
     tools:context=".SelectUserType">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,42 +31,47 @@
             android:background="@mipmap/easyattendance"/>
 
     </LinearLayout>
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-        <LinearLayout
-            android:id="@+id/fullscreen_content_controls"
+    <LinearLayout
+        android:id="@+id/fullscreen_content_controls"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:ignore="UselessParent">
+
+        <Button
+            android:id="@+id/teacher"
+            style="?metaButtonBarButtonStyle"
             android:layout_width="match_parent"
-            android:layout_height="208dp"
-            android:layout_gravity="bottom"
-            android:orientation="vertical"
-            tools:ignore="UselessParent"
-            android:padding="16dp">
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_rect_button_blue_selector"
+            android:text="@string/action_i_am_a_teacher"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
 
-            <Button
-                android:id="@+id/teacher"
-                style="?metaButtonBarButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_rect_button_blue_selector"
-                android:text="@string/action_i_am_a_teacher"
-                android:textColor="@color/colorWhite" />
+        <Button
+            android:id="@+id/student"
+            style="?metaButtonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_rect_button_orange_selector"
+            android:text="@string/action_i_am_a_student"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
 
-            <Button
-                android:id="@+id/student"
-                android:layout_marginTop="8dp"
-                style="?metaButtonBarButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_rect_button_orange_selector"
-                android:text="@string/action_i_am_a_student"
-                android:textColor="@color/colorWhite" />
+    </LinearLayout>
 
-        </LinearLayout>
-
-</FrameLayout>
+</LinearLayout>

@@ -9,11 +9,12 @@
     <TextView
         android:id="@+id/tvCourseId"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:padding="4dp"
         android:textColor="@color/colorBlue"
-        android:textStyle="bold"/>
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -28,7 +29,10 @@
             android:layout_weight="1"
             android:padding="4dp"
             android:textColor="@color/colorBlack"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/tvStudentCount"
