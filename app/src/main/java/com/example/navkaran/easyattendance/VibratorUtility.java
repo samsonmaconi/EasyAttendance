@@ -26,12 +26,13 @@ public class VibratorUtility {
 
         if (vibratorUtility.vibrator.hasVibrator()) {
             Log.d(TAG, "Has Vibrator");
+            Log.d(TAG, "Count: " + count);
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     int c = count;
                     while (c-- > 0) {
-                        exec(context, duration);
+                        exec(duration);
                         try {
                             Thread.sleep(200);
                         } catch (InterruptedException e) {
@@ -47,8 +48,18 @@ public class VibratorUtility {
         }
     }
 
-    private static void exec(Context context, int duration) {
+    //overloaded method to send boolean vibration feedback
+    public static void vibrate(final Context context, boolean positive) {
+        if(!positive){
+            vibrate(context, 75, 2);
+        }else{
+            vibrate(context, 300, 1);
+        }
+    }
+
+    private static void exec(int duration) {
         vibratorUtility.vibrator.vibrate(duration);
+        Log.d(TAG, "Vibrated for " + duration + " milliseconds");
     }
 
 }

@@ -20,6 +20,8 @@ public class EditCourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_course);
 
+        getSupportActionBar().setTitle(R.string.title_edit_course);
+
         etCourseId = findViewById(R.id.et_courseId);
         etCourseName = findViewById(R.id.et_courseName);
         etCourseStudentCount = findViewById(R.id.et_courseStudentCount);

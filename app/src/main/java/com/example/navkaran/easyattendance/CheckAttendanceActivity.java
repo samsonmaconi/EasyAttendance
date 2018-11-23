@@ -138,7 +138,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
             classId = classIDList.get(position);
 
             if (lastCheck.equals(classId)) {
-                VibratorUtility.vibrate(getApplicationContext(),1000, 1);
+                VibratorUtility.vibrate(getApplicationContext(),true);
                 Toast.makeText(CheckAttendanceActivity.this, String.format(getString(R.string.formatString_alert_failure_duplicate), classId), Toast.LENGTH_LONG).show();
                 sign_attendance.setEnabled(false);
                 sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
@@ -166,14 +166,14 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                         lastCheck = classId;
                         sign_attendance.setEnabled(false);
                         sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
-                        VibratorUtility.vibrate(getApplicationContext(),500, 2);
+                        VibratorUtility.vibrate(getApplicationContext(),false);
                         Toast.makeText(CheckAttendanceActivity.this, String.format(getString(R.string.formatString_alert_success), classId), Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                VibratorUtility.vibrate(getApplicationContext(),1000, 1);
+                VibratorUtility.vibrate(getApplicationContext(),false);
                 Toast.makeText(getApplicationContext(), String.format(getString(R.string.formatString_alert_failure_closed), classId), Toast.LENGTH_SHORT).show();
             }
         }
