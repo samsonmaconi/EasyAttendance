@@ -1,49 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="com.example.navkaran.easyattendance">
+    package="com.example.navkaran.easyattendance">
 
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
-<uses-feature android:name="android.hardware.location.gps" />
+    <uses-feature android:name="android.hardware.location.gps" />
 
-<application
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:logo="@mipmap/ic_launcher"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/AppTheme">
-    <activity android:name=".MainActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:logo="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-    <activity
-        android:name=".SelectUserType"
-        android:configChanges="orientation|keyboardHidden|screenSize"
-        android:theme="@style/FullscreenTheme" />
-    <activity
-        android:name=".WelcomeActivity"
-        android:parentActivityName=".SelectUserType" />
-    <activity android:name=".CheckAttendanceActivity" />
-    <activity android:name=".CourseListActivity" />
-    <activity
-        android:name=".TakeAttendanceActivity"
-        android:parentActivityName=".CourseListActivity" />
-    <activity android:name=".AttendanceDetailsActivity">
-
-        <!-- android:parentActivityName=".TakeAttendanceActivity" -->
-    </activity>
-    <activity android:name=".AttendanceHistory"
-        android:parentActivityName=".CourseListActivity"></activity>
-    <activity android:name=".NewCourseActivity" />
-    <activity android:name=".EditCourseActivity"></activity>
-</application>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SelectUserType"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".WelcomeActivity"
+            android:parentActivityName=".SelectUserType" />
+        <activity android:name=".CheckAttendanceActivity" />
+        <activity android:name=".CourseListActivity" />
+        <activity
+            android:name=".TakeAttendanceActivity"
+            android:parentActivityName=".CourseListActivity" />
+        <activity android:name=".AttendanceDetailsActivity"
+            android:parentActivityName=".TakeAttendanceActivity">
+        </activity>
+        <activity
+            android:name=".AttendanceHistory"
+            android:parentActivityName=".CourseListActivity"></activity>
+        <activity android:name=".NewCourseActivity"
+            android:parentActivityName=".CourseListActivity"/>
+        <activity android:name=".EditCourseActivity"
+            android:parentActivityName=".CourseListActivity"></activity>
+    </application>
 
 </manifest>
