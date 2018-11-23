@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -23,6 +24,7 @@ public class HistoryCheckedActivity extends AppCompatActivity {
     private String courseName;
     private int studentAccountRegister;
     private int studentAcountChecked;
+    private int corseKey;
 
 
     private ArrayList<AttendanceItem> attendanceItemList;
@@ -51,6 +53,7 @@ public class HistoryCheckedActivity extends AppCompatActivity {
 
         //get course data from last intent
         Intent intent = getIntent();
+        corseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);
         lectureId = intent.getLongExtra(EasyAttendanceConstants.LECTURE_ID, 0);
         courseId = intent.getStringExtra(EasyAttendanceConstants.COURSE_ID);
         courseName = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
@@ -93,4 +96,14 @@ public class HistoryCheckedActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case android.R.id.home: {
+                onBackPressed();
+                return true;
+            }
+        }
+        return false;
+    }
 }
