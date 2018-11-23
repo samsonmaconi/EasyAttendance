@@ -22,31 +22,37 @@ public class AttendanceHistory extends AppCompatActivity {
     private String courseId,courseName;
     private TextView className,classNumber,registeredStudents;
     private int courseKey, studentCount, attendanceCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_history);
 
+        System.out.println("onCreate");
+
         className = findViewById(R.id.class_name);
         classNumber = findViewById(R.id.class_number);
         registeredStudents = findViewById(R.id.register_number);
+        datelist = findViewById(R.id.lvdatelist);
 
         intent = getIntent();
         courseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);
-
         courseId = intent.getStringExtra(EasyAttendanceConstants.COURSE_ID);
-        classNumber.setText(String.valueOf(courseId));
         courseName = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
-        className.setText(courseName);
         studentCount = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
+
+        classNumber.setText(String.valueOf(courseId));
+        className.setText(courseName);
         registeredStudents.setText(String.valueOf(studentCount));
+
+        System.out.println("courseKey: "+courseKey);
 
         //List<Lecture> Testing = new ArrayList<Lecture>();
         //Testing.add(new Lecture(50,new Date(),courseKey));
 
         // uses live data for better performance, so when lecture and attendances are
         // deleted in HistoryCheckedActivity, the list auto refreshes
-        datelist = findViewById(R.id.lvdatelist);
+
         lectureRepository = new LectureRepository(getApplication());
         lectures = lectureRepository.getLiveLecturesByCourseKey(courseKey);
         adapter= new AttendanceHistoryAdapter(this, R.layout.attendance_history_list_item, lectures.getValue());
@@ -67,18 +73,21 @@ public class AttendanceHistory extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent();
                 intent.setClass(view.getContext(), HistoryCheckedActivity.class);
+
                 // this lec is the one clicked by user
                 Lecture lecClicked = adapter.getLectureList().get(i);
+
                 // course id, name, student count, are from previous intents
                 intent.putExtra(EasyAttendanceConstants.COURSE_ID, courseId);
                 intent.putExtra(EasyAttendanceConstants.COURSE_NAME, courseName);
                 intent.putExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, studentCount);
+
                 // get lecture id from lec clicked
                 intent.putExtra(EasyAttendanceConstants.LECTURE_ID, lecClicked.getLectureId());
                 intent.putExtra(EasyAttendanceConstants.ATTENDANCE_COUNT, lecClicked.getNumAttendee());
+
                 startActivity(intent);
             }
         });
-
     }
 }
