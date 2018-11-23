@@ -1,5 +1,6 @@
 package com.example.navkaran.easyattendance;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
@@ -9,6 +10,9 @@ import java.util.List;
 
 @Dao
 public interface LectureDAO {
+
+    @Query("SELECT * FROM lectures WHERE lectures.course_key = :courseKey")
+    LiveData<List<Lecture>> getLiveLecturesByCourseKey(int courseKey);
 
     @Query("SELECT * FROM lectures WHERE lectures.course_key = :courseKey")
     List<Lecture> getLecturesByCourseKey(int courseKey);
