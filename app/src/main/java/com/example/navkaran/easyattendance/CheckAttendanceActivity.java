@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,27 +31,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class CheckAttendanceActivity extends AppCompatActivity {
 
-    private Runnable runnable;
-    private ArrayList<String> classList;
-    private ArrayAdapter<String> spinnerArrayAdapter;
-    private LinkedList<String> classIDList;
-    private String classID;
     private Button sign_attendance;
     private Spinner spinner;
-    private String lastCheck = "null";
-    private String Student_id;
+    private Runnable runnable;
     private Handler handler;
-
-    // to prevent app from crashing when user forget to turn on location services on their device .
-    private Double latitude = 0.2333;
-    private Double longitude = 0.2333;
-
+    private ArrayList<String> classList, classIDList;
+    private ArrayAdapter<String> spinnerArrayAdapter;
+    private String classId;
+    private String lastCheck = "";
+    private String studentId;
+    private String location_error = "";
+    private Double student_latitude = 0.0;
+    private Double student_longitude = 0.0;
     private FusedLocationProviderClient mFusedLocationClient;
-    private String location_error = "no error";
+
+    private final String TAG = "CheckAttendance"; //for testing and debugging
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,56 +75,53 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_attendance_home);
 
         Intent intent = getIntent();
-        Student_id = intent.getStringExtra("userID");
+        studentId = intent.getStringExtra("userID");
 
         spinner = findViewById(R.id.spinner);
-        sign_attendance = findViewById(R.id.btn_iamhere);
+        sign_attendance = findViewById(R.id.btn_markAttendance);
         classList = new ArrayList<>();
-        classIDList = new LinkedList<>();
-        spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, classList);
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        classIDList = new ArrayList<>();
+        spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, classList);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerArrayAdapter);
-        spinner.setOnItemSelectedListener(select_class);
-        sign_attendance.setOnClickListener(sign);
+        spinner.setOnItemSelectedListener(onClassSelected);
+        sign_attendance.setOnClickListener(onBtnMarkAttendanceClick);
 
-        /*
+
+        //This block of code refreshes the list of Courses through the API every 30000 milliseconds
+        handler = new Handler();
         runnable = new Runnable() {
             @Override
             public void run() {
-                getClassList();
-            }
-        };
-
-        Thread thread = new Thread(null, runnable, "background");
-        thread.start();
-        */
-
-        handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                runnable = new Runnable() {
+                handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        getClassList();
+                        getUserLocation();
+                        runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                getCourseList();
+                            }
+                        };
+                        Thread thread = new Thread(null, runnable, "SetLocation_GetClassList");
+                        thread.start();
+                        handler.postDelayed(this, 30000);
                     }
-                };
-                Thread thread = new Thread(null, runnable, "background");
-                thread.start();
-                handler.postDelayed(this, 2000);
-            }
-        }, 0);
+                });
 
-        setLocation();
+            }
+        };
+        Thread thread = new Thread(null, runnable, "background");
+        thread.start();
     }
 
-    View.OnClickListener sign = new View.OnClickListener() {
+    View.OnClickListener onBtnMarkAttendanceClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             runnable = new Runnable() {
                 @Override
                 public void run() {
-                    checkAttendance();
+                    markAttendance();
                 }
             };
 
@@ -136,18 +131,20 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         }
     };
 
-    AdapterView.OnItemSelectedListener select_class = new AdapterView.OnItemSelectedListener() {
+    AdapterView.OnItemSelectedListener onClassSelected = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             System.out.println(position);
-            classID = classIDList.get(position);
+            classId = classIDList.get(position);
 
-            if(lastCheck.equals(classID)){
+            if (lastCheck.equals(classId)) {
+                VibratorUtility.vibrate(getApplicationContext(),1000, 1);
+                Toast.makeText(CheckAttendanceActivity.this, String.format(getString(R.string.formatString_alert_failure_duplicate), classId), Toast.LENGTH_LONG).show();
                 sign_attendance.setEnabled(false);
                 sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
-            }else {
+            } else {
                 sign_attendance.setEnabled(true);
-                sign_attendance.setBackgroundResource(R.drawable.round_button_red);
+                sign_attendance.setBackgroundResource(R.drawable.round_button_orange_selector);
             }
         }
 
@@ -157,75 +154,78 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         }
     };
 
-    public void checkAttendance(){
-        final String url = "https://web.cs.dal.ca/~stang/csci5708/mark.php?student_info=" +Student_id+","+classID+",1";
+
+    public void markAttendance() {
+        final String url = "https://web.cs.dal.ca/~stang/csci5708/mark.php?student_info=" + studentId + "," + classId + ",1";
         System.out.println(url);
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        String show = "Attend : " + classID +"\n@\n"+"lat: "+latitude+"   lon: "+longitude;
-                        Toast.makeText(getApplicationContext(),show , Toast.LENGTH_LONG).show();
-                        lastCheck = classID;
+                        lastCheck = classId;
                         sign_attendance.setEnabled(false);
                         sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
+                        VibratorUtility.vibrate(getApplicationContext(),500, 2);
+                        Toast.makeText(CheckAttendanceActivity.this, String.format(getString(R.string.formatString_alert_success), classId), Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
+                VibratorUtility.vibrate(getApplicationContext(),1000, 1);
+                Toast.makeText(getApplicationContext(), String.format(getString(R.string.formatString_alert_failure_closed), classId), Toast.LENGTH_SHORT).show();
             }
         }
         );
         RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
-    public void getClassList(){
+    public void getCourseList() {
         final String url = "https://web.cs.dal.ca/~stang/csci5708/get_lecture_list.php";
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "ClassList Response: Success");
+                        String class_id;
+                        String class_name;
+                        double class_lon;
+                        double class_lat;
                         classList.clear();
-                        try{
-                            for(int i=0; i<response.length(); i++){
-                                String class_id = response.getJSONObject(i).getString("class_id");
-                                String class_name = response.getJSONObject(i).getString("class_name");
-                                double class_lon = response.getJSONObject(i).getDouble("longitude");
-                                double class_lat = response.getJSONObject(i).getDouble("latitude");
-                                //int class_state = response.getJSONObject(i).getInt("state");
-                                int class_state = 1;
-                                System.out.println("longitude: "+longitude+" latitude: "+latitude);
-                                if(new Class("("+class_id + ") " + class_name,
-                                        class_lon,class_lat,longitude,latitude,20,class_state).isAbleToCheckIn()){
-                                    classList.add("("+class_id + ") " + class_name);
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                class_id = response.getJSONObject(i).getString("class_id");
+                                class_name = response.getJSONObject(i).getString("class_name");
+                                class_lon = response.getJSONObject(i).getDouble("longitude");
+                                class_lat = response.getJSONObject(i).getDouble("latitude");
+                                Log.d(TAG, "student_longitude: " + student_longitude + " student_latitude: " + student_latitude);
+                                if (DistanceChecker.isWithinRange(student_longitude, student_latitude, class_lon, class_lat)) {
+                                    Log.d(TAG, "Distance Checker: Success");
+                                    classList.add("(" + class_id + ") " + class_name);
                                     classIDList.add(class_id);
-
-                                }else{
-                                    //classList.add("("+class_id + ") " + class_name);
                                 }
-                                if(classList.isEmpty()){
-                                    classIDList.clear();
-                                    sign_attendance.setEnabled(false);
-                                    sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
-                                }
+                                Log.d(TAG, "After Distance Checker");
                             }
-                            spinnerArrayAdapter.notifyDataSetChanged();
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (classList.isEmpty()) {
+                            Log.d(TAG, "classList : isEmpty");
                             classIDList.clear();
                             sign_attendance.setEnabled(false);
                             sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
+                        } else {
+                            Log.d(TAG, "classList : isNotEmpty");
                             spinnerArrayAdapter.notifyDataSetChanged();
-                            e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "ClassList Response: Volley Error");
                 error.printStackTrace();
                 classIDList.clear();
                 sign_attendance.setEnabled(false);
@@ -237,7 +237,8 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
-    private void setLocation(){
+
+    private void getUserLocation() {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
@@ -246,22 +247,22 @@ public class CheckAttendanceActivity extends AppCompatActivity {
             mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
-                    // Got last known location. In some rare situations this can be null.
+                    // Get last known location. In some rare situations this can be null.
                     if (location != null) {
-                        // save longitude and latitude to a local variable for future use
-                        longitude = location.getLongitude();
-                        latitude = location.getLatitude();
-                        System.out.println("************CheckAttendanceActivity************** longitude: "+longitude+"    latitude: "+latitude);
-                    }else {
+                        // save student_longitude and student_latitude to a local variable for future use
+                        student_longitude = location.getLongitude();
+                        student_latitude = location.getLatitude();
+                        Log.d(TAG, "Get User Location: lon: " + student_longitude + ", lat: " + student_latitude);
+                    } else {
                         location_error = "Unknown Location";
-                        System.out.println("**************** "+location_error);
+                        Log.d(TAG, "Get User Location: " + location_error);
                     }
                 }
             });
             return;
-        }else{
+        } else {
             location_error = "Permission Denied";
-            System.out.println("**************** "+location_error);
+            Log.d(TAG, "Get User Location: " + location_error);
         }
     }
 }

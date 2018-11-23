@@ -17,20 +17,20 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/lable"
+            android:id="@+id/lblSelectCourse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlue"
-            android:textSize="16sp"
-            android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:text="Select Course"/>
+            android:text="@string/label_selected_course"
+            android:textColor="@color/colorBlue"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/lable"
+            android:layout_below="@id/lblSelectCourse"
             android:background="@drawable/spinner_background"
             android:orientation="horizontal">
 
@@ -40,19 +40,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:gravity="center"
-                android:spinnerMode="dropdown" />
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:paddingTop="2dp"
-                android:paddingRight="8dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_details" />
+                android:prompt="@string/hint_select_a_course"
+                android:spinnerMode="dialog" />
 
         </RelativeLayout>
 
@@ -67,15 +56,15 @@
         android:padding="16dp">
 
         <Button
-            android:id="@+id/btn_iamhere"
+            android:id="@+id/btn_markAttendance"
             android:layout_width="256dp"
             android:layout_height="256dp"
-            android:background="@drawable/round_button_red_selector"
-            android:text="@string/action_mark_attendance"
-            android:textColor="@color/colorWhite"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textSize="16sp"/>
+            android:background="@drawable/round_button_disabled"
+            android:text="@string/action_mark_attendance"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
