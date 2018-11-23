@@ -38,19 +38,18 @@ public class MainActivity extends AppCompatActivity {
             intent = new Intent(this, CourseListActivity.class);
             intent.putExtra("userRole", userRole);
             intent.putExtra("userID", userID);
-            finish();
             startActivity(intent);
+            finish();
         }else if(userRole.equals("student")){
             intent = new Intent(this, CheckAttendanceActivity.class);
             intent.putExtra("userRole", userRole);
             intent.putExtra("userID", userID);
-            finish();
             startActivity(intent);
+            finish();
         }else{
             intent = new Intent(this, SelectUserType.class);
-            finish();
             startActivity(intent);
+            finish();
         }
     }
-
 }
