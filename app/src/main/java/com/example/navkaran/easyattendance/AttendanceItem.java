@@ -29,7 +29,7 @@ public class AttendanceItem{
     @ColumnInfo(name = "lecture_id")
     private long lectureId;
     @Ignore
-    private Boolean hasCheckedIn;
+    private Boolean hasCheckedIn = true;
     @Ignore
     private static final String[] status = {"Not Checked-in", "Checked-in"};
 
