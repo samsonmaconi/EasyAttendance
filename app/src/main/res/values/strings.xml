@@ -12,29 +12,31 @@
     <string name="action_delete">Delete</string>
 
     <!--Labels-->
-    <string name="label_select_course">Your Courses</string>
+    <string name="label_your_courses">Your Courses</string>
     <string name="label_staff_id">Staff ID</string>
     <string name="label_student_id">Student ID</string>
     <string name="label_status">Status</string>
     <string name="label_select_date">Select Date</string>
+    <string name="label_selected_course">Selected Course</string>
     <string name="label_course_id">Course ID</string>
     <string name="label_course_name">Course Name</string>
     <string name="label_course_student_count">Student Count</string>
 
     <!--Hints-->
-    <string name="hint_select_a_course">Please select a course</string>
+    <string name="hint_select_a_course">Select A Course</string>
     <string name="hint_example_id">e.g B00801169</string>
     <string name="hint_course_id">e.g CSCI 5708</string>
     <string name="hint_course_name">e.g Mobile Computing</string>
     <string name="hint_course_student_count">How many students are taking this course?</string>
+    <string name="hint_no_courses">You currently have 0 course information saved. Add a course</string>
 
     <!--Formatted Strings-->
     <string name="formatString_checked_in">%1$d of %2$d checked-in</string>
     <string name="formatString_in_attendance">%1$d of %2$d in attendance</string>
     <string name="formatString_students_registered">%1$d Students Registered</string>
     <string name="formatString_alert_success">You have successfully marked your attendance for %1$s</string>
-    <string name="formatString_alert_failure_distance">Unable to mark attendance for %1$s. Please ensure you are within the vicinity of the teacher.</string>
-    <string name="formatString_alert_failure_availability">Unable to mark attendance for %1$s. Not currently available.</string>
+    <string name="formatString_alert_failure_closed">Unable to mark attendance for %1$s. Attendance closed.</string>
+    <string name="formatString_alert_failure_duplicate">You have already marked your attendance for %1$s.</string>
 
     <!--Activity Titles-->
     <string name="title_attendance_list">Attendance List</string>
@@ -42,6 +44,9 @@
     <string name="title_attendance_home">Mark Attendance</string>
     <string name="title_class_attendance">Class Attendance</string>
     <string name="title_course_list">Select a Course</string>
+    <string name="title_course_history">Select a Date</string>
+    <string name="title_edit_course">Edit Course</string>
+    <string name="title_add_course">Add Course</string>
 
     <!--String array for context menu-->
     <string-array name="stringArray_course_list_menu">

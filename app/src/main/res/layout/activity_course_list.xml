@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/label_select_course"
+                android:text="@string/label_your_courses"
                 android:textAlignment="textStart"
                 android:textColor="@color/colorBlue"
                 android:textSize="20sp"
