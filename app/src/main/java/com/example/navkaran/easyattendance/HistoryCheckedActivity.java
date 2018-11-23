@@ -90,8 +90,6 @@ public class HistoryCheckedActivity extends AppCompatActivity {
                 }
             }
         });
-        
-
 
     }
 
