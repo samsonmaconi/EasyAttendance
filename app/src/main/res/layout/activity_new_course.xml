@@ -15,7 +15,7 @@
         android:labelFor="@id/et_courseId"
         android:text="@string/label_course_id"
         android:textColor="@color/colorBlue"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -34,7 +34,7 @@
         android:labelFor="@id/et_courseName"
         android:text="@string/label_course_name"
         android:textColor="@color/colorBlue"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -53,7 +53,7 @@
         android:labelFor="@id/et_courseStudentCount"
         android:text="@string/label_course_student_count"
         android:textColor="@color/colorBlue"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -69,8 +69,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:background="@drawable/rounded_rect_button_blue_selector"
         android:text="@string/action_save"
         android:textColor="@color/colorWhite"
-        android:background="@drawable/rounded_rect_button_blue_selector" />
+        android:textSize="16sp" />
 
 </LinearLayout>

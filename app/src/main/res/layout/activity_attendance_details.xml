@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:text="CSCI 5412"
             android:textColor="@color/colorBlue"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
