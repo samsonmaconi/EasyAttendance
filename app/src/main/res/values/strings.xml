@@ -42,7 +42,7 @@
     <string name="title_attendance_list">Attendance List</string>
     <string name="title_welcome">Welcome</string>
     <string name="title_attendance_home">Mark Attendance</string>
-    <string name="title_class_attendance">Class Attendance</string>
+    <string name="title_class_attendance">Take Class Attendance</string>
     <string name="title_course_list">Select a Course</string>
     <string name="title_course_history">Select a Date</string>
     <string name="title_edit_course">Edit Course</string>

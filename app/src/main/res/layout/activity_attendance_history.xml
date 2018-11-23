@@ -23,8 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CSCI5412"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/class_name"
@@ -43,15 +44,18 @@
             android:textColor="@color/colorBlack"/>
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/textDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="textStart"
         android:layout_below="@id/course_info"
+        android:layout_marginTop="16dp"
         android:text="@string/label_select_date"
+        android:textAlignment="textStart"
         android:textColor="@color/colorBlue"
-        android:textStyle="bold"/>
+        android:textSize="18sp"
+        android:textStyle="bold" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

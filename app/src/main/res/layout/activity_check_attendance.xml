@@ -24,7 +24,7 @@
             android:layout_marginBottom="8dp"
             android:text="@string/label_selected_course"
             android:textColor="@color/colorBlue"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <RelativeLayout
