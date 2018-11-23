@@ -3,6 +3,7 @@ package com.example.navkaran.easyattendance;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LectureRepository {
