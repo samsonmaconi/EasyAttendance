@@ -1,24 +1,23 @@
 package com.example.navkaran.easyattendance;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import static com.example.navkaran.easyattendance.AttendanceDetailsActivity.ATTENDANCE_COUNT;
-
 public class AttendanceHistory extends AppCompatActivity {
-    private CourseItemRepository repository;
-    private LiveData<List<CourseItem>> lectures;
     ListView datelist;
     private AttendanceHistoryAdapter adapter;
     private LectureRepository lectureRepository;
+    private LiveData<List<Lecture>> lectures;
     private Intent intent;
     private String courseId,courseName;
     private TextView className,classNumber,registeredStudents;
@@ -39,26 +38,47 @@ public class AttendanceHistory extends AppCompatActivity {
         classNumber.setText(String.valueOf(courseId));
         courseName = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
         className.setText(courseName);
-        //TODO: Change Default Values back to 0
         studentCount = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
         registeredStudents.setText(String.valueOf(studentCount));
-        attendanceCount = intent.getIntExtra(ATTENDANCE_COUNT, 0);
-        ArrayList<Lecture> Testing = new ArrayList<Lecture>();
-        Testing.add(new Lecture(50,new Date(),courseKey));
-        datelist = findViewById(R.id.lvdatelist);
-        try {
-            // Will be uncommented when database have entries in it
 
-            //adapter= new AttendanceHistoryAdapter(this, R.layout.attendance_history_list_item,lectureRepository.getLecturesByCourseKey(courseKey));
-            adapter = new AttendanceHistoryAdapter(this, R.layout.attendance_history_list_item,Testing);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //List<Lecture> Testing = new ArrayList<Lecture>();
+        //Testing.add(new Lecture(50,new Date(),courseKey));
+
+        // uses live data for better performance, so when lecture and attendances are
+        // deleted in HistoryCheckedActivity, the list auto refreshes
+        datelist = findViewById(R.id.lvdatelist);
+        lectureRepository = new LectureRepository(getApplication());
+        lectures = lectureRepository.getLiveLecturesByCourseKey(courseKey);
+        adapter= new AttendanceHistoryAdapter(this, R.layout.attendance_history_list_item, lectures.getValue());
         datelist.setAdapter(adapter);
 
-        registerForContextMenu(datelist);
+        lectures.observe(this, new Observer<List<Lecture>>() {
+            @Override
+            public void onChanged(@Nullable List<Lecture> lectures) {
+                adapter.setLectures(lectures);
+            }
+        });
 
+        //registerForContextMenu(datelist);
 
+        //listens to which item in listview user clicks
+        datelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent();
+                intent.setClass(view.getContext(), HistoryCheckedActivity.class);
+                // this lec is the one clicked by user
+                Lecture lecClicked = adapter.getLectureList().get(i);
+                // course id, name, student count, are from previous intents
+                intent.putExtra(EasyAttendanceConstants.COURSE_ID, courseId);
+                intent.putExtra(EasyAttendanceConstants.COURSE_NAME, courseName);
+                intent.putExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, studentCount);
+                // get lecture id from lec clicked
+                intent.putExtra(EasyAttendanceConstants.LECTURE_ID, lecClicked.getLectureId());
+                intent.putExtra(EasyAttendanceConstants.ATTENDANCE_COUNT, lecClicked.getNumAttendee());
+                startActivity(intent);
+            }
+        });
 
     }
 }

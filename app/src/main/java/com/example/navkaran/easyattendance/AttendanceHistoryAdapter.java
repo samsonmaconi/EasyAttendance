@@ -1,24 +1,29 @@
 package com.example.navkaran.easyattendance;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class AttendanceHistoryAdapter extends ArrayAdapter<Lecture> {
-    private List<Lecture> LectureList;
+    private List<Lecture> lectureList;
 
     public AttendanceHistoryAdapter(Context context, int resource, List<Lecture> LectureList) {
         super(context, resource, LectureList);
-        this.LectureList = LectureList;
+        this.lectureList = lectureList;
+    }
+
+    public void setLectures(List<Lecture> lectures) {
+        lectureList = lectures;
+        notifyDataSetChanged();
+    }
+
+    public List<Lecture> getLectureList() {
+        return lectureList;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -31,7 +36,10 @@ public class AttendanceHistoryAdapter extends ArrayAdapter<Lecture> {
             v = inflater.inflate(R.layout.attendance_history_list_item, null);
         }
 
-        Lecture i = LectureList.get(position);
+        Lecture i = null;
+        if(lectureList != null) {
+            i = lectureList.get(position);
+        }
 
         if (i != null) {
             TextView attenDate = v.findViewById(R.id.attendate);
@@ -43,6 +51,13 @@ public class AttendanceHistoryAdapter extends ArrayAdapter<Lecture> {
             attenCount.setText(String.valueOf(i.getNumAttendee()));
         }
         return v;
+    }
+
+    @Override
+    public int getCount() {
+        if (lectureList != null)
+            return lectureList.size();
+        else return 0;
     }
 
 }

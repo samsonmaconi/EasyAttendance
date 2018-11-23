@@ -59,7 +59,6 @@ public class CourseListActivity extends AppCompatActivity {
         courses.observe(this, new Observer<List<CourseItem>>() {
             @Override
             public void onChanged(@Nullable List<CourseItem> courseItems) {
-                if(courseItems != null)
                 adapter.setCourseList(courseItems);
             }
         });

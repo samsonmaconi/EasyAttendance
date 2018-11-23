@@ -38,15 +38,17 @@
             android:name=".TakeAttendanceActivity"
             android:parentActivityName=".CourseListActivity" />
         <activity android:name=".AttendanceDetailsActivity"
-            android:parentActivityName=".TakeAttendanceActivity">
-        </activity>
+            android:parentActivityName=".TakeAttendanceActivity" />
         <activity
             android:name=".AttendanceHistory"
-            android:parentActivityName=".CourseListActivity"></activity>
+            android:parentActivityName=".CourseListActivity" />
         <activity android:name=".NewCourseActivity"
-            android:parentActivityName=".CourseListActivity"/>
+            android:parentActivityName=".CourseListActivity" />
         <activity android:name=".EditCourseActivity"
-            android:parentActivityName=".CourseListActivity"></activity>
+            android:parentActivityName=".CourseListActivity" />
+        <activity
+            android:name=".HistoryCheckedActivity"
+            android:parentActivityName=".AttendanceHistory" />
     </application>
 
 </manifest>
