@@ -15,6 +15,7 @@ public class AttendanceHistory extends AppCompatActivity {
     ListView datelist;
     private CourseAdapter adapter;
     ArrayList dummy = new ArrayList();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,7 @@ public class AttendanceHistory extends AppCompatActivity {
         datelist = findViewById(R.id.lvdatelist);
         adapter = new CourseAdapter(this, R.layout.course_list_item, dummy);
         datelist.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         registerForContextMenu(datelist);
 
     }
