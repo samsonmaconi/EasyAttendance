@@ -41,10 +41,8 @@ public class AttendanceDetailsActivity extends AppCompatActivity{
     private LectureRepository lectureRepository;
     private AttendanceItemRepository attendanceRepository;
 
-    public static final String ATTENDANCE_COUNT = "ATTENDANCE_COUNT";
-
     private final String TAG = "AttendanceDetails";
-    private final String FETCH_URL = "https://web.cs.dal.ca/~stang/csci5708/end_attendance.php?class_id=";
+    private final String FETCH_URL = EasyAttendanceConstants.API_URL+"end_attendance.php?class_id=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +57,7 @@ public class AttendanceDetailsActivity extends AppCompatActivity{
         courseName = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
 
         studentCount = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
-        attendanceCount = intent.getIntExtra(ATTENDANCE_COUNT, 0);
+        attendanceCount = intent.getIntExtra(EasyAttendanceConstants.ATTENDANCE_COUNT, 0);
 
         lvAttendanceList = findViewById(R.id.lvAttendanceList);
         btnDone = findViewById(R.id.btnDone);

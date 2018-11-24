@@ -147,7 +147,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
      * check how many student account already marked attendance
      */
     private void checkAttendance() {
-        final String url = "https://web.cs.dal.ca/~stang/csci5708/count.php?class_id=" + encodeParameter(course_id);
+        final String url = EasyAttendanceConstants.API_URL + "count.php?class_id=" + encodeParameter(course_id);
         Log.d(TAG, "checkAttendance URL: " + url);
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, url, null,
@@ -190,7 +190,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
      * start attendance
      */
     private void startAttendance(String course_id, String course_name, double lon, double lat) {
-        final String url = "https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_id=" + encodeParameter(course_id) +
+        final String url = EasyAttendanceConstants.API_URL + "start_attendance.php?class_id=" + encodeParameter(course_id) +
                 "&class_name=" + encodeParameter(course_name) +
                 "&longitude=" + lon +
                 "&latitude=" + lat;
