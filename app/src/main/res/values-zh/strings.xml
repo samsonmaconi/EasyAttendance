@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">Easy Attendance</string>
+
+    <!--Button Text-->
+    <string name="action_done">完成</string>
+    <string name="action_save">保存</string>
+    <string name="action_i_am_a_teacher">我是老师</string>
+    <string name="action_i_am_a_student">我是学生</string>
+    <string name="action_start_attendance">开始签到</string>
+    <string name="action_stop_attendance">停止签到</string>
+    <string name="action_mark_attendance">签到</string>
+    <string name="action_delete">删除</string>
+
+    <!--Labels-->
+    <string name="label_your_courses">我的课程</string>
+    <string name="label_staff_id">员工ID</string>
+    <string name="label_student_id">学生ID</string>
+    <string name="label_status">状态</string>
+    <string name="label_select_date">请选择一个日期</string>
+    <string name="label_selected_course">请选择课程</string>
+    <string name="label_course_id">课程ID</string>
+    <string name="label_course_name">课程名</string>
+    <string name="label_course_student_count">学生数</string>
+
+    <!--Hints-->
+    <string name="hint_select_a_course">请选择课程</string>
+    <string name="hint_please_select_a_course">请选择课程</string>
+    <string name="hint_example_id">e.g B00801169</string>
+    <string name="hint_course_id">e.g CSCI 5708</string>
+    <string name="hint_course_name">e.g 移动计算</string>
+    <string name="hint_course_student_count">有多少学生参加课程？</string>
+    <string name="hint_no_courses">没有课程，请加入你的课程</string>
+
+    <!--Formatted Strings-->
+    <string name="formatString_checked_in">%1$d / %2$d 已经签到</string>
+    <string name="formatString_in_attendance">%1$d / %2$d 参加了课程</string>
+    <string name="formatString_students_registered">注册学生数 %1$d</string>
+    <string name="formatString_alert_success">你已经成功签到 %1$s</string>
+    <string name="formatString_alert_failure_closed">无法签到 %1$s. 教师已经关闭签到.</string>
+    <string name="formatString_alert_failure_duplicate">你已经成功签到 %1$s. 请滚蛋</string>
+    <string name="formatString_confirm_delete">你确定删除吗 %1$s?</string>
+
+    <!--Alerts-->
+    <string name="alert_attendance_saved">签到记录已保存</string>
+    <string name="alert_incomplete_form">表格不完整</string>
+    <string name="alert_course_updated">课程信息更新</string>
+    <string name="alert_new_course_added">新课程已添加</string>
+    <string name="alert_course_deleted">课程删除</string>
+
+    <!--Activity Titles-->
+    <string name="title_attendance_list">签到表</string>
+    <string name="title_attendance_list_hist">历史签到表</string>
+    <string name="title_welcome">欢迎！</string>
+    <string name="title_attendance_home">签到</string>
+    <string name="title_class_attendance">签到</string>
+    <string name="title_course_list">选择课程</string>
+    <string name="title_course_history">选择日期</string>
+    <string name="title_edit_course">编辑课程</string>
+    <string name="title_add_course">添加课程</string>
+
+    <!--String array for context menu-->
+    <string-array name="stringArray_course_list_menu">
+        <item>编辑</item>
+        <item>删除</item>
+        <item>历史</item>
+    </string-array>
+
+</resources>
