@@ -1,11 +1,11 @@
 package com.example.navkaran.easyattendance;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +27,8 @@ public class HistoryCheckedActivity extends AppCompatActivity {
     private int studentAccountRegister;
     private int studentAcountChecked;
 
+    private Context context;
+
     private ArrayList<AttendanceItem> attendanceItemList;
     private AttendanceAdapter attendanceAdapter;
 
@@ -40,6 +42,7 @@ public class HistoryCheckedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_attendance_details);
 
         getSupportActionBar().setTitle(R.string.title_attendance_list_hist);
+        context = this;
 
         lvAttendanceList = findViewById(R.id.lvAttendanceList);
         btnDone = findViewById(R.id.btnDone);
@@ -80,9 +83,9 @@ public class HistoryCheckedActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                new AlertDialog.Builder(getApplicationContext())
+                new AlertDialog.Builder(context)
                         .setTitle(getString(R.string.action_delete))
-                        .setMessage(String.format(getString(R.string.formatString_confirm_delete), "this lecture"))
+                        .setMessage("delete this?")
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
