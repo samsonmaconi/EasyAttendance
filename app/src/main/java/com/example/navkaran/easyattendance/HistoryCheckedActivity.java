@@ -45,6 +45,7 @@ public class HistoryCheckedActivity extends AppCompatActivity {
         tvCourseName = findViewById(R.id.tvCourseName);
         tvStudentCount = findViewById(R.id.tvStudentCount);
         tvAttendanceSummary = findViewById(R.id.tvAttendanceSummary);
+        btnDone.setBackgroundResource(R.drawable.rounded_rect_button_orange);
         btnDone.setBackgroundResource(R.color.colorRed_pressed);
         btnDone.setText(R.string.action_delete);
 
