@@ -106,12 +106,10 @@ public class CourseListActivity extends AppCompatActivity {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int menuItemIndex = item.getItemId();
-        String[] menuItems = getResources().getStringArray(R.array.stringArray_course_list_menu);
-        String menuItemName = menuItems[menuItemIndex];
         final CourseItem courseSelected = adapter.getCourseList().get(info.position);
 
-        switch (menuItemName) {
-            case "Edit":
+        switch (menuItemIndex) {
+            case 0: //Edit MenuItem
                 Intent intent = new Intent(CourseListActivity.this, EditCourseActivity.class);
                 intent.putExtra(EasyAttendanceConstants.COURSE_KEY, courseSelected.getCourseKey());
                 intent.putExtra(EasyAttendanceConstants.COURSE_ID, courseSelected.getCourseID());
@@ -119,20 +117,21 @@ public class CourseListActivity extends AppCompatActivity {
                 intent.putExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, courseSelected.getStudentCount());
                 startActivityForResult(intent, EasyAttendanceConstants.EDIT_COURSE_ACTIVITY_REQUEST_CODE);
                 break;
-            case "Delete":
+            case 1: //Delete MenuItem
                 new AlertDialog.Builder(this)
-                        .setTitle("Delete " + courseSelected.getCourseID())
-                        .setMessage("Are you sure you want to Delete " + courseSelected.getCourseID() + "?")
+                        .setTitle(getString(R.string.action_delete) + " " + courseSelected.getCourseID())
+                        .setMessage(String.format(getString(R.string.formatString_confirm_delete), courseSelected.getCourseID()))
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                VibratorUtility.vibrate(getApplicationContext(), true);
                                 repository.delete(courseSelected);
+                                VibratorUtility.vibrate(getApplicationContext(), true);
+                                Toast.makeText(getApplicationContext(), getString(R.string.alert_course_deleted), Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton(android.R.string.no, null).show();
                 break;
-            case "History":
+            case 2: //History MenuItem
                 Intent histIntent = new Intent(CourseListActivity.this, AttendanceHistory.class);
                 histIntent.putExtra(EasyAttendanceConstants.COURSE_KEY, courseSelected.getCourseKey());
                 histIntent.putExtra(EasyAttendanceConstants.COURSE_ID, courseSelected.getCourseID());
@@ -151,7 +150,7 @@ public class CourseListActivity extends AppCompatActivity {
             String courseId = data.getStringExtra(EasyAttendanceConstants.COURSE_ID);
             String courseName = data.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
             int courseStudentCount = data.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
-            Toast.makeText(getApplicationContext(), "New Course Added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.alert_new_course_added), Toast.LENGTH_SHORT).show();
             VibratorUtility.vibrate(getApplicationContext(), true);
             repository.insert(new CourseItem(courseId, courseName, courseStudentCount));
         } else if (requestCode == EasyAttendanceConstants.EDIT_COURSE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
@@ -159,11 +158,11 @@ public class CourseListActivity extends AppCompatActivity {
             String courseId = data.getStringExtra(EasyAttendanceConstants.COURSE_ID);
             String courseName = data.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
             int courseStudentCount = data.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
-            Toast.makeText(getApplicationContext(), "Course Updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.alert_course_updated), Toast.LENGTH_SHORT).show();
             VibratorUtility.vibrate(getApplicationContext(), true);
             repository.update(new CourseItem(courseKey, courseId, courseName, courseStudentCount));
         } else {
-            Toast.makeText(getApplicationContext(), "Incomplete form", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.alert_incomplete_form), Toast.LENGTH_LONG).show();
             VibratorUtility.vibrate(getApplicationContext(), false);
         }
     }
