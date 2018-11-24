@@ -96,11 +96,10 @@ public class AttendanceDetailsActivity extends AppCompatActivity{
                         item.setLectureId(lectureId);
                     }
                     attendanceRepository.insert(attendanceItemArrayList.toArray(new AttendanceItem[attendanceItemArrayList.size()]));
-                    Toast.makeText(getApplicationContext(),"Attendance Details Saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),getString(R.string.alert_attendance_saved), Toast.LENGTH_SHORT).show();
                     VibratorUtility.vibrate(getApplicationContext(), true);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),"Failed to save Attendance Details", Toast.LENGTH_SHORT).show();
                     VibratorUtility.vibrate(getApplicationContext(), false);
                 }
 
@@ -146,7 +145,6 @@ public class AttendanceDetailsActivity extends AppCompatActivity{
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(getApplicationContext(), "No Student attend this class", Toast.LENGTH_SHORT).show();
             }
         }
         );

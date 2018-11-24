@@ -89,7 +89,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         class_number.setText(course_id);
         class_name.setText(course_name);
         check_number.setText("");
-        register_number.setText(student_num + " Students Registered");
+        register_number.setText(String.format(getString(R.string.formatString_students_registered), student_num));
 
         handler = new Handler();
         runnable = new Runnable() {
