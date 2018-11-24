@@ -1,7 +1,9 @@
 package com.example.navkaran.easyattendance;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -77,16 +79,26 @@ public class HistoryCheckedActivity extends AppCompatActivity {
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Delete the record in the database
-                // delete with LectureRepository's delete method, it deletes with cascade, so both lecture and attendances are deleted.
 
-                Boolean success = lectureRepository.deleteByLectureId(lectureId);
-                if (success) {
-                    Toast.makeText(getApplicationContext(), "Delete successfully", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Error, try again", Toast.LENGTH_SHORT).show();
-                }
+                new AlertDialog.Builder(getApplicationContext())
+                        .setTitle(getString(R.string.action_delete))
+                        .setMessage(String.format(getString(R.string.formatString_confirm_delete), "this lecture"))
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                //Delete the record in the database
+                                // delete with LectureRepository's delete method, it deletes with cascade, so both lecture and attendances are deleted.
+                                Boolean success = lectureRepository.deleteByLectureId(lectureId);
+                                if (success) {
+                                    Toast.makeText(getApplicationContext(), getString(R.string.alert_course_deleted), Toast.LENGTH_SHORT).show();
+                                    finish();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Error, try again", Toast.LENGTH_SHORT).show();
+                                }
+                                VibratorUtility.vibrate(getApplicationContext(), true);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null).show();
             }
         });
 

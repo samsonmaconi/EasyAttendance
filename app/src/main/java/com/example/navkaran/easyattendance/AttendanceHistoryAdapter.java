@@ -55,7 +55,7 @@ public class AttendanceHistoryAdapter extends ArrayAdapter<Lecture> {
             }
 
             attenDate.setText(df.format(i.getDate()));
-            String formatStr = getContext().getResources().getString(R.string.formatString_students_registered);
+            String formatStr = getContext().getResources().getString(R.string.formatString_students_checked_in);
             attenCount.setText(String.format(formatStr, i.getNumAttendee()));
         }
         return v;

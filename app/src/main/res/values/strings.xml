@@ -49,7 +49,7 @@
 
     <!--Activity Titles-->
     <string name="title_attendance_list">Attendance List</string>
-    <string name="title_lecture_list_hist">Lecture List (Historical)</string>
+    <string name="title_lecture_list_hist">Lecture History</string>
     <string name="title_attendance_list_hist">Attendance List (Historical)</string>
     <string name="title_welcome">Welcome</string>
     <string name="title_attendance_home">Mark Attendance</string>
