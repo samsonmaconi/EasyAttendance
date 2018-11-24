@@ -35,6 +35,7 @@
     <string name="formatString_checked_in">%1$d of %2$d checked-in</string>
     <string name="formatString_in_attendance">%1$d of %2$d in attendance</string>
     <string name="formatString_students_registered">%1$d Students Registered</string>
+    <string name="formatString_students_checked_in">%1$d Students Checked-in</string>
     <string name="formatString_alert_success">You have successfully marked your attendance for %1$s</string>
     <string name="formatString_alert_failure_closed">Unable to mark attendance for %1$s. Attendance closed.</string>
     <string name="formatString_alert_failure_duplicate">You have already marked your attendance for %1$s.</string>
@@ -49,6 +50,7 @@
 
     <!--Activity Titles-->
     <string name="title_attendance_list">Attendance List</string>
+    <string name="title_lecture_list_hist">Lecture History</string>
     <string name="title_attendance_list_hist">Attendance List (Historical)</string>
     <string name="title_welcome">Welcome</string>
     <string name="title_attendance_home">Mark Attendance</string>

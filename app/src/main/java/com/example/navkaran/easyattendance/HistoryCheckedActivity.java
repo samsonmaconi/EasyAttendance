@@ -1,9 +1,11 @@
 package com.example.navkaran.easyattendance;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -24,8 +26,8 @@ public class HistoryCheckedActivity extends AppCompatActivity {
     private String courseName;
     private int studentAccountRegister;
     private int studentAcountChecked;
-    private int corseKey;
 
+    private Context context;
 
     private ArrayList<AttendanceItem> attendanceItemList;
     private AttendanceAdapter attendanceAdapter;
@@ -39,13 +41,16 @@ public class HistoryCheckedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_details);
 
+        getSupportActionBar().setTitle(R.string.title_attendance_list_hist);
+        context = this;
+
         lvAttendanceList = findViewById(R.id.lvAttendanceList);
         btnDone = findViewById(R.id.btnDone);
         tvCourseId = findViewById(R.id.tvCourseId);
         tvCourseName = findViewById(R.id.tvCourseName);
         tvStudentCount = findViewById(R.id.tvStudentCount);
         tvAttendanceSummary = findViewById(R.id.tvAttendanceSummary);
-        btnDone.setBackgroundResource(R.color.colorRed_pressed);
+        btnDone.setBackgroundResource(R.drawable.rounded_rect_button_red_selector);
         btnDone.setText(R.string.action_delete);
 
         attendanceItemRepository = new AttendanceItemRepository(getApplication());
@@ -53,13 +58,11 @@ public class HistoryCheckedActivity extends AppCompatActivity {
 
         //get course data from last intent
         Intent intent = getIntent();
-        corseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);
         lectureId = intent.getLongExtra(EasyAttendanceConstants.LECTURE_ID, 0);
         courseId = intent.getStringExtra(EasyAttendanceConstants.COURSE_ID);
         courseName = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
         studentAccountRegister = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
         studentAcountChecked = intent.getIntExtra(EasyAttendanceConstants.ATTENDANCE_COUNT, 0);
-
 
         // get student checking information from database
         try {
@@ -67,7 +70,6 @@ public class HistoryCheckedActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         //set the view
         tvCourseId.setText(courseId);
@@ -77,20 +79,29 @@ public class HistoryCheckedActivity extends AppCompatActivity {
         attendanceAdapter = new AttendanceAdapter(this, R.layout.attendance_list_item, attendanceItemList);
         lvAttendanceList.setAdapter(attendanceAdapter);
 
-
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Delete the record in the database
-                // delete with LectureRepository's delete method, it deletes with cascade, so both lecture and attendances are deleted.
 
-                Boolean success = lectureRepository.deleteByLectureId(lectureId);
-                if (success) {
-                    Toast.makeText(getApplicationContext(), "Delete successfully", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Error, try again", Toast.LENGTH_SHORT).show();
-                }
+                new AlertDialog.Builder(context)
+                        .setTitle(getString(R.string.action_delete))
+                        .setMessage("delete this?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                //Delete the record in the database
+                                // delete with LectureRepository's delete method, it deletes with cascade, so both lecture and attendances are deleted.
+                                Boolean success = lectureRepository.deleteByLectureId(lectureId);
+                                if (success) {
+                                    Toast.makeText(getApplicationContext(), getString(R.string.alert_course_deleted), Toast.LENGTH_SHORT).show();
+                                    finish();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Error, try again", Toast.LENGTH_SHORT).show();
+                                }
+                                VibratorUtility.vibrate(getApplicationContext(), true);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null).show();
             }
         });
 

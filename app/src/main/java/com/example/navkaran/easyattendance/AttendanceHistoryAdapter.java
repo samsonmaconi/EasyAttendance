@@ -1,16 +1,19 @@
 package com.example.navkaran.easyattendance;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class AttendanceHistoryAdapter extends ArrayAdapter<Lecture> {
     private List<Lecture> lectureList;
+    private SimpleDateFormat df = new SimpleDateFormat("EEE MMM dd");
 
     public AttendanceHistoryAdapter(Context context, int resource, List<Lecture> LectureList) {
         super(context, resource, LectureList);
@@ -43,12 +46,17 @@ public class AttendanceHistoryAdapter extends ArrayAdapter<Lecture> {
 
         if (i != null) {
             TextView attenDate = v.findViewById(R.id.attendate);
-            //TextView attenDay = v.findViewById(R.id.attenday);
             TextView attenCount = v.findViewById(R.id.attenCount);
 
-            attenDate.setText(i.getDate().toString());
-            //attenDay.setText();
-            attenCount.setText(String.valueOf(i.getNumAttendee()));
+            if(position % 2 == 0) {
+                v.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
+            } else {
+                v.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorWhiteFaded));
+            }
+
+            attenDate.setText(df.format(i.getDate()));
+            String formatStr = getContext().getResources().getString(R.string.formatString_students_checked_in);
+            attenCount.setText(String.format(formatStr, i.getNumAttendee()));
         }
         return v;
     }

@@ -28,7 +28,7 @@ public class AttendanceHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_history);
 
-        System.out.println("onCreate");
+        getSupportActionBar().setTitle(R.string.title_lecture_list_hist);
 
         className = findViewById(R.id.class_name);
         classNumber = findViewById(R.id.class_number);
@@ -43,16 +43,10 @@ public class AttendanceHistory extends AppCompatActivity {
 
         classNumber.setText(String.valueOf(courseId));
         className.setText(courseName);
-        registeredStudents.setText(String.valueOf(studentCount));
-
-        System.out.println("courseKey: "+courseKey);
-
-        //List<Lecture> Testing = new ArrayList<Lecture>();
-        //Testing.add(new Lecture(50,new Date(),courseKey));
+        registeredStudents.setText(String.format(getString(R.string.formatString_students_registered), studentCount));
 
         // uses live data for better performance, so when lecture and attendances are
         // deleted in HistoryCheckedActivity, the list auto refreshes
-
         lectureRepository = new LectureRepository(getApplication());
         lectures = lectureRepository.getLiveLecturesByCourseKey(courseKey);
         adapter= new AttendanceHistoryAdapter(this, R.layout.attendance_history_list_item, lectures.getValue());
@@ -64,8 +58,6 @@ public class AttendanceHistory extends AppCompatActivity {
                 adapter.setLectures(lectures);
             }
         });
-
-        //registerForContextMenu(datelist);
 
         //listens to which item in listview user clicks
         datelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
