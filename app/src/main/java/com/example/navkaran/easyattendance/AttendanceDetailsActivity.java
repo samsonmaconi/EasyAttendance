@@ -19,6 +19,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -55,13 +57,9 @@ public class AttendanceDetailsActivity extends AppCompatActivity{
         courseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);
         courseId = intent.getStringExtra(EasyAttendanceConstants.COURSE_ID);
         courseName = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
-        //TODO: Change Default Values back to 0
+
         studentCount = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
         attendanceCount = intent.getIntExtra(ATTENDANCE_COUNT, 0);
-
-        //TODO: Remove next 2 Temp Lines
-        //courseId = courseId == null ? "CSCI-5708" : courseId;
-        //courseName = courseName == null ? "Not Mobile Computing" : courseName;
 
         lvAttendanceList = findViewById(R.id.lvAttendanceList);
         btnDone = findViewById(R.id.btnDone);
@@ -98,9 +96,12 @@ public class AttendanceDetailsActivity extends AppCompatActivity{
                         item.setLectureId(lectureId);
                     }
                     attendanceRepository.insert(attendanceItemArrayList.toArray(new AttendanceItem[attendanceItemArrayList.size()]));
+                    Toast.makeText(getApplicationContext(),"Attendance Details Saved", Toast.LENGTH_SHORT).show();
+                    VibratorUtility.vibrate(getApplicationContext(), true);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),"Failed to save", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Failed to save Attendance Details", Toast.LENGTH_SHORT).show();
+                    VibratorUtility.vibrate(getApplicationContext(), false);
                 }
 
                 Intent i = new Intent(getApplicationContext(), CourseListActivity.class);
@@ -120,7 +121,7 @@ public class AttendanceDetailsActivity extends AppCompatActivity{
     }
 
     private void fetchAttendanceLog() {
-        String url = FETCH_URL + courseId;
+        String url = FETCH_URL + encodeParameter(courseId);
         Log.d(TAG, "Request URL: " + url);
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -139,6 +140,7 @@ public class AttendanceDetailsActivity extends AppCompatActivity{
                 }
                 tvAttendanceSummary.setText(String.format(getString(R.string.formatString_in_attendance), attendanceCount, studentCount));
                 attendanceAdapter.notifyDataSetChanged();
+                VibratorUtility.vibrate(getApplicationContext(),true);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -150,6 +152,15 @@ public class AttendanceDetailsActivity extends AppCompatActivity{
         );
 
         RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
+    }
+
+    private String encodeParameter(String s){
+        try {
+            return URLEncoder.encode(s, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
 

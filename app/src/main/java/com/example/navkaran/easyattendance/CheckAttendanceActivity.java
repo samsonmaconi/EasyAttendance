@@ -17,8 +17,14 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -30,6 +36,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class CheckAttendanceActivity extends AppCompatActivity {
@@ -156,7 +164,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
 
 
     public void markAttendance() {
-        final String url = "https://web.cs.dal.ca/~stang/csci5708/mark.php?student_info=" + studentId + "," + classId + ",1";
+        final String url = "https://web.cs.dal.ca/~stang/csci5708/mark.php?student_info=" + encodeParameter(studentId) + "," + encodeParameter(classId) + ",1";
         System.out.println(url);
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, url, null,
@@ -225,8 +233,20 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "ClassList Response: Volley Error");
                 error.printStackTrace();
+                String message = "message";
+                if (error instanceof NetworkError || error instanceof AuthFailureError || error instanceof NoConnectionError) {
+                    message = "Cannot connect to Internet. Please check your connection!";
+                } else if (error instanceof ServerError) {
+                    message = "The server could not be found. Please try again after some time!!";
+                } else if (error instanceof ParseError) {
+                    message = "Parsing error! Please try again after some time!!";
+                } else if (error instanceof TimeoutError) {
+                    message = "Connection TimeOut! Please check your internet connection.";
+                }
+
+                Log.d(TAG, "getCourseList Error: " + message);
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 classIDList.clear();
                 sign_attendance.setEnabled(false);
                 sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
@@ -265,4 +285,28 @@ public class CheckAttendanceActivity extends AppCompatActivity {
             Log.d(TAG, "Get User Location: " + location_error);
         }
     }
+
+    private String encodeParameter(String s){
+        try {
+            return URLEncoder.encode(s, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        handler.removeCallbacksAndMessages(null);
+        Log.d(TAG, "onStop: handler callbacks removed");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.post(runnable);
+        Log.d(TAG, "onResume: handler callbacks added");
+    }
+
 }

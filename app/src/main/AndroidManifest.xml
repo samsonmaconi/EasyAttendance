@@ -37,8 +37,7 @@
         <activity
             android:name=".TakeAttendanceActivity"
             android:parentActivityName=".CourseListActivity" />
-        <activity android:name=".AttendanceDetailsActivity"
-            android:parentActivityName=".TakeAttendanceActivity" />
+        <activity android:name=".AttendanceDetailsActivity" />
         <activity
             android:name=".AttendanceHistory"
             android:parentActivityName=".CourseListActivity" />
