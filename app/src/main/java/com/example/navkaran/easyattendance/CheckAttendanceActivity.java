@@ -113,7 +113,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                         };
                         Thread thread = new Thread(null, runnable, "SetLocation_GetClassList");
                         thread.start();
-                        handler.postDelayed(this, 30000);
+                        handler.postDelayed(this, 3000);
                     }
                 });
 
@@ -142,17 +142,22 @@ public class CheckAttendanceActivity extends AppCompatActivity {
     AdapterView.OnItemSelectedListener onClassSelected = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            System.out.println(position);
-            classId = classIDList.get(position);
-
-            if (lastCheck.equals(classId)) {
-                VibratorUtility.vibrate(getApplicationContext(),true);
-                Toast.makeText(CheckAttendanceActivity.this, String.format(getString(R.string.formatString_alert_failure_duplicate), classId), Toast.LENGTH_LONG).show();
+            Log.d(TAG, "Position: " + position);
+            if(position == 0){
                 sign_attendance.setEnabled(false);
                 sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
-            } else {
-                sign_attendance.setEnabled(true);
-                sign_attendance.setBackgroundResource(R.drawable.round_button_orange_selector);
+            }else {
+                classId = classIDList.get(position - 1); //-1 to Accounts for the hint
+
+                if (lastCheck.equals(classId)) {
+                    VibratorUtility.vibrate(getApplicationContext(), true);
+                    Toast.makeText(CheckAttendanceActivity.this, String.format(getString(R.string.formatString_alert_failure_duplicate), classId), Toast.LENGTH_LONG).show();
+                    sign_attendance.setEnabled(false);
+                    sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
+                } else {
+                    sign_attendance.setEnabled(true);
+                    sign_attendance.setBackgroundResource(R.drawable.round_button_orange_selector);
+                }
             }
         }
 
@@ -202,6 +207,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                         double class_lon;
                         double class_lat;
                         classList.clear();
+                        classList.add(getString(R.string.hint_please_select_a_course));
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 class_id = response.getJSONObject(i).getString("class_id");
@@ -225,6 +231,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                             classIDList.clear();
                             sign_attendance.setEnabled(false);
                             sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
+                            spinnerArrayAdapter.notifyDataSetChanged();
                         } else {
                             Log.d(TAG, "classList : isNotEmpty");
                             spinnerArrayAdapter.notifyDataSetChanged();
@@ -238,7 +245,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                 if (error instanceof NetworkError || error instanceof AuthFailureError || error instanceof NoConnectionError) {
                     message = "Cannot connect to Internet. Please check your connection!";
                 } else if (error instanceof ServerError) {
-                    message = "The server could not be found. Please try again after some time!!";
+                    message = "No lecture available now. Please try again after some time!!";
                 } else if (error instanceof ParseError) {
                     message = "Parsing error! Please try again after some time!!";
                 } else if (error instanceof TimeoutError) {
