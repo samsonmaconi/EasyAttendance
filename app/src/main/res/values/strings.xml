@@ -37,6 +37,14 @@
     <string name="formatString_alert_success">You have successfully marked your attendance for %1$s</string>
     <string name="formatString_alert_failure_closed">Unable to mark attendance for %1$s. Attendance closed.</string>
     <string name="formatString_alert_failure_duplicate">You have already marked your attendance for %1$s.</string>
+    <string name="formatString_confirm_delete">Are you sure you want to Delete %1$s></string>
+
+    <!--Alerts-->
+    <string name="alert_attendance_saved">Attendance Details Saved</string>
+    <string name="alert_incomplete_form">Incomplete Form</string>
+    <string name="alert_course_updated">Course Updated</string>
+    <string name="alert_new_course_added">New Course Added</string>
+    <string name="alert_course_deleted">Course Deleted</string>
 
     <!--Activity Titles-->
     <string name="title_attendance_list">Attendance List</string>

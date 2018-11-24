@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name"> Easy Attendance </string>
+
+    <!-- Button Text -->
+    <string name="action_done"> Terminé </string>
+    <string name="action_save"> Enregistrer </string>
+    <string name="action_i_am_a_teacher"> Je suis un enseignant </string>
+    <string name="action_i_am_a_student"> Je suis un étudiant </string>
+    <string name="action_start_attendance"> Début de la Fréquentation </string>
+    <string name="action_stop_attendance"> Arrêter la Fréquentation </string>
+    <string name="action_mark_attendance"> Marquer la Présence </string>
+    <string name="action_delete"> Supprimer </string>
+
+    <!-- Labels -->
+    <string name="label_your_courses"> Vos cours </string>
+    <string name="label_staff_id"> Identifiant du personnel </string>
+    <string name="label_student_id"> Identifiant de l\'étudiant </string>
+    <string name="label_status"> Statut </string>
+    <string name="label_select_date"> Sélectionnez la date </string>
+    <string name="label_selected_course"> Cours Sélectionné </string>
+    <string name="label_course_id"> ID du Cours </string>
+    <string name="label_course_name"> Nom du Cours </string>
+    <string name="label_course_student_count"> Nombre d\'étudiants </string>
+
+    <!-- Hints -->
+    <string name="hint_select_a_course"> Sélectionnez un Cours </string>
+    <string name="hint_example_id"> e.g. B00801169 </string>
+    <string name="hint_course_id"> e.g. CSCI 5708 </string>
+    <string name="hint_course_name"> e.g. Informatique Mobile </string>
+    <string name="hint_course_student_count"> Combien d\'étudiants suivent ce cours? </string>
+    <string name="hint_no_courses"> Vous avez actuellement 0 informations de cours enregistrées. Ajouter un cours </string>
+
+    <!-- Formatted Strings -->
+    <string name="formatString_checked_in">%1$d sur %2$d enregistré </string>
+    <string name="formatString_in_attendance">%1$d sur %2$d archivés </string>
+    <string name="formatString_students_registered">%1$d Etudiants inscrits </string>
+    <string name="formatString_alert_success"> Vous avez marqué avec succès votre participation à %1$s </string>
+    <string name="formatString_alert_failure_closed"> Impossible de marquer la présence pour %1$s. Présence fermée. </string>
+    <string name="formatString_alert_failure_duplicate"> Vous avez déjà marqué votre présence pour %1$s. </string>
+    <string name="formatString_confirm_delete">Êtes-vous sûr de vouloir supprimer %1$s?</string>
+
+    <!--Alerts-->
+    <string name="alert_attendance_saved"> Détails de présence enregistrés </string>
+    <string name="alert_incomplete_form"> Formulaire Incomplet </string>
+    <string name="alert_course_updated"> Cours mis à jour </string>
+    <string name="alert_new_course_added"> Nouveau Cours Ajouté </string>
+    <string name="alert_course_deleted"> Cours Supprimé </string>
+
+    <!-- Activity Titles-->
+    <string name="title_attendance_list"> Liste de Présence </string>
+    <string name="title_attendance_list_hist"> Liste de Présence (Historique) </string>
+    <string name="title_welcome"> Bienvenue </string>
+    <string name="title_attendance_home"> Marquer la Présence </string>
+    <string name="title_class_attendance"> Participer au Cours </string>
+    <string name="title_course_list"> Sélectionnez un Cours </string>
+    <string name="title_course_history"> Sélectionnez une Date </string>
+    <string name="title_edit_course"> Modifier le Cours </string>
+    <string name="title_add_course"> Ajouter un Cours </string>
+
+    <!-- String array for context menu -->
+    <string-array name="stringArray_course_list_menu">
+        <item> Modifier </item>
+        <item> Supprimer </item>
+        <item> Historique </item>
+    </string-array>
+
+</resources>
