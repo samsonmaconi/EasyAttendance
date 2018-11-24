@@ -24,6 +24,7 @@
 
     <!-- Hints -->
     <string name="hint_select_a_course"> Sélectionnez un Cours </string>
+    <string name="hint_please_select_a_course">Veuillez Choisir un Cours</string>
     <string name="hint_example_id"> e.g. B00801169 </string>
     <string name="hint_course_id"> e.g. CSCI 5708 </string>
     <string name="hint_course_name"> e.g. Informatique Mobile </string>

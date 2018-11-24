@@ -24,6 +24,7 @@
 
     <!--Hints-->
     <string name="hint_select_a_course">Select A Course</string>
+    <string name="hint_please_select_a_course">Please Select A Course</string>
     <string name="hint_example_id">e.g B00801169</string>
     <string name="hint_course_id">e.g CSCI 5708</string>
     <string name="hint_course_name">e.g Mobile Computing</string>
@@ -37,7 +38,7 @@
     <string name="formatString_alert_success">You have successfully marked your attendance for %1$s</string>
     <string name="formatString_alert_failure_closed">Unable to mark attendance for %1$s. Attendance closed.</string>
     <string name="formatString_alert_failure_duplicate">You have already marked your attendance for %1$s.</string>
-    <string name="formatString_confirm_delete">Are you sure you want to Delete %1$s></string>
+    <string name="formatString_confirm_delete">Are you sure you want to Delete %1$s?</string>
 
     <!--Alerts-->
     <string name="alert_attendance_saved">Attendance Details Saved</string>

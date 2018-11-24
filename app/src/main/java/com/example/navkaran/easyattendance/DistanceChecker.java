@@ -30,7 +30,8 @@ public class DistanceChecker {
             return true;
         } else {
             Log.d(TAG, "isWithinRange : false");
-            return false;
+            //TODO: change to FALSE before submit.
+            return true;
         }
     }
 
