@@ -24,8 +24,6 @@ public class HistoryCheckedActivity extends AppCompatActivity {
     private String courseName;
     private int studentAccountRegister;
     private int studentAcountChecked;
-    private int corseKey;
-
 
     private ArrayList<AttendanceItem> attendanceItemList;
     private AttendanceAdapter attendanceAdapter;
@@ -39,14 +37,15 @@ public class HistoryCheckedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_details);
 
+        getSupportActionBar().setTitle(R.string.title_attendance_list_hist);
+
         lvAttendanceList = findViewById(R.id.lvAttendanceList);
         btnDone = findViewById(R.id.btnDone);
         tvCourseId = findViewById(R.id.tvCourseId);
         tvCourseName = findViewById(R.id.tvCourseName);
         tvStudentCount = findViewById(R.id.tvStudentCount);
         tvAttendanceSummary = findViewById(R.id.tvAttendanceSummary);
-        btnDone.setBackgroundResource(R.drawable.rounded_rect_button_orange);
-        btnDone.setBackgroundResource(R.color.colorRed_pressed);
+        btnDone.setBackgroundResource(R.drawable.rounded_rect_button_red_selector);
         btnDone.setText(R.string.action_delete);
 
         attendanceItemRepository = new AttendanceItemRepository(getApplication());
@@ -54,13 +53,11 @@ public class HistoryCheckedActivity extends AppCompatActivity {
 
         //get course data from last intent
         Intent intent = getIntent();
-        corseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);
         lectureId = intent.getLongExtra(EasyAttendanceConstants.LECTURE_ID, 0);
         courseId = intent.getStringExtra(EasyAttendanceConstants.COURSE_ID);
         courseName = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
         studentAccountRegister = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
         studentAcountChecked = intent.getIntExtra(EasyAttendanceConstants.ATTENDANCE_COUNT, 0);
-
 
         // get student checking information from database
         try {
@@ -69,7 +66,6 @@ public class HistoryCheckedActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
         //set the view
         tvCourseId.setText(courseId);
         tvCourseName.setText(courseName);
@@ -77,7 +73,6 @@ public class HistoryCheckedActivity extends AppCompatActivity {
         tvAttendanceSummary.setText(String.format(getString(R.string.formatString_in_attendance), studentAcountChecked, studentAccountRegister));
         attendanceAdapter = new AttendanceAdapter(this, R.layout.attendance_list_item, attendanceItemList);
         lvAttendanceList.setAdapter(attendanceAdapter);
-
 
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override

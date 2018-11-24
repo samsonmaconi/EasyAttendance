@@ -1,6 +1,7 @@
 package com.example.navkaran.easyattendance;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +48,15 @@ public class AttendanceHistoryAdapter extends ArrayAdapter<Lecture> {
             TextView attenDate = v.findViewById(R.id.attendate);
             TextView attenCount = v.findViewById(R.id.attenCount);
 
+            if(position % 2 == 0) {
+                v.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
+            } else {
+                v.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorWhiteFaded));
+            }
+
             attenDate.setText(df.format(i.getDate()));
-            attenCount.setText(String.valueOf(i.getNumAttendee()) + " in attendance");
+            String formatStr = getContext().getResources().getString(R.string.formatString_students_registered);
+            attenCount.setText(String.format(formatStr, i.getNumAttendee()));
         }
         return v;
     }
