@@ -13,5 +13,5 @@ public class EasyAttendanceConstants {
     public static final int EDIT_COURSE_ACTIVITY_REQUEST_CODE = 2;
     public static final String ATTENDANCE_COUNT = "ATTENDANCE_COUNT";
     public static final String LECTURE_ID = "LECTURE_ID";
-    public static final String API_URL = "https://web.cs.dal.ca/~stang/";
+    public static final String API_URL = "https://web.cs.dal.ca/~stang/csci5708/";
 }
