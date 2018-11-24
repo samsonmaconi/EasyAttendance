@@ -164,7 +164,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
 
 
     public void markAttendance() {
-        final String url = "https://web.cs.dal.ca/~stang/csci5708/mark.php?student_info=" + encodeParameter(studentId) + "," + encodeParameter(classId) + ",1";
+        final String url = EasyAttendanceConstants.API_URL + "mark.php?student_info=" + encodeParameter(studentId) + "," + encodeParameter(classId) + ",1";
         System.out.println(url);
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, url, null,
@@ -190,7 +190,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
     }
 
     public void getCourseList() {
-        final String url = "https://web.cs.dal.ca/~stang/csci5708/get_lecture_list.php";
+        final String url = EasyAttendanceConstants.API_URL + "get_lecture_list.php";
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
