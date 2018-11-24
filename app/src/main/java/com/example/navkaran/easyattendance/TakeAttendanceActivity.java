@@ -8,13 +8,20 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -23,6 +30,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * Created by xiaoyutian on 2018-11-06.
@@ -53,12 +63,15 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     private double latitude;
     private double longitude;
 
+    private String TAG = "TakeAttendAct";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance);
 
-        getSupportActionBar().setTitle("Class Attendance");
+        getSupportActionBar().setTitle(R.string.title_class_attendance);
+
         //connect with UI
         stop_btn = findViewById(R.id.stop_btn);
         stop_btn.setOnClickListener(stop);
@@ -75,28 +88,27 @@ public class TakeAttendanceActivity extends AppCompatActivity {
 
         class_number.setText(course_id);
         class_name.setText(course_name);
-        check_number.setText("not yet started");
-        register_number.setText(student_num+" Students Registered");
+        check_number.setText("");
+        register_number.setText(student_num + " Students Registered");
 
         handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        runnable = new Runnable() {
             @Override
             public void run() {
-                runnable = new Runnable() {
+                Runnable r = new Runnable() {
                     @Override
                     public void run() {
-                        if(shouldCheck){
+                        if (shouldCheck) {
+                            Log.d(TAG, "Inner Runnable: checkAttendance() called");
                             checkAttendance();
                         }
                     }
                 };
-                Thread thread = new Thread(null, runnable, "background");
+                Thread thread = new Thread(null, r, "Check Attendance");
                 thread.start();
                 handler.postDelayed(this, 2000);
             }
-        }, 0);
-
-        setLocation();
+        };
     }
 
 
@@ -104,11 +116,11 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            if(shouldStop){
+            if (shouldStop) {
                 handler.removeCallbacksAndMessages(null);
                 stopAttendance();
-            }else {
-                startAttendance(course_id,course_name,longitude,latitude);
+            } else {
+                startAttendance(course_id, course_name, longitude, latitude);
                 stop_btn.setText(R.string.action_stop_attendance);
                 stop_btn.setBackgroundResource(R.drawable.round_button_red_selector);
                 shouldCheck = true;
@@ -116,9 +128,11 @@ public class TakeAttendanceActivity extends AppCompatActivity {
             }
         }
     };
+
     /**
-     * stop Attendance fuction*/
-    private void stopAttendance(){
+     * stop Attendance function
+     */
+    private void stopAttendance() {
         Intent intent = new Intent(this, AttendanceDetailsActivity.class);
         intent.putExtra(EasyAttendanceConstants.COURSE_KEY, courseKey);
         intent.putExtra(EasyAttendanceConstants.COURSE_ID, course_id);
@@ -126,12 +140,15 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         intent.putExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, student_num);
         intent.putExtra(EasyAttendanceConstants.ATTENDANCE_COUNT, attendanceCount);
         startActivity(intent);
+        finish();
     }
+
     /**
-     * check how many student account already taked attendance*/
-    private void checkAttendance(){
-        final String url = "https://web.cs.dal.ca/~stang/csci5708/count.php?class_id="+course_id;
-        System.out.println(url);
+     * check how many student account already marked attendance
+     */
+    private void checkAttendance() {
+        final String url = "https://web.cs.dal.ca/~stang/csci5708/count.php?class_id=" + encodeParameter(course_id);
+        Log.d(TAG, "checkAttendance URL: " + url);
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -139,7 +156,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             attendanceCount = response.getInt("students_count");
-                            check_number.setText(attendanceCount+" of "+student_num+" in attendance");
+                            check_number.setText(String.format(getString(R.string.formatString_checked_in), attendanceCount, student_num));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -148,31 +165,63 @@ public class TakeAttendanceActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
+                String message = "message";
+                if (error instanceof NetworkError || error instanceof AuthFailureError || error instanceof NoConnectionError) {
+                    message = "Cannot connect to Internet. Please check your connection!";
+                } else if (error instanceof ServerError) {
+                    message = "The server could not be found. Please try again after some time!!";
+                } else if (error instanceof ParseError) {
+                    message = "Parsing error! Please try again after some time!!";
+                } else if (error instanceof TimeoutError) {
+                    message = "Connection TimeOut! Please check your internet connection.";
+                }
+
+                Log.d(TAG, "checkAttendance Error: " + message);
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                VibratorUtility.vibrate(getApplicationContext(),false);
 
             }
         }
         );
         RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
     }
+
     /**
-     * start attendance*/
-    private void startAttendance(String course_id, String course_name, double lon, double lat){
-        final String url = "https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_info="+course_id+","+course_name+","+lon+","+lat;
-        System.out.println(url);
+     * start attendance
+     */
+    private void startAttendance(String course_id, String course_name, double lon, double lat) {
+        final String url = "https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_id=" + encodeParameter(course_id) +
+                "&class_name=" + encodeParameter(course_name) +
+                "&longitude=" + lon +
+                "&latitude=" + lat;
+
+        Log.d(TAG, "startAttendance URL: " + url);
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
+                        check_number.setText(String.format(getString(R.string.formatString_checked_in), 0, student_num));
+                        VibratorUtility.vibrate(getApplicationContext(),true);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(getApplicationContext(),"CourseListActivity Error",Toast.LENGTH_SHORT).show();
+                String message = "message";
+                if (error instanceof NetworkError || error instanceof AuthFailureError || error instanceof NoConnectionError) {
+                    message = "Cannot connect to Internet. Please check your connection!";
+                } else if (error instanceof ServerError) {
+                    message = "The server could not be found. Please try again after some time!!";
+                } else if (error instanceof ParseError) {
+                    message = "Parsing error! Please try again after some time!!";
+                } else if (error instanceof TimeoutError) {
+                    message = "Connection TimeOut! Please check your internet connection.";
+                }
 
+                Log.d(TAG, "startAttendance Error: " + message);
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                VibratorUtility.vibrate(getApplicationContext(),false);
             }
         }
         );
@@ -180,8 +229,9 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     }
 
     /**
-     * set instrctor localtion with GPS feature*/
-    private void setLocation(){
+     * get teacher's location with GPS feature
+     */
+    private void getLocation() {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
@@ -195,17 +245,41 @@ public class TakeAttendanceActivity extends AppCompatActivity {
                         // save longitude and latitude to a local variable for future use
                         longitude = location.getLongitude();
                         latitude = location.getLatitude();
-                        System.out.println("************CourseListActivity************** longitude: "+longitude+"    latitude: "+latitude);
-                    }else {
+                        Log.d(TAG, "getLocation: " + "teacher lon: " + longitude + " teacher lat: " + latitude);
+                    } else {
                         location_error = "Unknown Location";
-                        System.out.println("**************** "+location_error);
+                        Log.d(TAG, "getLocation: " + location_error);
                     }
                 }
             });
             return;
-        }else{
+        } else {
             location_error = "Permission Denied";
-            System.out.println("**************** "+location_error);
+            Log.d(TAG, "getLocation: " + location_error);
         }
+    }
+
+    private String encodeParameter(String s){
+        try {
+            return URLEncoder.encode(s, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        handler.removeCallbacksAndMessages(null);
+        Log.d(TAG, "onStop: handler callbacks removed");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.post(runnable);
+        getLocation();
+        Log.d(TAG, "onResume: handler callbacks added");
     }
 }
