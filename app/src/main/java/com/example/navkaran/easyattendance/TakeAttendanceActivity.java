@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,11 +24,13 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,6 +67,8 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     private double longitude;
 
     private String TAG = "TakeAttendAct";
+
+    private final String FETCH_URL = EasyAttendanceConstants.API_URL+"end_attendance.php?class_id=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -266,6 +271,46 @@ public class TakeAttendanceActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case android.R.id.home: {
+                fetchAttendanceLog();
+                super.onOptionsItemSelected(menuItem);
+            }
+        }
+        return false;
+    }
+
+    private void fetchAttendanceLog() {
+        String url = FETCH_URL + encodeParameter(course_id);
+        Log.d(TAG, "Request URL: " + url);
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                String studentId;
+
+                for(int i = 0; i <response.length(); i++ ){
+                    try {
+                        studentId = response.getJSONObject(i).getString("student_id");
+                        Log.d(TAG, "JSONResponse Loop: Student ID: " + studentId);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }
+        );
+
+        RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
     @Override
