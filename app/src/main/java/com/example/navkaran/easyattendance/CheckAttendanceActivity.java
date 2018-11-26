@@ -46,10 +46,13 @@ public class CheckAttendanceActivity extends AppCompatActivity {
     private Spinner spinner;
     private Runnable runnable;
     private Handler handler;
-    private ArrayList<String> classList, classIDList;
+    private ArrayList<String> classList;
+    private ArrayList<String> classID_String;
+    private ArrayList<Integer> classIDList;
     private ArrayAdapter<String> spinnerArrayAdapter;
-    private String classId;
-    private String lastCheck = "";
+    private int classID;
+    private String classStringID;
+    private int lastCheck = -1;
     private String studentId;
     private String location_error = "";
     private Double student_latitude = 0.0;
@@ -89,6 +92,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         sign_attendance = findViewById(R.id.btn_markAttendance);
         classList = new ArrayList<>();
         classIDList = new ArrayList<>();
+        classID_String = new ArrayList<>();
         spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, classList);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerArrayAdapter);
@@ -147,11 +151,11 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                 sign_attendance.setEnabled(false);
                 sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
             }else {
-                classId = classIDList.get(position - 1); //-1 to Accounts for the hint
-
-                if (lastCheck.equals(classId)) {
+                classID = classIDList.get(position - 1); //-1 to Accounts for the hint
+                classStringID = classID_String.get(position-1); //-1 to Accounts for the hint
+                if (lastCheck == classID) {
                     VibratorUtility.vibrate(getApplicationContext(), true);
-                    Toast.makeText(CheckAttendanceActivity.this, String.format(getString(R.string.formatString_alert_failure_duplicate), classId), Toast.LENGTH_LONG).show();
+                    Toast.makeText(CheckAttendanceActivity.this, String.format(getString(R.string.formatString_alert_failure_duplicate), classStringID), Toast.LENGTH_LONG).show();
                     sign_attendance.setEnabled(false);
                     sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
                 } else {
@@ -169,25 +173,25 @@ public class CheckAttendanceActivity extends AppCompatActivity {
 
 
     public void markAttendance() {
-        final String url = EasyAttendanceConstants.API_URL + "mark.php?student_info=" + encodeParameter(studentId) + "," + encodeParameter(classId) + ",1";
+        final String url = EasyAttendanceConstants.API_URL + "mark.php?student_info=" + encodeParameter(studentId) + "," + encodeParameter(classStringID) + ",1";
         System.out.println(url);
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        lastCheck = classId;
+                        lastCheck = classID;
                         sign_attendance.setEnabled(false);
                         sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
                         VibratorUtility.vibrate(getApplicationContext(),false);
-                        Toast.makeText(CheckAttendanceActivity.this, String.format(getString(R.string.formatString_alert_success), classId), Toast.LENGTH_LONG).show();
+                        Toast.makeText(CheckAttendanceActivity.this, String.format(getString(R.string.formatString_alert_success), classStringID), Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 VibratorUtility.vibrate(getApplicationContext(),false);
-                Toast.makeText(getApplicationContext(), String.format(getString(R.string.formatString_alert_failure_closed), classId), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), String.format(getString(R.string.formatString_alert_failure_closed), classStringID), Toast.LENGTH_SHORT).show();
             }
         }
         );
@@ -196,20 +200,25 @@ public class CheckAttendanceActivity extends AppCompatActivity {
 
     public void getCourseList() {
         final String url = EasyAttendanceConstants.API_URL + "get_lecture_list.php";
+        System.out.println(url);
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d(TAG, "ClassList Response: Success");
+                        int primarykeyID;
                         String class_id;
                         String class_name;
                         double class_lon;
                         double class_lat;
                         classList.clear();
+                        classIDList.clear();
+                        classID_String.clear();
                         classList.add(getString(R.string.hint_please_select_a_course));
                         try {
                             for (int i = 0; i < response.length(); i++) {
+                                primarykeyID = response.getJSONObject(i).getInt("id");
                                 class_id = response.getJSONObject(i).getString("class_id");
                                 class_name = response.getJSONObject(i).getString("class_name");
                                 class_lon = response.getJSONObject(i).getDouble("longitude");
@@ -218,7 +227,8 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                                 if (DistanceChecker.isWithinRange(student_longitude, student_latitude, class_lon, class_lat)) {
                                     Log.d(TAG, "Distance Checker: Success");
                                     classList.add("(" + class_id + ") " + class_name);
-                                    classIDList.add(class_id);
+                                    classIDList.add(primarykeyID);
+                                    classID_String.add(class_id);
                                 }
                                 Log.d(TAG, "After Distance Checker");
                             }
