@@ -1,5 +1,6 @@
 # Identification
-The project title, group members, and their Banner numbers. A contact email address. Information on how to access the Git repository where the code is located.
+EasyAttendance by group 14:
+, and their Banner numbers. A contact email address. Information on how to access the Git repository where the code is located.
 
 # Project Summary
 One paragraph to describe your project. Your description should include the project concept and key features implemented.
