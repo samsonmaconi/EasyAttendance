@@ -15,7 +15,7 @@ EasyAttendance
 It is an app that allows university professors to take attendance easily and for students to sign attendance easily. It is an app that aims to replace the old way of taking attendance by attendance sheet. Our app can be used all over the world, by professors and students who are familiar or unfamiliar with mobile technology.
 
 ## Libraries
-**Volley HTTP:** Volley is an open source HTTP library that makes networking for Android apps easier and most importantly, faster. Volley is available on [GitHub] (https://github.com/google/volley).
+**Volley HTTP:** Volley is an open source HTTP library that makes networking for Android apps easier and most importantly, faster. Volley is available on [GitHub](https://github.com/google/volley).
 
 ## Installation Notes
 Our app has an initial phase in which users need to select their role form teacher and student. Once users have gone through the initial phase, they will not be able to go back and select their role again, our app will remember their choice permanently until the user uninstalled the app. To test our app you will need a minimum of two Android devices (or emulators). The location service must be turned on. If you encountered any UI issues, [here](https://www.samsung.com/ca/smartphones/galaxy-s9/shop/) is the solution.
