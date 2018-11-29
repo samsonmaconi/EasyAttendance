@@ -73,5 +73,5 @@ We also need to further optimize the structure of the app, such as using server 
 ## Sources
 
 - [Android Design Guides](https://developer.android.com/design/)
-- [Volley] (https://github.com/google/volley)
+- [Volley](https://github.com/google/volley)
 - [Google Location and Activity Recognition](https://developers.google.com/android/guides/setup)
