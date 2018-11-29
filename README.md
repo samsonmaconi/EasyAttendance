@@ -21,24 +21,17 @@ It is an app that allows university professors to take attendance easily and for
 Our app has an initial phase in which users need to select their role form teacher and student. Once users have gone through the initial phase, they will not be able to go back and select their role again, our app will remember their choice permanently until the user uninstalled the app. To test our app you will need a minimum of two Android devices (or emulators). The location service must be turned on. If you encountered any UI issues, [here](https://www.samsung.com/ca/smartphones/galaxy-s9/shop/) is the solution.
 
 ## Code Examples
-You will encounter roadblocks and problems while developing your project. Share 2-3 'problems' that your team solved while developing your project. Write a few sentences that describe your solution and provide a code snippet/block that shows your solution. Example:
+**Problem 1: We needed a location permission from the user**
 
-**Problem 1: We needed a method to calculate a Fibonacci sequence**
-
-A short description.
+If we do not check permission before we request location, the app may crash due to "permission denied." 
 ```
-// The method we implemented that solved our problem
-public static int fibonacci(int fibIndex) {
-    if (memoized.containsKey(fibIndex)) {
-        return memoized.get(fibIndex);
-    } else {
-        int answer = fibonacci(fibIndex - 1) + fibonacci(fibIndex - 2);
-        memoized.put(fibIndex, answer);
-        return answer;
-    }
-}
-
-// Source: Wikipedia Java [1]
+if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    EasyAttendanceConstants.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
 ```
 
 ## Feature Section
