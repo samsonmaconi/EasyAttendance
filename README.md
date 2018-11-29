@@ -1,8 +1,8 @@
 # Identification
-#####Project Name: 
+###Project Name: 
 EasyAttendance
 
-#####Group 14:
+###Group 14:
 - Shengtian Tang, B00690131, sh625730@dal.ca
 - David Cui, B00788648
 - Lan Chen, B00809814
