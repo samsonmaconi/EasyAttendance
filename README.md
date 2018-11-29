@@ -57,7 +57,7 @@ We also need to further optimize the structure of the app, such as using server 
 
 #### Minimum Functionality
 - Users can select their role as Teacher or Student (Completed)
-- Teachers can see a list of courses (Completed Completed)
+- Teachers can see a list of courses (Completed)
 - Teachers can start attendance (Completed)
 - Teachers can collect the result (Completed)
 - Students can mark attendance (Completed)
