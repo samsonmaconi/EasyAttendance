@@ -46,9 +46,9 @@ public class CheckAttendanceActivity extends AppCompatActivity {
     private Spinner spinner;
     private Runnable runnable;
     private Handler handler;
-    private ArrayList<String> classList;
-    private ArrayList<String> classID_String;
-    private ArrayList<Integer> classIDList;
+    private ArrayList<String> classList; // list of class name (Mobile Computing)
+    private ArrayList<String> classID_String; // list of class id (e.g. CSCI-5708)
+    private ArrayList<Integer> classIDList; // list of class number id (primary key)
     private ArrayAdapter<String> spinnerArrayAdapter;
     private int classID;
     private String classStringID;
@@ -171,7 +171,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         }
     };
 
-
+    //send HTTP request to our DB to sign in
     public void markAttendance() {
         final String url = EasyAttendanceConstants.API_URL + "mark.php?student_info=" + encodeParameter(studentId) + "," + encodeParameter(classStringID) + ",1";
         System.out.println(url);
@@ -198,6 +198,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         RequestQueueSingleton.getmInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
+    // get course list from the API. only available course will be displayed
     public void getCourseList() {
         final String url = EasyAttendanceConstants.API_URL + "get_lecture_list.php";
         System.out.println(url);
@@ -264,6 +265,8 @@ public class CheckAttendanceActivity extends AppCompatActivity {
 
                 Log.d(TAG, "getCourseList Error: " + message);
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
+                //disable the button once sign-in is done
                 classIDList.clear();
                 sign_attendance.setEnabled(false);
                 sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
@@ -275,6 +278,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
     }
 
 
+    // use google location service to find user's location
     private void getUserLocation() {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 

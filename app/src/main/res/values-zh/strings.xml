@@ -36,8 +36,8 @@
     <string name="formatString_in_attendance">%1$d / %2$d 参加了课程</string>
     <string name="formatString_students_registered">注册学生数 %1$d</string>
     <string name="formatString_alert_success">你已经成功签到 %1$s</string>
-    <string name="formatString_alert_failure_closed">无法签到 %1$s. 教师已经关闭签到.</string>
-    <string name="formatString_alert_failure_duplicate">你已经成功签到 %1$s. 请滚蛋</string>
+    <string name="formatString_alert_failure_closed">无法签到 %1$s. 教师已经关闭签到. QAQ</string>
+    <string name="formatString_alert_failure_duplicate">你已经成功签到 %1$s. 请滚蛋~~</string>
     <string name="formatString_confirm_delete">你确定删除吗 %1$s?</string>
 
     <!--Alerts-->
