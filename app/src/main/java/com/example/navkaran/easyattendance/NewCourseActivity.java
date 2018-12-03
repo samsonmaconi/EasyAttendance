@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+// David Cui Nov 2018
+
+/**
+ * gets input from users required for adding a course to the list
+ */
 public class NewCourseActivity extends AppCompatActivity {
 
     private EditText etCourseId;
@@ -28,6 +33,8 @@ public class NewCourseActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btn_save);
 
         // gets the input and return them to the caller activity - CourseListActivity
+        // the result code is CANCELED is the user cancels the activity with the back hardware
+        // button or provides incomplete form
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

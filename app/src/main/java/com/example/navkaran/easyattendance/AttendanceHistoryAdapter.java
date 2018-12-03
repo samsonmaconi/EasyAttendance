@@ -15,8 +15,8 @@ public class AttendanceHistoryAdapter extends ArrayAdapter<Lecture> {
     private List<Lecture> lectureList;
     private SimpleDateFormat df = new SimpleDateFormat("EEE MMM dd");
 
-    public AttendanceHistoryAdapter(Context context, int resource, List<Lecture> LectureList) {
-        super(context, resource, LectureList);
+    public AttendanceHistoryAdapter(Context context, int resource, List<Lecture> lectureList) {
+        super(context, resource, lectureList);
         this.lectureList = lectureList;
     }
 

@@ -42,7 +42,7 @@
 
     <!--Alerts-->
     <string name="alert_attendance_saved"> Détails de présence enregistrés </string>
-    <string name="alert_incomplete_form"> Formulaire Incomplet </string>
+    <string name="alert_canceled_or_incomplete_form"> Formulaire annulé ou incomplet </string>
     <string name="alert_course_updated"> Cours mis à jour </string>
     <string name="alert_new_course_added"> Nouveau Cours Ajouté </string>
     <string name="alert_course_deleted"> Cours Supprimé </string>
