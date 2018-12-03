@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * This class handles the display of the attendanceList
+ * in the ListView.
+ */
 public class AttendanceAdapter extends ArrayAdapter<AttendanceItem> {
 
     private ArrayList<AttendanceItem> attendanceList;

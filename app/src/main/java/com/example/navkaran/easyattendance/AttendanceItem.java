@@ -9,20 +9,18 @@ import android.support.annotation.NonNull;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-// Converted to a database entity for LectureID and StudentID
+/**
+ * A class for student attendance details
+ */
 @Entity(tableName = "attendances",
-        primaryKeys = {"student_id","lecture_id"},
+        primaryKeys = {"student_id", "lecture_id"},
         foreignKeys = {
                 @ForeignKey(onDelete = CASCADE,
                         entity = Lecture.class,
                         parentColumns = "lecture_id",
                         childColumns = "lecture_id")},
-        indices = {@Index(value="lecture_id")})
-public class AttendanceItem{
-    @Ignore
-    private static int checkedInCount = 0;
-    @Ignore
-    private static int totalCount = 0;
+        indices = {@Index(value = "lecture_id")})
+public class AttendanceItem {
     @ColumnInfo(name = "student_id")
     @NonNull
     private String studentId;
@@ -37,21 +35,6 @@ public class AttendanceItem{
     public AttendanceItem(@NonNull String studentId, Boolean hasCheckedIn) {
         this.studentId = studentId;
         this.hasCheckedIn = hasCheckedIn;
-        if(hasCheckedIn){
-            checkedInCount++;
-        }
-        totalCount++;
-    }
-
-    @Ignore
-    public AttendanceItem(long lectureId, @NonNull String studentId, Boolean hasCheckedIn) {
-        this.lectureId = lectureId;
-        this.studentId = studentId;
-        this.hasCheckedIn = hasCheckedIn;
-        if(hasCheckedIn){
-            checkedInCount++;
-        }
-        totalCount++;
     }
 
     public AttendanceItem(@NonNull String studentId, long lectureId) {
@@ -71,23 +54,12 @@ public class AttendanceItem{
         return this.hasCheckedIn ? status[1] : status[0];
     }
 
-    public @NonNull String getStudentId() {
+    public @NonNull
+    String getStudentId() {
         return studentId;
-    }
-
-    public void setStudentId(@NonNull String studentId) {
-        this.studentId = studentId;
     }
 
     public Boolean hasCheckedIn() {
         return hasCheckedIn;
-    }
-
-    public static int getCheckedInCount() {
-        return checkedInCount;
-    }
-
-    public static int getTotalCount() {
-        return totalCount;
     }
 }

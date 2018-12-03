@@ -1,14 +1,14 @@
 package com.example.navkaran.easyattendance;
-/**
- * This is a Singleton Utility Class for
- * initiating device vibrations. It is instantiated
- * at the first call of it's static vibrate method.
- */
 
 import android.content.Context;
 import android.os.Vibrator;
 import android.util.Log;
 
+/**
+ * This is a Singleton Utility Class for
+ * initiating device vibrations. It is instantiated
+ * at the first call of it's static vibrate method.
+ */
 public class VibratorUtility {
     private static String TAG = "VibratorUtility";
     private static Vibrator vibrator;
