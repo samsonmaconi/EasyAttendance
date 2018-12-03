@@ -1,30 +1,42 @@
-# Identification
-##### Project Name: 
-EasyAttendance
 
-##### Group 14:
-- Shengtian Tang, B00690131, sh625730@dal.ca
+![Easy Attendance](readme_images/logo.png)
+
+# Identification
+### Project Name: Easy Attendance
+### Group 14:
 - David Cui, B00788648
 - Lan Chen, B00809814
-- Navkaran Kumar, B00782012
-- Samson Maconi, B00801169
+- Navkaran Kumar, B00782012, 
+- Samson Maconi, B00801169, samson.maconi@dal.ca
+- Shengtian Tang, B00690131, sh625730@dal.ca
 - Xiaoyu Tian, B00692270
 
 
 # Project Summary
-It is an app that allows university professors to take attendance easily and for students to sign attendance easily. It is an app that aims to replace the old way of taking attendance by attendance sheet. Our app can be used all over the world, by professors and students who are familiar or unfamiliar with mobile technology.
+The Easy Attendance application is a Productivity app with a promise to simplify the attendance taking process for both teachers and students. It is an app that aims to replace the old way of taking attendance by attendance sheet. This application was developed to be very intuitive and simple to use for the **Target Audience** which **are Teachers in academic institutions and their Students**. Using an iterative approach to feature enhancement, the app incorporates some features to improve the user experience incuding Multiple Locales (English, French, Hindi, and Chinese), Haptic Feedback, and Location Verification.
+
+![Why Easy Attendance](readme_images/why.png)
+
 
 ## Libraries
 **Volley HTTP:** Volley is an open source HTTP library that makes networking for Android apps easier and most importantly, faster. Volley is available on [GitHub](https://github.com/google/volley).
 
 ## Installation Notes
-Our app has an initial phase in which users need to select their role form teacher and student. Once users have gone through the initial phase, they will not be able to go back and select their role again, our app will remember their choice permanently until the user uninstalled the app. To test our app you will need a minimum of two Android devices (or emulators). The location service must be turned on. If you encountered any UI issues, [here](https://www.samsung.com/ca/smartphones/galaxy-s9/shop/) is the solution.
+Our app has one-time user setup where the user will be prompted to select their role (Teacher or Student), and then their User ID. This information is then stored as a `SharedPrefererence`
+```java
+SharedPreferences sp = getSharedPreferences("CONTAINER",Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString("userID", id);
+                        editor.putString("userRole", role);
+```
+Once the user has sucessfully gone through the initial setup once, he/she will be routed to the Home Activity for the user's selected role (`CheckAttendanceActivity` class for Students and `CourseListActivity` class for teachers). To test this app, you will need a minimum of two Android devices (or emulators). The location service must be turned on and functional.
 
 ## Code Examples
-**Problem 1: We needed a location permission from the user**
+**Problem 1: We needed permission to use the user's Location**
 
-If we do not check permission before we request location, the app may crash due to "permission denied." 
-```
+If we do not check permission before we request location, the app may crash with the "permission denied" error
+
+```java
 if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -34,22 +46,53 @@ if (ContextCompat.checkSelfPermission(this,
         }
 ```
 
+**Problem 2: We had to suspend and reinstate handler message queues to save computation and network resources**
+
+In the `TakeAttendanceActivity` class for instance, if the teacher decides to perform any of the following actions after Starting the attendance process:
+- Cancel the attendance by hitting the back button 
+- Switch to a different app
+- Minimise the application
+The handlers running on a background thread to update the UI thread will keep running in vain and therefore keep wasking resources.
+
+To fix this we had to suspend/reinstate handler message queues to save computation and network resources.
+
+```java
+    @Override
+    protected void onStop() {
+        super.onStop();
+        handler.removeCallbacksAndMessages(null);
+        Log.d(TAG, "onStop: handler callbacks removed");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.post(runnable);
+        getLocation();
+        Log.d(TAG, "onResume: handler callbacks added");
+    }
+```
+
 ## Feature Section
-- An instructor may teach different courses each year, our app allows instructors to add and edit the course list. They can add a new course by press the "+" button on button right, and edit or view attendance history of an existing course in the list by long press the list item. 
+![High Level Overview](readme_images/high_level.png)
+- **Manage Courses**: A teacher may teach different courses each year, our app allows teachers to add and edit their course list. They can ***add a new course*** by press the "+" floating action button, and ***edit an existing course*** or ***delete an existing course*** through the *context menu* from a long press of the course item.
+- **Manage Course Attendance History**: The application also allows a teacher to ***view attendance history*** of a course on the teacher's list by **long pressing the course item** and selecting History to navigate to the `AttendanceHistory` class. This allows the teacher to ***View***, or ***Delete*** historical attendance logs.
+- **Capture Class Attendance**: A teacher can start attendance by selecting a course on the list in the `CourseListActivity` class, which then proceeds to the `TakeAttendanceActivity` class where the teacher opens the attendance to the students by presing the Start Attendance button. 
 
-- Instructors can start attendance by click one course on the list.
+- **Students can Sign Attendance**: From the Student home and sole  activity (`CheckAttendanceActivity` class) the students can select a class from a dropdown list of ongoing lectures and mark his attendance in a few clicks. Only the nearby lectures will be shown on the list; to reduce the chances of mistakes or attempting to fraudulently mark attendance when away.
 
-- Students can sign attendance to the selected class. Only the nearby lectures will be shown in the list, that reduces the chance for students to make mistakes
+- **Multi Language Support**: For a more personal user experience, the application is available in multiple locales including English, French, Chinese and Hindi.
 
-- Our app provides multi-language access, including English, French, Chinese and Hindi.
+- **Haptic Feedback**: For this app, we designed a custom `VibratorUtility` class for delivering boolean haptic feedback along side negative or ppossitive Toast messages. Two short bursts for a negative feedback and one longer burst for a positive feedback.
 
 ## Final Project Status
-If we have time, the first thing to do is to add face recognition to our app. Using GPS and face recognition together to ensure that students can only sign-in in the classroom.
+At it's current state, the project works and fulfils all the proposed functionality. However there is still room for improvement.
 
-We also need to further optimize the structure of the app, such as using server push notifications instead of periodic HTTP requests to reduce data usage.
+The Application could benefit from further code optimisations and additional testing. Optimisations such as using push requests to update the UI on the `TakeAttendanceActivity` as opposed to the current iterative GET requests to pull updates from the remote database.
+
 
 #### Minimum Functionality
-- Users can select their role as Teacher or Student (Completed)
+- Users can select their role as *Teacher* or *Student* (Completed)
 - Teachers can see a list of courses (Completed)
 - Teachers can start attendance (Completed)
 - Teachers can collect the result (Completed)
@@ -61,7 +104,11 @@ We also need to further optimize the structure of the app, such as using server 
 - Teachers can edit/delete courses list(Completed)
 
 #### Bonus Functionality
-- The app can store attendance history (Completed)
+- The app can store and manipulate attendance history (Completed)
+- The app is Multilingual (Completed)
+- The app provides haptic feedback (Completed)
+
+![Features](readme_images/features.png)
 
 ## Sources
 
