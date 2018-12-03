@@ -194,8 +194,10 @@ iterative GET requests to pull updates from the remote database.
 The backend service for exchanging information between instructor and student includes a database on Dalhousie Bluenose and a set of custom REST APIs
 
 **Start attendance:** https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_info=[class_id],[class_name],[longitude],[latitude]
+
 **Get Student sign-in inforamtion:** https://web.cs.dal.ca/~stang/csci5708/mark.php?student_info=[student_id],[class_id],[attendance]
-**Get the current lecture list:**https://web.cs.dal.ca/~stang/csci5708/get_lecture_list.php
+
+**Get the current lecture list:** https://web.cs.dal.ca/~stang/csci5708/get_lecture_list.php
 
 ## Sources
 
