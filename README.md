@@ -191,13 +191,18 @@ iterative GET requests to pull updates from the remote database.
 ![Features](readme_images/features.png)
 
 ## Backend Service
-The backend service for exchanging information between instructor and student includes a database on Dalhousie Bluenose and a set of custom REST APIs
+The backend service for exchanging information between instructor and student includes a database on Dalhousie Bluenose and a set of custom REST APIs. When the instructor starts the attendance, The app will send information about the lecture and it's GPS location to the database. Than student side app will make an API call to get a list of current classes. After comparing the GPS location of the student device and lecture, the app will decide which class is available for the student to sign-in. Students who signed-in will add a record contains their name and the course id into the database. Once the instructor stops the attendance, the app will get a list of student who signed-in and clear all records related to this course in the database
 
 **Start attendance:** https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_info=[class_id],[class_name],[longitude],[latitude]
 
 **Get Student sign-in inforamtion:** https://web.cs.dal.ca/~stang/csci5708/mark.php?student_info=[student_id],[class_id],[attendance]
 
 **Get the current lecture list:** https://web.cs.dal.ca/~stang/csci5708/get_lecture_list.php
+
+**End attendance:** https://web.cs.dal.ca/~stang/csci5708/end_attendance.php?class_id=[class_id]
+
+**Get the number of student who signed-in for a specific class:** https://web.cs.dal.ca/~stang/csci5708/count.php?class_id=[class_id]
+
 
 ## Sources
 
