@@ -7,8 +7,12 @@ import android.content.Context;
 
 // David Cui B00788648 Nov 2018
 
-// Room database simplifies using SQLite, reduces boilerplate code
-// singleton since RoomDatabase is expensive and we don't need different copies
+/**
+ * Local SQLite database used for storing attendance histories.
+ * Room database simplifies using SQLite, reduces boilerplate code.
+ * Singleton since RoomDatabase is expensive and we don't need different copies.
+ * Entities are tables in the database.
+ */
 @Database(entities = {CourseItem.class, AttendanceItem.class, Lecture.class}, version = 1,
         exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
@@ -24,6 +28,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     // build a persistent database
     // must use worker threads to operate on database, thus must be synchronized
+    // parameter: application context
     public static AppDatabase getInstance(final Context context) {
         if (sInstance == null) {
             synchronized (AppDatabase.class) {

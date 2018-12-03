@@ -11,6 +11,7 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 /**
  * A class for student attendance details
+ * A table in the local database
  */
 @Entity(tableName = "attendances",
         primaryKeys = {"student_id", "lecture_id"},
@@ -26,6 +27,7 @@ public class AttendanceItem {
     private String studentId;
     @ColumnInfo(name = "lecture_id")
     private long lectureId;
+    // ignored fields are not stored in the database
     @Ignore
     private Boolean hasCheckedIn = true;
     @Ignore

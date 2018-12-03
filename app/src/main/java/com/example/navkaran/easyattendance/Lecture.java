@@ -11,7 +11,12 @@ import java.util.Date;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-// entity for Lecture
+// David Cui Nov 2018
+
+/**
+ * data container or entity for lecture, a course has many lectures
+ * and a lecture has many attendances (each attendance is a student attended)
+ */
 @Entity(tableName = "lectures",
         foreignKeys = {
                 @ForeignKey(onDelete = CASCADE,

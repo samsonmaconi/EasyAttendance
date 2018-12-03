@@ -42,7 +42,7 @@
 
     <!--Alerts-->
     <string name="alert_attendance_saved">签到记录已保存</string>
-    <string name="alert_incomplete_form">表格不完整</string>
+    <string name="alert_canceled_or_incomplete_form">取消或者表格不完整</string>
     <string name="alert_course_updated">课程信息更新</string>
     <string name="alert_new_course_added">新课程已添加</string>
     <string name="alert_course_deleted">课程删除</string>

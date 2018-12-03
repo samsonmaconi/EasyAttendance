@@ -42,7 +42,7 @@
 
     <!--Alerts-->
     <string name="alert_attendance_saved">उपस्थिति विवरण सहेजा गया</string>
-    <string name="alert_incomplete_form">अधूरा फॉर्म</string>
+    <string name="alert_canceled_or_incomplete_form">अधूरा फॉर्म</string>
     <string name="alert_course_updated">पाठ्यक्रम अपडेट किया गया</string>
     <string name="alert_new_course_added">नया कोर्स जोड़ा गया</string>
     <string name="alert_course_deleted">पाठ्यक्रम हटा दिया गया</string>
