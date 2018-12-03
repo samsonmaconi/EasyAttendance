@@ -116,7 +116,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         };
     }
 
-
+    //change color after click start button
     View.OnClickListener stop = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
