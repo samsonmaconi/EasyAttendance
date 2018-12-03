@@ -29,7 +29,7 @@ SharedPreferences sp = getSharedPreferences("CONTAINER",Context.MODE_PRIVATE);
                         editor.putString("userID", id);
                         editor.putString("userRole", role);
 ```
-Once the user has sucessfully gone through the initial setup once, he/she will be routed to the Home Activity for the user's selected role (`CheckAttendanceActivity` class for Students and `CourseListActivity` class for teachers). To test this app, you will need a minimum of two Android devices (or emulators). The location service must be turned on and functional.
+If the user has sucessfully gone through the initial setup once, he/she will be routed to the Home Activity for the user's selected role (`CheckAttendanceActivity` class for Students and `CourseListActivity` class for teachers). To test this app, you will need a minimum of two Android devices (or emulators). The location service must be turned on and functional.
 
 ## Code Examples
 **Problem 1: We needed permission to use the user's Location**
