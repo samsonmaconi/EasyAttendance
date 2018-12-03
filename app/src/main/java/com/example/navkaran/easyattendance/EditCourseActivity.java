@@ -39,8 +39,9 @@ public class EditCourseActivity extends AppCompatActivity {
         final int courseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);
         etCourseId.setText(intent.getStringExtra(EasyAttendanceConstants.COURSE_ID));
         etCourseName.setText(intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME));
-        etCourseStudentCount.setText(intent
+        String studentCount = Integer.toString(intent
                 .getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0));
+        etCourseStudentCount.setText(studentCount);
 
         // gets the input and return them to the caller activity - CourseListActivity
         // the result code is CANCELED is the user cancels the activity with the back hardware
