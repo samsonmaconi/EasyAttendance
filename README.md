@@ -37,6 +37,8 @@ and most importantly, faster. Volley is available on [GitHub](https://github.com
 **Room Persistence:** Room Persistence is an android library that simplifies the use of SQLite local
 database. It reduces boilerplate codes and validates SQL queries compile-time to reduce errors. Room is available on [Android Documentation](https://developer.android.com/training/data-storage/room/).
 
+**Google Play services location API:** It is the location API available in Google Play services used to adding location awareness to our app with automated location tracking. It is available on [Google Play Services.](https://developers.google.com/android/guides/setup)
+
 ## Installation Notes
 To install the application on your device, please follow the following instructions:
 1. Clone or download the project into your Android Studio
