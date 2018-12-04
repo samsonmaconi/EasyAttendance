@@ -9,7 +9,7 @@
 - Navkaran Kumar, B00782012, NKumar@dal.ca
 - Samson Maconi, B00801169, samson.maconi@dal.ca
 - Shengtian Tang, B00690131, sh625730@dal.ca
-- Xiaoyu Tian, B00692270
+- Xiaoyu Tian, B00692270, xy503482@dal.ca
 
 Code Available on https://github.com/Navkaran0105/EasyAttendance
 
