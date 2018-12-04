@@ -1,5 +1,7 @@
 package com.example.navkaran.easyattendance;
 
+// Author: Lan Chen, B00809814
+// activity for login
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,7 +35,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
         //sp = this.getSharedPreferences("id_data", 0);
         //editor = sp.edit();
-
         //get the data from select_uer_type Activity
         Intent intent = getIntent();
         role = intent.getStringExtra("userRole");
