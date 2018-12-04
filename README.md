@@ -5,7 +5,7 @@
 ### Project Name: Easy Attendance
 ### Group 14:
 - David Cui, B00788648, yq506499@dal.ca
-- Lan Chen, B00809814
+- Lan Chen, B00809814,lan.chen@dal.ca
 - Navkaran Kumar, B00782012, NKumar@dal.ca
 - Samson Maconi, B00801169, samson.maconi@dal.ca
 - Shengtian Tang, B00690131, sh625730@dal.ca
