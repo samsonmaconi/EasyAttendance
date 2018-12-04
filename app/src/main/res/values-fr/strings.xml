@@ -35,6 +35,7 @@
     <string name="formatString_checked_in">%1$d sur %2$d enregistré </string>
     <string name="formatString_in_attendance">%1$d sur %2$d archivés </string>
     <string name="formatString_students_registered">%1$d Etudiants inscrits </string>
+    <string name="formatString_students_checked_in">%1$d Etudiants enregistrés</string>
     <string name="formatString_alert_success"> Vous avez marqué avec succès votre participation à %1$s </string>
     <string name="formatString_alert_failure_closed"> Impossible de marquer la présence pour %1$s. Présence fermée. </string>
     <string name="formatString_alert_failure_duplicate"> Vous avez déjà marqué votre présence pour %1$s. </string>
@@ -49,6 +50,7 @@
 
     <!-- Activity Titles-->
     <string name="title_attendance_list"> Liste de Présence </string>
+    <string name="title_lecture_list_hist">Histoire du cours</string>
     <string name="title_attendance_list_hist"> Liste de Présence (Historique) </string>
     <string name="title_welcome"> Bienvenue </string>
     <string name="title_attendance_home"> Marquer la Présence </string>
@@ -57,6 +59,12 @@
     <string name="title_course_history"> Sélectionnez une Date </string>
     <string name="title_edit_course"> Modifier le Cours </string>
     <string name="title_add_course"> Ajouter un Cours </string>
+
+    <!--Toast Text-->
+    <string name="toast_welcome_enter_id">veuillez d\'abord entrer votre identifiant</string>
+    <string name="toast_welcome_only_enter_letter_number">veuillez ne saisir que des lettres et des chiffres pour votre identité</string>
+    <string name="toast_welcome_save">sauvegarde réussie</string>
+    <string name="toast_historychecked_error">Erreur, réessayez</string>
 
     <!-- String array for context menu -->
     <string-array name="stringArray_course_list_menu">

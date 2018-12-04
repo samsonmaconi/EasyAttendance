@@ -1,5 +1,7 @@
 package com.example.navkaran.easyattendance;
 
+// Author: Lan Chen, B00809814
+// activity for login
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,7 +35,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
         //sp = this.getSharedPreferences("id_data", 0);
         //editor = sp.edit();
-
         //get the data from select_uer_type Activity
         Intent intent = getIntent();
         role = intent.getStringExtra("userRole");
@@ -58,11 +59,11 @@ public class WelcomeActivity extends AppCompatActivity {
                 //Judging the accuracy of input
                 if (id.equals("")) {
                     // if the user enter nothing
-                    Toast.makeText(getApplicationContext(), "please enter your ID first", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.toast_welcome_enter_id), Toast.LENGTH_SHORT).show();
                 } else {
                     if (!isInputRight(id)) {
                         //if the user not only enter letter or number
-                        Toast.makeText(getApplicationContext(), "please only enter letter and number for your ID", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.toast_welcome_only_enter_letter_number), Toast.LENGTH_SHORT).show();
                     } else {
 
                         //if the user enter right, save the ID locally
@@ -71,7 +72,7 @@ public class WelcomeActivity extends AppCompatActivity {
                         editor.putString("userID", id);
                         editor.putString("userRole", role);
                         if(editor.commit()){
-                            Toast.makeText(getApplicationContext(), "save successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.toast_welcome_save), Toast.LENGTH_SHORT).show();
                         }
 
                         //close the current activity and open next activity based on which role

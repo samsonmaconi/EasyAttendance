@@ -1,5 +1,8 @@
 package com.example.navkaran.easyattendance;
 
+
+// Author: Lan Chen, B00809814
+// activity for checking history attendence for specific lecture
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -96,7 +99,7 @@ public class HistoryCheckedActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), getString(R.string.alert_course_deleted), Toast.LENGTH_SHORT).show();
                                     finish();
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "Error, try again", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), getString(R.string.toast_historychecked_error), Toast.LENGTH_SHORT).show();
                                 }
                                 VibratorUtility.vibrate(getApplicationContext(), true);
                             }
