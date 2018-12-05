@@ -30,10 +30,10 @@ public class NewCourseActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(R.string.title_add_course);
 
-        etCourseId = findViewById(R.id.et_courseId);
-        etCourseName = findViewById(R.id.et_courseName);
-        etCourseStudentCount = findViewById(R.id.et_courseStudentCount);
-        btnSave = findViewById(R.id.btn_save);
+        etCourseId = findViewById(R.id.etCourseId);
+        etCourseName = findViewById(R.id.etCourseName);
+        etCourseStudentCount = findViewById(R.id.etCourseStudentCount);
+        btnSave = findViewById(R.id.btnSave);
 
         // gets the input and return them to the caller activity - CourseListActivity
         // the result code is CANCELED is the user cancels the activity with the back hardware

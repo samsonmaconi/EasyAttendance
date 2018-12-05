@@ -31,10 +31,10 @@ public class EditCourseActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(R.string.title_edit_course);
 
-        etCourseId = findViewById(R.id.et_courseId);
-        etCourseName = findViewById(R.id.et_courseName);
-        etCourseStudentCount = findViewById(R.id.et_courseStudentCount);
-        btnSave = findViewById(R.id.btn_save);
+        etCourseId = findViewById(R.id.etCourseId);
+        etCourseName = findViewById(R.id.etCourseName);
+        etCourseStudentCount = findViewById(R.id.etCourseStudentCount);
+        btnSave = findViewById(R.id.btnSave);
 
         Intent intent = getIntent();
 
