@@ -1,16 +1,12 @@
 package com.example.navkaran.easyattendance;
 
-import android.Manifest;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
@@ -139,7 +135,7 @@ public class CourseListActivity extends AppCompatActivity {
                         .setNegativeButton(android.R.string.no, null).show();
                 break;
             case 2: //History MenuItem, go to AttendanceHistoryActivity
-                Intent histIntent = new Intent(CourseListActivity.this, AttendanceHistory.class);
+                Intent histIntent = new Intent(CourseListActivity.this, AttendanceHistoryActivity.class);
                 histIntent.putExtra(EasyAttendanceConstants.COURSE_KEY, courseSelected.getCourseKey());
                 histIntent.putExtra(EasyAttendanceConstants.COURSE_ID, courseSelected.getCourseID());
                 histIntent.putExtra(EasyAttendanceConstants.COURSE_NAME, courseSelected.getCourseName());

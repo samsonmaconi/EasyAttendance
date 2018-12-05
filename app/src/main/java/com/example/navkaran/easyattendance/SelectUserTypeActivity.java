@@ -17,7 +17,7 @@ import android.view.View;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class SelectUserType extends AppCompatActivity {
+public class SelectUserTypeActivity extends AppCompatActivity {
     private View mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")

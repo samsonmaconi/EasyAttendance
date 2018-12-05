@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class AttendanceHistory extends AppCompatActivity {
+public class AttendanceHistoryActivity extends AppCompatActivity {
     ListView datelist;
     private AttendanceHistoryAdapter adapter;
     private LectureRepository lectureRepository;

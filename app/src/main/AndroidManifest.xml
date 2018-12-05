@@ -26,12 +26,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SelectUserType"
+            android:name=".SelectUserTypeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".WelcomeActivity"
-            android:parentActivityName=".SelectUserType" />
+            android:parentActivityName=".SelectUserTypeActivity" />
         <activity android:name=".CheckAttendanceActivity" />
         <activity android:name=".CourseListActivity" />
         <activity
@@ -39,7 +39,7 @@
             android:parentActivityName=".CourseListActivity" />
         <activity android:name=".AttendanceDetailsActivity" />
         <activity
-            android:name=".AttendanceHistory"
+            android:name=".AttendanceHistoryActivity"
             android:parentActivityName=".CourseListActivity" />
         <activity android:name=".NewCourseActivity"
             android:parentActivityName=".CourseListActivity" />
@@ -47,7 +47,7 @@
             android:parentActivityName=".CourseListActivity" />
         <activity
             android:name=".HistoryCheckedActivity"
-            android:parentActivityName=".AttendanceHistory" />
+            android:parentActivityName=".AttendanceHistoryActivity" />
     </application>
 
 </manifest>

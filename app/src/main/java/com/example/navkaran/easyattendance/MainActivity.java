@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }else{
-            intent = new Intent(this, SelectUserType.class);
+            intent = new Intent(this, SelectUserTypeActivity.class);
             startActivity(intent);
             finish();
         }
