@@ -1,4 +1,4 @@
-package com.example.navkaran.easyattendance;
+package com.example.navkaran.easyattendance.activities;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
@@ -10,6 +10,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.navkaran.easyattendance.adapters.AttendanceHistoryAdapter;
+import com.example.navkaran.easyattendance.utils.EasyAttendanceConstants;
+import com.example.navkaran.easyattendance.models.Lecture;
+import com.example.navkaran.easyattendance.models.LectureRepository;
+import com.example.navkaran.easyattendance.R;
 
 import java.util.List;
 

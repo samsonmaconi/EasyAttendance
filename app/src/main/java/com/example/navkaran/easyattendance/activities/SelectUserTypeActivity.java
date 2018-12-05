@@ -1,4 +1,4 @@
-package com.example.navkaran.easyattendance;
+package com.example.navkaran.easyattendance.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -9,9 +9,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
+
+import com.example.navkaran.easyattendance.utils.EasyAttendanceConstants;
+import com.example.navkaran.easyattendance.R;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.

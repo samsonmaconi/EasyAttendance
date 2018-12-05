@@ -1,4 +1,4 @@
-package com.example.navkaran.easyattendance;
+package com.example.navkaran.easyattendance.activities;
 
 // Author: Lan Chen, B00809814
 // activity for login
@@ -7,12 +7,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.navkaran.easyattendance.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

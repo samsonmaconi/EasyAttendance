@@ -1,4 +1,4 @@
-package com.example.navkaran.easyattendance;
+package com.example.navkaran.easyattendance.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.navkaran.easyattendance.utils.EasyAttendanceConstants;
+import com.example.navkaran.easyattendance.R;
 
 // David Cui
 

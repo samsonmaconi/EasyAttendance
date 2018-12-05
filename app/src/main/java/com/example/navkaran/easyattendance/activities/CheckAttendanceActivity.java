@@ -1,4 +1,4 @@
-package com.example.navkaran.easyattendance;
+package com.example.navkaran.easyattendance.activities;
 /**
  * This is the only activity seen by the student
  *
@@ -40,6 +40,11 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.navkaran.easyattendance.utils.DistanceChecker;
+import com.example.navkaran.easyattendance.utils.EasyAttendanceConstants;
+import com.example.navkaran.easyattendance.R;
+import com.example.navkaran.easyattendance.RequestQueueSingleton;
+import com.example.navkaran.easyattendance.utils.VibratorUtility;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;

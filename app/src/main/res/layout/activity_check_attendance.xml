@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background_white_blue"
-    tools:context=".CheckAttendanceActivity"
+    tools:context=".activities.CheckAttendanceActivity"
     android:orientation="vertical">
 
     <include layout="@layout/logo_banner"

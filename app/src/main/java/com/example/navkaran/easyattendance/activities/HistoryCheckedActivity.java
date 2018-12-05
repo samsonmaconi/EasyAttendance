@@ -1,4 +1,4 @@
-package com.example.navkaran.easyattendance;
+package com.example.navkaran.easyattendance.activities;
 
 
 // Author: Lan Chen, B00809814
@@ -16,8 +16,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.navkaran.easyattendance.adapters.AttendanceAdapter;
+import com.example.navkaran.easyattendance.models.AttendanceItem;
+import com.example.navkaran.easyattendance.models.AttendanceItemRepository;
+import com.example.navkaran.easyattendance.utils.EasyAttendanceConstants;
+import com.example.navkaran.easyattendance.models.LectureRepository;
+import com.example.navkaran.easyattendance.R;
+import com.example.navkaran.easyattendance.utils.VibratorUtility;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class HistoryCheckedActivity extends AppCompatActivity {
 

@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,28 +26,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SelectUserTypeActivity"
+            android:name=".activities.SelectUserTypeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme" />
         <activity
-            android:name=".WelcomeActivity"
-            android:parentActivityName=".SelectUserTypeActivity" />
-        <activity android:name=".CheckAttendanceActivity" />
-        <activity android:name=".CourseListActivity" />
+            android:name=".activities.WelcomeActivity"
+            android:parentActivityName=".activities.SelectUserTypeActivity" />
+        <activity android:name=".activities.CheckAttendanceActivity" />
+        <activity android:name=".activities.CourseListActivity" />
         <activity
-            android:name=".TakeAttendanceActivity"
-            android:parentActivityName=".CourseListActivity" />
-        <activity android:name=".AttendanceDetailsActivity" />
+            android:name=".activities.TakeAttendanceActivity"
+            android:parentActivityName=".activities.CourseListActivity" />
+        <activity android:name=".activities.AttendanceDetailsActivity" />
         <activity
-            android:name=".AttendanceHistoryActivity"
-            android:parentActivityName=".CourseListActivity" />
-        <activity android:name=".NewCourseActivity"
-            android:parentActivityName=".CourseListActivity" />
-        <activity android:name=".EditCourseActivity"
-            android:parentActivityName=".CourseListActivity" />
+            android:name=".activities.AttendanceHistoryActivity"
+            android:parentActivityName=".activities.CourseListActivity" />
+        <activity android:name=".activities.NewCourseActivity"
+            android:parentActivityName=".activities.CourseListActivity" />
+        <activity android:name=".activities.EditCourseActivity"
+            android:parentActivityName=".activities.CourseListActivity" />
         <activity
-            android:name=".HistoryCheckedActivity"
-            android:parentActivityName=".AttendanceHistoryActivity" />
+            android:name=".activities.HistoryCheckedActivity"
+            android:parentActivityName=".activities.AttendanceHistoryActivity" />
     </application>
 
 </manifest>

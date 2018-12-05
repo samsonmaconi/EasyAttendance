@@ -1,12 +1,14 @@
-package com.example.navkaran.easyattendance;
+package com.example.navkaran.easyattendance.adapters;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.example.navkaran.easyattendance.models.CourseItem;
+import com.example.navkaran.easyattendance.R;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.navkaran.easyattendance;
+package com.example.navkaran.easyattendance.activities;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
@@ -16,6 +16,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.navkaran.easyattendance.adapters.CourseAdapter;
+import com.example.navkaran.easyattendance.models.CourseItem;
+import com.example.navkaran.easyattendance.models.CourseItemRepository;
+import com.example.navkaran.easyattendance.utils.EasyAttendanceConstants;
+import com.example.navkaran.easyattendance.R;
+import com.example.navkaran.easyattendance.utils.VibratorUtility;
 
 import java.util.List;
 

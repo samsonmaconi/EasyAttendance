@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CourseListActivity"
+    tools:context=".activities.CourseListActivity"
     android:background="@drawable/gradient_background_white_blue">
 
     <include layout="@layout/logo_banner"

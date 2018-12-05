@@ -1,4 +1,4 @@
-package com.example.navkaran.easyattendance;
+package com.example.navkaran.easyattendance.models;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;

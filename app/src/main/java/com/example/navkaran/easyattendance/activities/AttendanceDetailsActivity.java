@@ -1,4 +1,4 @@
-package com.example.navkaran.easyattendance;
+package com.example.navkaran.easyattendance.activities;
 
 
 import android.content.Intent;
@@ -15,6 +15,15 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.navkaran.easyattendance.adapters.AttendanceAdapter;
+import com.example.navkaran.easyattendance.models.AttendanceItem;
+import com.example.navkaran.easyattendance.models.AttendanceItemRepository;
+import com.example.navkaran.easyattendance.utils.EasyAttendanceConstants;
+import com.example.navkaran.easyattendance.models.Lecture;
+import com.example.navkaran.easyattendance.models.LectureRepository;
+import com.example.navkaran.easyattendance.R;
+import com.example.navkaran.easyattendance.RequestQueueSingleton;
+import com.example.navkaran.easyattendance.utils.VibratorUtility;
 
 import org.json.JSONArray;
 import org.json.JSONException;

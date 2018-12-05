@@ -1,8 +1,12 @@
-package com.example.navkaran.easyattendance;
+package com.example.navkaran.easyattendance.models;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+
+import com.example.navkaran.easyattendance.models.AppDatabase;
+import com.example.navkaran.easyattendance.models.CourseItem;
+import com.example.navkaran.easyattendance.models.CourseItemDAO;
 
 import java.util.List;
 
