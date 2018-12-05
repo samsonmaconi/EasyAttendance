@@ -95,7 +95,7 @@ public class HistoryCheckedActivity extends AppCompatActivity {
 
                 new AlertDialog.Builder(context)
                         .setTitle(getString(R.string.action_delete))
-                        .setMessage("delete this?")
+                        .setMessage(String.format(getString(R.string.formatString_confirm_delete_lecture), courseId))
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {

@@ -40,6 +40,7 @@
     <string name="formatString_alert_failure_closed">उपस्थिति को चिह्नित करने में असमर्थ %1$s. उपस्थिति बंद</string>
     <string name="formatString_alert_failure_duplicate">आपने पहले से ही अपनी उपस्थिति को चिह्नित कर लिया है %1$s.</string>
     <string name="formatString_confirm_delete">क्या आप पक्का इसे हटाना चाहते हैं %1$s?</string>
+    <string name="formatString_confirm_delete_lecture">क्या आप वाकई इस व्याख्यान को हटाना चाहते हैं %1$s?</string>
 
     <!--Alerts-->
     <string name="alert_attendance_saved">उपस्थिति विवरण सहेजा गया</string>

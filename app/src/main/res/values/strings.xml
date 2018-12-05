@@ -28,7 +28,7 @@
     <string name="hint_example_id">e.g B00801169</string>
     <string name="hint_course_id">e.g CSCI 5708</string>
     <string name="hint_course_name">e.g Mobile Computing</string>
-    <string name="hint_course_student_count">How many students are taking this course?</string>
+    <string name="hint_course_student_count">How many students in this course?</string>
     <string name="hint_no_courses">You currently have 0 course information saved. Add a course</string>
 
     <!--Formatted Strings-->
@@ -40,6 +40,7 @@
     <string name="formatString_alert_failure_closed">Unable to mark attendance for %1$s. Attendance closed.</string>
     <string name="formatString_alert_failure_duplicate">You have already marked your attendance for %1$s.</string>
     <string name="formatString_confirm_delete">Are you sure you want to Delete %1$s?</string>
+    <string name="formatString_confirm_delete_lecture">Are you sure you want to Delete this lecture of %1$s?</string>
 
     <!--Alerts-->
     <string name="alert_attendance_saved">Attendance Details Saved</string>

@@ -40,6 +40,7 @@
     <string name="formatString_alert_failure_closed"> Impossible de marquer la présence pour %1$s. Présence fermée. </string>
     <string name="formatString_alert_failure_duplicate"> Vous avez déjà marqué votre présence pour %1$s. </string>
     <string name="formatString_confirm_delete">Êtes-vous sûr de vouloir supprimer %1$s?</string>
+    <string name="formatString_confirm_delete_lecture">Êtes-vous sûr de vouloir supprimer cette leçon de %1$s?</string>
 
     <!--Alerts-->
     <string name="alert_attendance_saved"> Détails de présence enregistrés </string>

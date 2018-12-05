@@ -39,7 +39,8 @@
     <string name="formatString_alert_success">你已经成功签到 %1$s</string>
     <string name="formatString_alert_failure_closed">无法签到 %1$s. 教师已经关闭签到. QAQ</string>
     <string name="formatString_alert_failure_duplicate">你已经成功签到 %1$s. 请滚蛋~~</string>
-    <string name="formatString_confirm_delete">你确定删除吗 %1$s?</string>
+    <string name="formatString_confirm_delete">你确定删除 %1$s 吗?</string>
+    <string name="formatString_confirm_delete_lecture">你确定删除 %1$s 的这节课吗?</string>
 
     <!--Alerts-->
     <string name="alert_attendance_saved">签到记录已保存</string>
