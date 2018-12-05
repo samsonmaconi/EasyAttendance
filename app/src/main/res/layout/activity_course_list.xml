@@ -25,6 +25,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- a label for courses listview -->
             <TextView
                 android:id="@+id/textDescription"
                 android:layout_width="match_parent"
@@ -36,6 +37,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <!-- list of courses -->
             <ListView
                 android:id="@+id/lvCourses"
                 android:layout_width="match_parent"
@@ -45,6 +47,7 @@
 
         </LinearLayout>
 
+        <!-- button to add a new course -->
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabNewCourse"
             android:layout_width="wrap_content"
