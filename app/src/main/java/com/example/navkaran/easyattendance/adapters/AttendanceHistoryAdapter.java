@@ -13,16 +13,25 @@ import com.example.navkaran.easyattendance.R;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
+
+// David Cui B00788648 Nov 2018
+
+/**
+ * adapter for list of lectures in attendance history.
+ * takes care of populating list view with contents of a list.
+ */
 
 public class AttendanceHistoryAdapter extends ArrayAdapter<Lecture> {
     private List<Lecture> lectureList;
-    private SimpleDateFormat df = new SimpleDateFormat("EEE MMM dd");
+    private SimpleDateFormat df = new SimpleDateFormat("EEE MMM dd", Locale.getDefault());
 
     public AttendanceHistoryAdapter(Context context, int resource, List<Lecture> lectureList) {
         super(context, resource, lectureList);
         this.lectureList = lectureList;
     }
 
+    // update list content and notify adapter to update view
     public void setLectures(List<Lecture> lectures) {
         lectureList = lectures;
         notifyDataSetChanged();
@@ -42,11 +51,13 @@ public class AttendanceHistoryAdapter extends ArrayAdapter<Lecture> {
             v = inflater.inflate(R.layout.attendance_history_list_item, null);
         }
 
+        // avoid null pointer
         Lecture i = null;
         if(lectureList != null) {
             i = lectureList.get(position);
         }
 
+        // set the list item view with content
         if (i != null) {
             TextView attenDate = v.findViewById(R.id.attendate);
             TextView attenCount = v.findViewById(R.id.attenCount);
@@ -64,6 +75,7 @@ public class AttendanceHistoryAdapter extends ArrayAdapter<Lecture> {
         return v;
     }
 
+    // adpater uses this to avoid null pointer
     @Override
     public int getCount() {
         if (lectureList != null)

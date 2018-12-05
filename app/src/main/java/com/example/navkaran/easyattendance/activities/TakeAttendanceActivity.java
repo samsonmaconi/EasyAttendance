@@ -50,15 +50,15 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     //for accessing extras
 
     // attribute need
-    private Button stop_btn;
-    private TextView class_number;
-    private TextView class_name;
+    private Button stopBtn;
+    private TextView classNumber;
+    private TextView className;
     private TextView register_number;
-    private TextView check_number;
+    private TextView checkNumber;
     private int courseKey;
-    private String course_id;
-    private String course_name;
-    private int student_num;
+    private String courseId;
+    private String courseName;
+    private int studentNum;
     private Runnable runnable;
     private Handler handler;
     private int attendanceCount;
@@ -66,7 +66,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     private boolean shouldCheck = false;
 
     private FusedLocationProviderClient mFusedLocationClient;
-    private String location_error = "no error";
+    private String locationError = "no error";
     private double latitude;
     private double longitude;
 
@@ -82,23 +82,23 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_class_attendance);
 
         //connect with UI
-        stop_btn = findViewById(R.id.stop_btn);
-        stop_btn.setOnClickListener(stop);
-        check_number = findViewById(R.id.check_number);
-        class_number = findViewById(R.id.class_number);
-        class_name = findViewById(R.id.class_name);
+        stopBtn = findViewById(R.id.stop_btn);
+        stopBtn.setOnClickListener(stop);
+        checkNumber = findViewById(R.id.check_number);
+        classNumber = findViewById(R.id.class_number);
+        className = findViewById(R.id.class_name);
         register_number = findViewById(R.id.register_number);
         //get database connection
         Intent intent = getIntent();
         courseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);
-        course_id = intent.getStringExtra(EasyAttendanceConstants.COURSE_ID);
-        course_name = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
-        student_num = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
+        courseId = intent.getStringExtra(EasyAttendanceConstants.COURSE_ID);
+        courseName = intent.getStringExtra(EasyAttendanceConstants.COURSE_NAME);
+        studentNum = intent.getIntExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, 0);
 
-        class_number.setText(course_id);
-        class_name.setText(course_name);
-        check_number.setText("");
-        register_number.setText(String.format(getString(R.string.formatString_students_registered), student_num));
+        classNumber.setText(courseId);
+        className.setText(courseName);
+        checkNumber.setText("");
+        register_number.setText(String.format(getString(R.string.formatString_students_registered), studentNum));
 
         handler = new Handler();
         runnable = new Runnable() {
@@ -129,9 +129,9 @@ public class TakeAttendanceActivity extends AppCompatActivity {
                 handler.removeCallbacksAndMessages(null);
                 stopAttendance();
             } else {
-                startAttendance(course_id, course_name, longitude, latitude);
-                stop_btn.setText(R.string.action_stop_attendance);
-                stop_btn.setBackgroundResource(R.drawable.round_button_red_selector);
+                startAttendance(courseId, courseName, longitude, latitude);
+                stopBtn.setText(R.string.action_stop_attendance);
+                stopBtn.setBackgroundResource(R.drawable.round_button_red_selector);
                 shouldCheck = true;
                 shouldStop = true;
             }
@@ -144,9 +144,9 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     private void stopAttendance() {
         Intent intent = new Intent(this, AttendanceDetailsActivity.class);
         intent.putExtra(EasyAttendanceConstants.COURSE_KEY, courseKey);
-        intent.putExtra(EasyAttendanceConstants.COURSE_ID, course_id);
-        intent.putExtra(EasyAttendanceConstants.COURSE_NAME, course_name);
-        intent.putExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, student_num);
+        intent.putExtra(EasyAttendanceConstants.COURSE_ID, courseId);
+        intent.putExtra(EasyAttendanceConstants.COURSE_NAME, courseName);
+        intent.putExtra(EasyAttendanceConstants.COURSE_STUDENT_COUNT, studentNum);
         intent.putExtra(EasyAttendanceConstants.ATTENDANCE_COUNT, attendanceCount);
         startActivity(intent);
         finish();
@@ -156,7 +156,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
      * check how many student account already marked attendance
      */
     private void checkAttendance() {
-        final String url = EasyAttendanceConstants.API_URL + "count.php?class_id=" + encodeParameter(course_id);
+        final String url = EasyAttendanceConstants.API_URL + "count.php?class_id=" + encodeParameter(courseId);
         Log.d(TAG, "checkAttendance URL: " + url);
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, url, null,
@@ -165,7 +165,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             attendanceCount = response.getInt("students_count");
-                            check_number.setText(String.format(getString(R.string.formatString_checked_in), attendanceCount, student_num));
+                            checkNumber.setText(String.format(getString(R.string.formatString_checked_in), attendanceCount, studentNum));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -198,9 +198,9 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     /**
      * start attendance
      */
-    private void startAttendance(String course_id, String course_name, double lon, double lat) {
-        final String url = EasyAttendanceConstants.API_URL + "start_attendance.php?class_id=" + encodeParameter(course_id) +
-                "&class_name=" + encodeParameter(course_name) +
+    private void startAttendance(String courseId, String courseName, double lon, double lat) {
+        final String url = EasyAttendanceConstants.API_URL + "start_attendance.php?class_id=" + encodeParameter(courseId) +
+                "&class_name=" + encodeParameter(courseName) +
                 "&longitude=" + lon +
                 "&latitude=" + lat;
 
@@ -210,7 +210,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        check_number.setText(String.format(getString(R.string.formatString_checked_in), 0, student_num));
+                        checkNumber.setText(String.format(getString(R.string.formatString_checked_in), 0, studentNum));
                         VibratorUtility.vibrate(getApplicationContext(),true);
                     }
                 }, new Response.ErrorListener() {
@@ -256,15 +256,15 @@ public class TakeAttendanceActivity extends AppCompatActivity {
                         latitude = location.getLatitude();
                         Log.d(TAG, "getLocation: " + "teacher lon: " + longitude + " teacher lat: " + latitude);
                     } else {
-                        location_error = "Unknown Location";
-                        Log.d(TAG, "getLocation: " + location_error);
+                        locationError = "Unknown Location";
+                        Log.d(TAG, "getLocation: " + locationError);
                     }
                 }
             });
             return;
         } else {
-            location_error = "Permission Denied";
-            Log.d(TAG, "getLocation: " + location_error);
+            locationError = "Permission Denied";
+            Log.d(TAG, "getLocation: " + locationError);
         }
     }
 
@@ -289,7 +289,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     }
 
     private void fetchAttendanceLog() {
-        String url = FETCH_URL + encodeParameter(course_id);
+        String url = FETCH_URL + encodeParameter(courseId);
         Log.d(TAG, "Request URL: " + url);
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {

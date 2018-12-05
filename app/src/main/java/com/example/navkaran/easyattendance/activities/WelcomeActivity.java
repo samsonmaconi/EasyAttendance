@@ -20,9 +20,9 @@ import java.util.regex.Pattern;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    public TextView tv_userId;
-    public EditText et_userId;
-    public Button bt_save;
+    public TextView tvUserId;
+    public EditText etUserId;
+    public Button btSave;
     private String role;
 
     @Override
@@ -30,9 +30,9 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        tv_userId = findViewById(R.id.tv_userId);
-        et_userId = findViewById(R.id.et_userId);
-        bt_save = findViewById(R.id.bt_save);
+        tvUserId = findViewById(R.id.tv_userId);
+        etUserId = findViewById(R.id.et_userId);
+        btSave = findViewById(R.id.bt_save);
 
         //sp = this.getSharedPreferences("id_data", 0);
         //editor = sp.edit();
@@ -41,21 +41,21 @@ public class WelcomeActivity extends AppCompatActivity {
         role = intent.getStringExtra("userRole");
         if (role != null) {
             if (role.equals("student")) {
-                tv_userId.setText(R.string.label_student_id);
-                bt_save.setBackgroundResource(R.drawable.rounded_rect_button_orange_selector);
+                tvUserId.setText(R.string.label_student_id);
+                btSave.setBackgroundResource(R.drawable.rounded_rect_button_orange_selector);
             } else if (role.equals("teacher")) {
-                tv_userId.setText(R.string.label_staff_id);
-                bt_save.setBackgroundResource(R.drawable.rounded_rect_button_blue_selector);
+                tvUserId.setText(R.string.label_staff_id);
+                btSave.setBackgroundResource(R.drawable.rounded_rect_button_blue_selector);
             }
         }
 
 
-        bt_save.setOnClickListener(new View.OnClickListener() {
+        btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 // save the data for studentID/staffID
-                String id = et_userId.getText().toString();
+                String id = etUserId.getText().toString();
 
                 //Judging the accuracy of input
                 if (id.equals("")) {

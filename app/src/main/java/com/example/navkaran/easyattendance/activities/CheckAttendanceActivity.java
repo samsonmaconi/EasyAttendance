@@ -59,21 +59,21 @@ import java.util.ArrayList;
 
 public class CheckAttendanceActivity extends AppCompatActivity {
 
-    private Button sign_attendance;
+    private Button signAttendance;
     private Spinner spinner;
     private Runnable runnable;
     private Handler handler;
     private ArrayList<String> classList; // list of class name (Mobile Computing)
-    private ArrayList<String> classID_String; // list of class id (e.g. CSCI-5708)
+    private ArrayList<String> classIDString; // list of class id (e.g. CSCI-5708)
     private ArrayList<Integer> classIDList; // list of class number id (primary key)
     private ArrayAdapter<String> spinnerArrayAdapter;
     private int classID;
     private String classStringID;
     private int lastCheck = -1;
     private String studentId;
-    private String location_error = "";
-    private Double student_latitude = 0.0;
-    private Double student_longitude = 0.0;
+    private String locationError = "";
+    private Double studentLatitude = 0.0;
+    private Double studentLongitude = 0.0;
     private FusedLocationProviderClient mFusedLocationClient;
 
     private final String TAG = "CheckAttendance"; //for testing and debugging
@@ -106,15 +106,15 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         studentId = intent.getStringExtra("userID");
 
         spinner = findViewById(R.id.spinner);
-        sign_attendance = findViewById(R.id.btn_markAttendance);
+        signAttendance = findViewById(R.id.btn_markAttendance);
         classList = new ArrayList<>();
         classIDList = new ArrayList<>();
-        classID_String = new ArrayList<>();
+        classIDString = new ArrayList<>();
         spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, classList);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerArrayAdapter);
         spinner.setOnItemSelectedListener(onClassSelected);
-        sign_attendance.setOnClickListener(onBtnMarkAttendanceClick);
+        signAttendance.setOnClickListener(onBtnMarkAttendanceClick);
 
 
         //This block of code refreshes the list of Courses through the API every 30000 milliseconds
@@ -165,19 +165,19 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Log.d(TAG, "Position: " + position);
             if(position == 0){
-                sign_attendance.setEnabled(false);
-                sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
+                signAttendance.setEnabled(false);
+                signAttendance.setBackgroundResource(R.drawable.round_button_disabled);
             }else {
                 classID = classIDList.get(position - 1); //-1 to Accounts for the hint
-                classStringID = classID_String.get(position-1); //-1 to Accounts for the hint
+                classStringID = classIDString.get(position-1); //-1 to Accounts for the hint
                 if (lastCheck == classID) {
                     VibratorUtility.vibrate(getApplicationContext(), true);
                     Toast.makeText(CheckAttendanceActivity.this, String.format(getString(R.string.formatString_alert_failure_duplicate), classStringID), Toast.LENGTH_LONG).show();
-                    sign_attendance.setEnabled(false);
-                    sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
+                    signAttendance.setEnabled(false);
+                    signAttendance.setBackgroundResource(R.drawable.round_button_disabled);
                 } else {
-                    sign_attendance.setEnabled(true);
-                    sign_attendance.setBackgroundResource(R.drawable.round_button_orange_selector);
+                    signAttendance.setEnabled(true);
+                    signAttendance.setBackgroundResource(R.drawable.round_button_orange_selector);
                 }
             }
         }
@@ -198,8 +198,8 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         lastCheck = classID;
-                        sign_attendance.setEnabled(false);
-                        sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
+                        signAttendance.setEnabled(false);
+                        signAttendance.setBackgroundResource(R.drawable.round_button_disabled);
                         VibratorUtility.vibrate(getApplicationContext(),false);
                         Toast.makeText(CheckAttendanceActivity.this, String.format(getString(R.string.formatString_alert_success), classStringID), Toast.LENGTH_LONG).show();
                     }
@@ -232,7 +232,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                         double class_lat;
                         classList.clear();
                         classIDList.clear();
-                        classID_String.clear();
+                        classIDString.clear();
                         classList.add(getString(R.string.hint_please_select_a_course));
                         try {
                             for (int i = 0; i < response.length(); i++) {
@@ -241,12 +241,12 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                                 class_name = response.getJSONObject(i).getString("class_name");
                                 class_lon = response.getJSONObject(i).getDouble("longitude");
                                 class_lat = response.getJSONObject(i).getDouble("latitude");
-                                Log.d(TAG, "student_longitude: " + student_longitude + " student_latitude: " + student_latitude);
-                                if (DistanceChecker.isWithinRange(student_longitude, student_latitude, class_lon, class_lat)) {
+                                Log.d(TAG, "studentLongitude: " + studentLongitude + " studentLatitude: " + studentLatitude);
+                                if (DistanceChecker.isWithinRange(studentLongitude, studentLatitude, class_lon, class_lat)) {
                                     Log.d(TAG, "Distance Checker: Success");
                                     classList.add("(" + class_id + ") " + class_name);
                                     classIDList.add(primarykeyID);
-                                    classID_String.add(class_id);
+                                    classIDString.add(class_id);
                                 }
                                 Log.d(TAG, "After Distance Checker");
                             }
@@ -257,8 +257,8 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                         if (classList.isEmpty()) {
                             Log.d(TAG, "classList : isEmpty");
                             classIDList.clear();
-                            sign_attendance.setEnabled(false);
-                            sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
+                            signAttendance.setEnabled(false);
+                            signAttendance.setBackgroundResource(R.drawable.round_button_disabled);
                             spinnerArrayAdapter.notifyDataSetChanged();
                         } else {
                             Log.d(TAG, "classList : isNotEmpty");
@@ -285,8 +285,8 @@ public class CheckAttendanceActivity extends AppCompatActivity {
 
                 //disable the button once sign-in is done
                 classIDList.clear();
-                sign_attendance.setEnabled(false);
-                sign_attendance.setBackgroundResource(R.drawable.round_button_disabled);
+                signAttendance.setEnabled(false);
+                signAttendance.setBackgroundResource(R.drawable.round_button_disabled);
                 spinnerArrayAdapter.notifyDataSetChanged();
             }
         }
@@ -307,20 +307,20 @@ public class CheckAttendanceActivity extends AppCompatActivity {
                 public void onSuccess(Location location) {
                     // Get last known location. In some rare situations this can be null.
                     if (location != null) {
-                        // save student_longitude and student_latitude to a local variable for future use
-                        student_longitude = location.getLongitude();
-                        student_latitude = location.getLatitude();
-                        Log.d(TAG, "Get User Location: lon: " + student_longitude + ", lat: " + student_latitude);
+                        // save studentLongitude and studentLatitude to a local variable for future use
+                        studentLongitude = location.getLongitude();
+                        studentLatitude = location.getLatitude();
+                        Log.d(TAG, "Get User Location: lon: " + studentLongitude + ", lat: " + studentLatitude);
                     } else {
-                        location_error = "Unknown Location";
-                        Log.d(TAG, "Get User Location: " + location_error);
+                        locationError = "Unknown Location";
+                        Log.d(TAG, "Get User Location: " + locationError);
                     }
                 }
             });
             return;
         } else {
-            location_error = "Permission Denied";
-            Log.d(TAG, "Get User Location: " + location_error);
+            locationError = "Permission Denied";
+            Log.d(TAG, "Get User Location: " + locationError);
         }
     }
 

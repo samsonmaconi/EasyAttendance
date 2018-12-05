@@ -3,10 +3,6 @@ package com.example.navkaran.easyattendance.models;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import com.example.navkaran.easyattendance.models.AppDatabase;
-import com.example.navkaran.easyattendance.models.AttendanceItem;
-import com.example.navkaran.easyattendance.models.AttendanceItemDAO;
-
 import java.util.List;
 
 // David Cui Nov 2018

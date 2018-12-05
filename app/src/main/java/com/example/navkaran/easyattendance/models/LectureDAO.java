@@ -6,8 +6,6 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.example.navkaran.easyattendance.models.Lecture;
-
 import java.util.List;
 
 // David Cui Nov 2018

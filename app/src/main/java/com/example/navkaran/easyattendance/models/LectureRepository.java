@@ -4,10 +4,6 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
-import com.example.navkaran.easyattendance.models.AppDatabase;
-import com.example.navkaran.easyattendance.models.Lecture;
-import com.example.navkaran.easyattendance.models.LectureDAO;
-
 import java.util.List;
 
 // David Cui Nov 2018

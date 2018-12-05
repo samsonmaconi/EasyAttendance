@@ -27,7 +27,7 @@ public class AttendanceHistoryActivity extends AppCompatActivity {
     private Intent intent;
     private String courseId,courseName;
     private TextView className,classNumber,registeredStudents;
-    private int courseKey, studentCount, attendanceCount;
+    private int courseKey, studentCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
