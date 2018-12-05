@@ -2,7 +2,7 @@
 ![Easy Attendance](readme_images/logo.png)
 
 # Identification
-### Project Name: Easy Attendance
+### Project Title: Easy Attendance
 ### Group 14:
 - David Cui, B00788648, yq506499@dal.ca
 - Lan Chen, B00809814, lan.chen@dal.ca
@@ -11,33 +11,78 @@
 - Shengtian Tang, B00690131, sh625730@dal.ca
 - Xiaoyu Tian, B00692270, xy503482@dal.ca
 
-Code Available on https://github.com/Navkaran0105/EasyAttendance
+Code Available on [our public Github repo](https://github.com/Navkaran0105/EasyAttendance)
 
 # Project Summary
-The Easy Attendance application is a Productivity application with the promise to simplify the attendance
-taking process for both teachers and students. It is an app that aims to replace the old way of taking
-attendance through a paper sheet. This application was developed to be very intuitive and simple to
-use for the **Target Audience** which **are Teachers in academic institutions and their Students**.
-Using an iterative approach to feature enhancement, the app incorporates some features to improve
-the user experience incuding Multiple Locales (English, French, Hindi, and Chinese), Haptic Feedback,
-and Location Verification. The application obtains the instructor's GPS locations and stores it in a
-remote database, then students' client obtains student GPS location using the devices' GPS feature and
-teacher location from the remote database. The coordinates are compared to only allow students within
-a certain distance of the instructor to check-in. Students who checked-in are stored in the remote
-database and the instructors can obtain that list from the remote database and stores it locally for
-future references.
+The Easy Attendance application is a Productivity application for Android platform with the promise 
+to simplify the attendance taking process for both teachers and students. 
+It is an app that aims to replace the old way of taking attendance through a paper sheet with the 
+new way of taking attendance through Easy Attendance on Android phones.
+This application was developed to be very intuitive and simple to use for the **target audience: 
+instructors in academic institutions and their students**.
+The application allows instructors to manage a list of the courses they teach. Instructors can 
+click a course and enable students to take attendance for that course. Students can then see the courses
+that they can check-in to and check-in to a course. Instrcutors can see how many students had checked-in 
+and can disable check-in for a course after a time period. Then, instructors can see a list of all 
+students who checked-in and the list is stored so instructors can access in the future. Accessing the 
+attendance history is simple, instructors just have to long-click a course in the course list, and they will 
+see the history option. Apart from the check-in feature, we also used an iterative approach to feature enhancement, 
+the app incorporates some features to improve the user experience incuding Multiple Locales 
+(English, French, Hindi, and Chinese), Haptic Feedback for important buttons, and GPS Location Verification of students.
 
 ![Why Easy Attendance](readme_images/why.png)
 
+## Backend Logic
+The features of the application is implemented by some important backend logics. They will be described here.
+The application has location verification, which ensures only students who are actually present in class may 
+check-in. This is implemented with the help of the GPS feature. When instructors enabe check-in for a course, 
+the application obtains the instructors' GPS location and stores it in a remote database along with course ID and 
+course name. Then, students' client queries the remote database's REST API interface to obtain a list of the courses 
+and GPS locations, then, the students' GPS location is obtained and compared so only courses within a certain range of 
+the students are displayed to the students, so the students will not see a huge list of courses. Now, students can select 
+a course and check-in to it, the students' GPS and course (instructor) GPS is compared to make sure students are present 
+in the class room. When students check-in successfully, their information are stored in the remote database, and instructors 
+can obtain that list from the remote database and stores it in a local SQLite database for future reference. 
+When an instructor disables check-in, the list of students who checked-in is pulled from the remote database 
+and the remote database clears the related entries so the process can be repeated for future lectures.
+
+## Backend Service
+The backend service for exchanging information between instructor and student includes a database on 
+Dalhousie Bluenose and a set of custom REST APIs. When the instructor starts the attendance, 
+The app will send information about the lecture and it's GPS location to the database. 
+Then student side app will make an API call to get a list of current classes. 
+After comparing the GPS location of the student device and lecture, the app will decide which class 
+is available for the student to sign-in. Students who signed-in will add a record contains their name 
+and the course id into the database. Once the instructor stops the attendance, the app will get a list 
+of student who signed-in and clear all records related to this course in the database
+
+**Start attendance:** https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_info=[class_id],[class_name],[longitude],[latitude]
+
+**Get Student sign-in inforamtion:** https://web.cs.dal.ca/~stang/csci5708/mark.php?student_info=[student_id],[class_id],[attendance]
+
+**Get the current lecture list:** https://web.cs.dal.ca/~stang/csci5708/get_lecture_list.php
+
+**End attendance:** https://web.cs.dal.ca/~stang/csci5708/end_attendance.php?class_id=[class_id]
+
+**Get the number of student who signed-in for a specific class:** https://web.cs.dal.ca/~stang/csci5708/count.php?class_id=[class_id]
+
+## ERD of Local Database
+add the ERD here
+
+## Sitemap and Clickstream
+add sitemap / clickstream here or not.
 
 ## Libraries
 **Volley HTTP:** Volley is an open source HTTP library that makes networking for Android apps easier
 and most importantly, faster. Volley is available on [GitHub](https://github.com/google/volley).
 
 **Room Persistence:** Room Persistence is an android library that simplifies the use of SQLite local
-database. It reduces boilerplate codes and validates SQL queries compile-time to reduce errors. Room is available on [Android Documentation](https://developer.android.com/training/data-storage/room/).
+database. It reduces boilerplate codes and validates SQL queries compile-time to reduce errors. Room is 
+available on [Android Documentation](https://developer.android.com/training/data-storage/room/).
 
-**Google Play services location API:** It is the location API available in Google Play services used to adding location awareness to our app with automated location tracking. It is available on [Google Play Services.](https://developers.google.com/android/guides/setup)
+**Google Play services location API:** It is the location API available in Google Play services 
+used to adding location awareness to our app with automated location tracking. It is available on 
+[Google Play Services.](https://developers.google.com/android/guides/setup)
 
 ## Installation Notes
 To install the application on your device, please follow the following instructions:
@@ -66,13 +111,13 @@ devices (or emulators). The location service must be turned on and functional.
 If we do not check permission before we request location, the app may crash with the "permission denied" error
 
 ```java
-if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    EasyAttendanceConstants.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        }
+    if (ContextCompat.checkSelfPermission(this, 
+            Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                EasyAttendanceConstants.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+    }
 ```
 Source: [4]
 
@@ -145,7 +190,7 @@ button, and ***edit an existing course*** or ***delete an existing course*** thr
 from a long press of the course item.
 - **Manage Course Attendance History**: The application also allows a teacher to ***view attendance
 history*** of a course on the teacher's list by **long pressing the course item** and selecting History
-to navigate to the `AttendanceHistory` class. This allows the teacher to ***View***, or ***Delete*** historical attendance logs.
+to navigate to the `AttendanceHistoryActivity` class. This allows the teacher to ***View***, or ***Delete*** historical attendance logs.
 - **Capture Class Attendance**: A teacher can start attendance by selecting a course on the list in
 the `CourseListActivity` class, which then proceeds to the `TakeAttendanceActivity` class where the
 teacher opens the attendance to the students by presing the Start Attendance button.
@@ -168,41 +213,31 @@ is still room for improvement.
 
 The Application could benefit from further code optimisations and additional testing. Optimisations
 such as using push requests to update the UI on the `TakeAttendanceActivity` as opposed to the current
-iterative GET requests to pull updates from the remote database.
+iterative GET requests to pull updates from the remote database. In addition, because the team was
+new to Android development and our design skills are novice, this project has some weaknesses, for example, 
+we were not able to test the app in a large-scale environment where thousands of courses are enabled, and 
+hundreds of thousands of students are checking-in at the same time. More effort can be given in the future to 
+re-design and re-implement the application to make it more robust and efficient.
 
 
 #### Minimum Functionality
 - Users can select their role as *Teacher* or *Student* (Completed)
 - Teachers can see a list of courses (Completed)
-- Teachers can start attendance (Completed)
-- Teachers can collect the result (Completed)
+- Teachers can start attendance for a course(Completed)
+- Teachers can stop attendance and see a list of students who checked-in (Completed)
 - Students can mark attendance (Completed)
-- GPS check (Completed)
+- GPS check to ensure students are actually present (Completed)
 
 #### Expected Functionality
-- Teachers can add courses to list(Completed)
-- Teachers can edit/delete courses list(Completed)
+- Teachers can add courses to the course list(Completed)
+- Teachers can edit/delete courses in the course list(Completed)
 
 #### Bonus Functionality
-- The app can store and manipulate attendance history (Completed)
+- The app can store attendance history and instructors can view or delete them (Completed)
 - The app is Multilingual (Completed)
 - The app provides haptic feedback (Completed)
 
 ![Features](readme_images/features.png)
-
-## Backend Service
-The backend service for exchanging information between instructor and student includes a database on Dalhousie Bluenose and a set of custom REST APIs. When the instructor starts the attendance, The app will send information about the lecture and it's GPS location to the database. Than student side app will make an API call to get a list of current classes. After comparing the GPS location of the student device and lecture, the app will decide which class is available for the student to sign-in. Students who signed-in will add a record contains their name and the course id into the database. Once the instructor stops the attendance, the app will get a list of student who signed-in and clear all records related to this course in the database
-
-**Start attendance:** https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_info=[class_id],[class_name],[longitude],[latitude]
-
-**Get Student sign-in inforamtion:** https://web.cs.dal.ca/~stang/csci5708/mark.php?student_info=[student_id],[class_id],[attendance]
-
-**Get the current lecture list:** https://web.cs.dal.ca/~stang/csci5708/get_lecture_list.php
-
-**End attendance:** https://web.cs.dal.ca/~stang/csci5708/end_attendance.php?class_id=[class_id]
-
-**Get the number of student who signed-in for a specific class:** https://web.cs.dal.ca/~stang/csci5708/count.php?class_id=[class_id]
-
 
 ## Sources
 
