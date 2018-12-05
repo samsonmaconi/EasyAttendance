@@ -9,6 +9,7 @@
     android:padding="4dp"
     android:orientation="horizontal">
 
+    <!-- course id, such as CSCI5708 -->
     <TextView
         android:id="@+id/tvCourseId"
         android:layout_width="0dp"
@@ -25,6 +26,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- course name, such as mobile computing -->
         <TextView
             android:id="@+id/tvCourseName"
             android:layout_width="match_parent"
@@ -37,6 +39,7 @@
             android:ellipsize="end"
             android:maxLines="1"/>
 
+        <!-- number of students registered -->
         <TextView
             android:id="@+id/tvStudentCount"
             android:layout_width="match_parent"
