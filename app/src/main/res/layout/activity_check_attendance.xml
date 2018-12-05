@@ -55,7 +55,7 @@
         android:padding="16dp">
 
         <Button
-            android:id="@+id/btn_markAttendance"
+            android:id="@+id/btnMarkAttendance"
             android:layout_width="256dp"
             android:layout_height="256dp"
             android:layout_centerHorizontal="true"

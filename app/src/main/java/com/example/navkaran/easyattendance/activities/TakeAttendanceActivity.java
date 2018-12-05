@@ -53,7 +53,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     private Button stopBtn;
     private TextView classNumber;
     private TextView className;
-    private TextView register_number;
+    private TextView registerNumber;
     private TextView checkNumber;
     private int courseKey;
     private String courseId;
@@ -82,12 +82,12 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_class_attendance);
 
         //connect with UI
-        stopBtn = findViewById(R.id.stop_btn);
+        stopBtn = findViewById(R.id.stopBtn);
         stopBtn.setOnClickListener(stop);
-        checkNumber = findViewById(R.id.check_number);
-        classNumber = findViewById(R.id.class_number);
-        className = findViewById(R.id.class_name);
-        register_number = findViewById(R.id.register_number);
+        checkNumber = findViewById(R.id.tvCheckNumber);
+        classNumber = findViewById(R.id.tvClassNumber);
+        className = findViewById(R.id.tvClassName);
+        registerNumber = findViewById(R.id.tvRegisterNumber);
         //get database connection
         Intent intent = getIntent();
         courseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);
@@ -98,7 +98,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         classNumber.setText(courseId);
         className.setText(courseName);
         checkNumber.setText("");
-        register_number.setText(String.format(getString(R.string.formatString_students_registered), studentNum));
+        registerNumber.setText(String.format(getString(R.string.formatString_students_registered), studentNum));
 
         handler = new Handler();
         runnable = new Runnable() {

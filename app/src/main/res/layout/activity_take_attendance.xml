@@ -17,7 +17,7 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/class_number"
+            android:id="@+id/tvClassNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CSCI5412"
@@ -26,7 +26,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/class_name"
+            android:id="@+id/tvClassName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Moblie Computing"
@@ -35,7 +35,7 @@
             android:textColor="@color/colorBlack"/>
 
         <TextView
-            android:id="@+id/register_number"
+            android:id="@+id/tvRegisterNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="102 Students Registered"
@@ -49,7 +49,7 @@
         android:layout_weight="0.2">
 
         <TextView
-            android:id="@+id/check_number"
+            android:id="@+id/tvCheckNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -68,7 +68,7 @@
         android:layout_weight="0.8">
 
         <Button
-            android:id="@+id/stop_btn"
+            android:id="@+id/stopBtn"
             android:layout_width="256dp"
             android:layout_height="256dp"
             android:background="@drawable/round_button_green_selector"

@@ -9,7 +9,7 @@
     android:background="@drawable/gradient_background_white_blue">
 
     <LinearLayout
-        android:id="@+id/course_info"
+        android:id="@+id/llCourseInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -19,7 +19,7 @@
         android:layout_marginBottom="8dp">
 
         <TextView
-            android:id="@+id/class_number"
+            android:id="@+id/tvClassNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
@@ -27,7 +27,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/class_name"
+            android:id="@+id/tvClassName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -35,7 +35,7 @@
             android:textColor="@color/colorBlack"/>
 
         <TextView
-            android:id="@+id/register_number"
+            android:id="@+id/tvRegisterNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorBlack"/>
@@ -43,10 +43,10 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textDescription"
+        android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/course_info"
+        android:layout_below="@id/llCourseInfo"
         android:layout_marginTop="16dp"
         android:text="@string/label_select_date"
         android:textAlignment="textStart"
@@ -56,7 +56,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/textDescription"
+        android:layout_below="@id/tvDescription"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:fillViewport="true">
@@ -67,7 +67,7 @@
             android:orientation="vertical">
 
             <ListView
-                android:id="@+id/lvdatelist"
+                android:id="@+id/lvDateList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </ListView>

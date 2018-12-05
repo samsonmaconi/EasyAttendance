@@ -102,7 +102,7 @@ public class CheckAttendanceActivity extends AppCompatActivity {
         studentId = intent.getStringExtra("userID");
 
         spinner = findViewById(R.id.spinner);
-        signAttendance = findViewById(R.id.btn_markAttendance);
+        signAttendance = findViewById(R.id.btnMarkAttendance);
         classList = new ArrayList<>();
         classIDList = new ArrayList<>();
         classIDString = new ArrayList<>();

@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-// David Cui B00788648 Nov 2018
+// David Cui and Navkaran Kumar Nov 2018
 
 /**
  * adapter for list of lectures in attendance history.
@@ -59,8 +59,8 @@ public class AttendanceHistoryAdapter extends ArrayAdapter<Lecture> {
 
         // set the list item view with content
         if (i != null) {
-            TextView attenDate = v.findViewById(R.id.attendate);
-            TextView attenCount = v.findViewById(R.id.attenCount);
+            TextView tvAttenDate = v.findViewById(R.id.tvAttenDate);
+            TextView tvAttenCount = v.findViewById(R.id.tvAttenCount);
 
             if(position % 2 == 0) {
                 v.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
@@ -68,9 +68,9 @@ public class AttendanceHistoryAdapter extends ArrayAdapter<Lecture> {
                 v.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorWhiteFaded));
             }
 
-            attenDate.setText(df.format(i.getDate()));
+            tvAttenDate.setText(df.format(i.getDate()));
             String formatStr = getContext().getResources().getString(R.string.formatString_students_checked_in);
-            attenCount.setText(String.format(formatStr, i.getNumAttendee()));
+            tvAttenCount.setText(String.format(formatStr, i.getNumAttendee()));
         }
         return v;
     }

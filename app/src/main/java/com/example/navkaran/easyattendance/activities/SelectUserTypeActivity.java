@@ -59,8 +59,8 @@ public class SelectUserTypeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_user_type);
 
         mVisible = true;
-        mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.app_details);
+        mControlsView = findViewById(R.id.llFullscreenContentControls);
+        mContentView = findViewById(R.id.llAppDetails);
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -77,7 +77,7 @@ public class SelectUserTypeActivity extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-       findViewById(R.id.teacher).setOnClickListener(new View.OnClickListener() {
+       findViewById(R.id.btnTeacher).setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                Intent intent1 = new Intent();
@@ -88,7 +88,7 @@ public class SelectUserTypeActivity extends AppCompatActivity {
                startActivity(intent1);
            }
        });
-        findViewById(R.id.student).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnStudent).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent();

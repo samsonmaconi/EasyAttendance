@@ -30,9 +30,9 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        tvUserId = findViewById(R.id.tv_userId);
-        etUserId = findViewById(R.id.et_userId);
-        btSave = findViewById(R.id.bt_save);
+        tvUserId = findViewById(R.id.tvUserId);
+        etUserId = findViewById(R.id.etUserId);
+        btSave = findViewById(R.id.btnSave);
 
         //sp = this.getSharedPreferences("id_data", 0);
         //editor = sp.edit();

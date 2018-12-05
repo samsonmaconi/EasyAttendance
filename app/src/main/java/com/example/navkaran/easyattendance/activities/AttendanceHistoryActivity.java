@@ -41,10 +41,10 @@ public class AttendanceHistoryActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(R.string.title_lecture_list_hist);
 
-        className = findViewById(R.id.class_name);
-        classNumber = findViewById(R.id.class_number);
-        registeredStudents = findViewById(R.id.register_number);
-        datelist = findViewById(R.id.lvdatelist);
+        className = findViewById(R.id.tvClassName);
+        classNumber = findViewById(R.id.tvClassNumber);
+        registeredStudents = findViewById(R.id.tvRegisterNumber);
+        datelist = findViewById(R.id.lvDateList);
 
         intent = getIntent();
         courseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);

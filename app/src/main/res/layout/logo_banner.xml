@@ -14,14 +14,14 @@
         android:layout_marginBottom="24dp">
 
         <ImageView
-            android:id="@+id/iv_logo"
+            android:id="@+id/ivLogo"
             android:layout_width="72dp"
             android:layout_height="80dp"
             android:background="@drawable/logo"
             android:contentDescription="Logo"/>
 
         <ImageView
-            android:id="@+id/iv_easyattend"
+            android:id="@+id/ivEasyAttend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@mipmap/easyattendance"

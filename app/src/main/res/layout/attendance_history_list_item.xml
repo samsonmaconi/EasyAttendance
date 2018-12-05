@@ -7,7 +7,7 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/attendate"
+        android:id="@+id/tvAttenDate"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -23,7 +23,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/attenCount"
+            android:id="@+id/tvAttenCount"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

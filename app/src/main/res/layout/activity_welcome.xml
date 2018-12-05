@@ -15,13 +15,13 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/iv_logo"
+            android:id="@+id/ivLogo"
             android:layout_width="72dp"
             android:layout_height="80dp"
             android:background="@drawable/logo" />
 
         <ImageView
-            android:id="@+id/iv_easyattend"
+            android:id="@+id/ivEasyattend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@mipmap/easyattendance"/>
@@ -30,7 +30,7 @@
 
 
     <EditText
-        android:id="@+id/et_userId"
+        android:id="@+id/etUserId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -39,10 +39,10 @@
         android:maxLines="1"/>
 
     <TextView
-        android:id="@+id/tv_userId"
+        android:id="@+id/tvUserId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/et_userId"
+        android:layout_above="@id/etUserId"
         android:layout_marginBottom="8dp"
         android:text="@string/label_staff_id"
         android:textColor="@color/colorBlack"
@@ -50,10 +50,10 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/bt_save"
+        android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_userId"
+        android:layout_below="@+id/etUserId"
         android:layout_marginTop="30dp"
         android:background="@drawable/rounded_rect_button_blue_selector"
         android:text="Save"
