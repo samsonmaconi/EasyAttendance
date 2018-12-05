@@ -13,6 +13,8 @@ import com.example.navkaran.easyattendance.R;
 
 import java.util.ArrayList;
 
+// Samson Maconi
+
 /**
  * This class handles the display of the attendanceList
  * in the ListView.

@@ -19,6 +19,11 @@ import com.example.navkaran.easyattendance.R;
 
 import java.util.List;
 
+// Navkaran Kumar
+
+/**
+ * the activity that displays all lectures for a course
+ */
 public class AttendanceHistoryActivity extends AppCompatActivity {
     ListView datelist;
     private AttendanceHistoryAdapter adapter;

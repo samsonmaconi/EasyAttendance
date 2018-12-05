@@ -14,6 +14,8 @@ import android.view.View;
 import com.example.navkaran.easyattendance.utils.EasyAttendanceConstants;
 import com.example.navkaran.easyattendance.R;
 
+// Navkaran Kumar
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.

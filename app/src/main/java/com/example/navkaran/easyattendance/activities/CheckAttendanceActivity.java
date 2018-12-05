@@ -1,4 +1,7 @@
 package com.example.navkaran.easyattendance.activities;
+
+// Shengtian Tang
+
 /**
  * This is the only activity seen by the student
  *
