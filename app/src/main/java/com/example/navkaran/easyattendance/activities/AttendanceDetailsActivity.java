@@ -22,7 +22,7 @@ import com.example.navkaran.easyattendance.utils.EasyAttendanceConstants;
 import com.example.navkaran.easyattendance.models.Lecture;
 import com.example.navkaran.easyattendance.models.LectureRepository;
 import com.example.navkaran.easyattendance.R;
-import com.example.navkaran.easyattendance.RequestQueueSingleton;
+import com.example.navkaran.easyattendance.utils.RequestQueueSingleton;
 import com.example.navkaran.easyattendance.utils.VibratorUtility;
 
 import org.json.JSONArray;

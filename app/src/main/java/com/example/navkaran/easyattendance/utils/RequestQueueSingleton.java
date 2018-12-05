@@ -1,4 +1,4 @@
-package com.example.navkaran.easyattendance;
+package com.example.navkaran.easyattendance.utils;
 
 import android.content.Context;
 
