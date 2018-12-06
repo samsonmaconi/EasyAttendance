@@ -15,9 +15,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-// David Cui and Navkaran Kumar Nov 2018
 
 /**
+ * @authors David Cui and Navkaran Kumar
+ * Nov 2018
  * adapter for list of lectures in attendance history.
  * takes care of populating list view with contents of a list.
  */

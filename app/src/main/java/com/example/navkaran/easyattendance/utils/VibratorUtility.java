@@ -5,6 +5,8 @@ import android.os.Vibrator;
 import android.util.Log;
 
 /**
+ * @author Samson Maconi
+ * Nov 2018
  * This is a Singleton Utility Class for
  * initiating device vibrations. It is instantiated
  * at the first call of it's static vibrate method.

@@ -1,7 +1,8 @@
 package com.example.navkaran.easyattendance.utils;
 
 /**
- * a place holder for the constants used for passing extras between activities
+ * @author Navkaran Kumar
+ * A place holder for the constants used for passing extras between activities
  * and other constants such as request codes or baseURL which are shared between activities
  */
 public class EasyAttendanceConstants {

@@ -2,7 +2,7 @@ package com.example.navkaran.easyattendance.activities;
 
 
 // Author: Lan Chen, B00809814
-// activity for checking history attendence for specific lecture
+// activity for checking Attendance History for specific lectures
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;

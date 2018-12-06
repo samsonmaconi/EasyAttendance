@@ -1,19 +1,5 @@
 package com.example.navkaran.easyattendance.activities;
 
-// Shengtian Tang
-
-/**
- * This is the only activity seen by the student
- *
- * This activity will check current lectures through API calls periodically,
- * only near by lectures will be displayed.
- *
- * Once student signed-in, the button will be disabled.
- *
- * The button will be enabled again when students select another near by lecture, so that
- * they can correct their mistakes if they signed-in to a wrong lecture.
- *
- * */
 
 import android.Manifest;
 import android.content.Intent;
@@ -60,6 +46,20 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+// Shengtian Tang
+
+/**
+ * This is the only activity seen by the student
+ *
+ * This activity will check current lectures through API calls periodically,
+ * only near by lectures will be displayed.
+ *
+ * Once student signed-in, the button will be disabled.
+ *
+ * The button will be enabled again when students select another near by lecture, so that
+ * they can correct their mistakes if they signed-in to a wrong lecture.
+ *
+ */
 public class CheckAttendanceActivity extends AppCompatActivity {
 
     private Button signAttendance;

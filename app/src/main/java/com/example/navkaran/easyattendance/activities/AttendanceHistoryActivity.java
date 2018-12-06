@@ -19,13 +19,14 @@ import com.example.navkaran.easyattendance.R;
 
 import java.util.List;
 
-// Navkaran Kumar
-
 /**
- * the activity that displays all lectures for a course
+ * @author Navkaran Kumar
+ * Nov 2018
+ * This activity handles the display of
+ * all historical lectures for a course.
  */
 public class AttendanceHistoryActivity extends AppCompatActivity {
-    ListView datelist;
+    ListView dateList;
     private AttendanceHistoryAdapter adapter;
     private LectureRepository lectureRepository;
     private LiveData<List<Lecture>> lectures;
@@ -44,7 +45,7 @@ public class AttendanceHistoryActivity extends AppCompatActivity {
         className = findViewById(R.id.tvClassName);
         classNumber = findViewById(R.id.tvClassNumber);
         registeredStudents = findViewById(R.id.tvRegisterNumber);
-        datelist = findViewById(R.id.lvDateList);
+        dateList = findViewById(R.id.lvDateList);
 
         intent = getIntent();
         courseKey = intent.getIntExtra(EasyAttendanceConstants.COURSE_KEY, -1);
@@ -61,7 +62,7 @@ public class AttendanceHistoryActivity extends AppCompatActivity {
         lectureRepository = new LectureRepository(getApplication());
         lectures = lectureRepository.getLiveLecturesByCourseKey(courseKey);
         adapter= new AttendanceHistoryAdapter(this, R.layout.attendance_history_list_item, lectures.getValue());
-        datelist.setAdapter(adapter);
+        dateList.setAdapter(adapter);
 
         lectures.observe(this, new Observer<List<Lecture>>() {
             @Override
@@ -70,8 +71,8 @@ public class AttendanceHistoryActivity extends AppCompatActivity {
             }
         });
 
-        //listens to which item in listview user clicks
-        datelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //listens to which item in the listView the user clicks
+        dateList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent();

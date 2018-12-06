@@ -1,7 +1,7 @@
 package com.example.navkaran.easyattendance.activities;
 
 // Author: Lan Chen, B00809814
-// activity for login
+// activity for one-time login
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,9 +34,6 @@ public class WelcomeActivity extends AppCompatActivity {
         etUserId = findViewById(R.id.etUserId);
         btSave = findViewById(R.id.btnSave);
 
-        //sp = this.getSharedPreferences("id_data", 0);
-        //editor = sp.edit();
-        //get the data from select_uer_type Activity
         Intent intent = getIntent();
         role = intent.getStringExtra("userRole");
         if (role != null) {
@@ -78,15 +75,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
                         //close the current activity and open next activity based on which role
                         Intent intent1 = new Intent();
-
-                        /*
-                        if (role.equals("student")) {
-                            intent1.setClass(getApplicationContext(), CheckAttendanceActivity.class);
-                        } else if (role.equals("teacher")) {
-                            intent1.setClass(getApplicationContext(), CourseListActivity.class);
-                        }
-                        */
-
                         intent1.setClass(getApplicationContext(), MainActivity.class);
 
                         //send the data to the next activity

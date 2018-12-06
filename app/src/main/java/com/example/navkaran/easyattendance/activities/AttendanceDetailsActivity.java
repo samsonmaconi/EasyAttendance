@@ -33,9 +33,9 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 
-// Samson Maconi
-
 /**
+ * @author Samson Maconi
+ * Nov 2018
  * This class handles the presentation and saving of the attendance list
  * retrieved from the remote database.
  */
