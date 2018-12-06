@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">Easy Attendance</string>
+
+    <!--Button Text-->
+    <string name="action_done">किया हुआ</string>
+    <string name="action_save">बचाना</string>
+    <string name="action_i_am_a_teacher">मैं एक शिक्षक हूं</string>
+    <string name="action_i_am_a_student">मैं एक छात्र हूँ</string>
+    <string name="action_start_attendance">उपस्थिति शुरू करो</string>
+    <string name="action_stop_attendance">उपस्थिति रोको</string>
+    <string name="action_mark_attendance">उपस्थिति चिह्नित करें</string>
+    <string name="action_delete">हटाना</string>
+
+    <!--Labels-->
+    <string name="label_your_courses">आपके पाठ्यक्रम</string>
+    <string name="label_staff_id">स्टाफ आईडी</string>
+    <string name="label_student_id">छात्र आईडी</string>
+    <string name="label_status">स्थिति</string>
+    <string name="label_select_date">तारीख़ चुनें</string>
+    <string name="label_selected_course">चयनित पाठ्यक्रम</string>
+    <string name="label_course_id">पाठ्यक्रम आईडी</string>
+    <string name="label_course_name">कोर्स का नाम</string>
+    <string name="label_course_student_count">छात्र गणना</string>
+
+    <!--Hints-->
+    <string name="hint_select_a_course">एक कोर्स का चयन करें</string>
+    <string name="hint_please_select_a_course">कृपया एक कोर्स का चयन करें</string>
+    <string name="hint_example_id">उदाहरण के लिए बी00801169</string>
+    <string name="hint_course_id">उदाहरण के लिए सीएससीआई 5708</string>
+    <string name="hint_course_name">उदाहरण के लिए, मोबाइल कंप्यूटिंग</string>
+    <string name="hint_course_student_count">इस कोर्स को कितने छात्र ले रहे हैं?</string>
+    <string name="hint_no_courses">वर्तमान में आपके पास 0 पाठ्यक्रम की जानकारी सहेजी गई है। एक कोर्स जोड़ें</string>
+
+    <!--Formatted Strings-->
+    <string name="formatString_checked_in">%1$d में %2$d आगमन की सूचना दिया</string>
+    <string name="formatString_in_attendance">%1$d में %2$d उपस्थिति हे</string>
+    <string name="formatString_students_registered">%1$d पंजीकृत छात्र</string>
+    <string name="formatString_students_checked_in">%1$d छात्र चेक-इन</string>
+    <string name="formatString_alert_success">आपने सफलतापूर्वक अपनी उपस्थिति को चिह्नित किया है %1$s</string>
+    <string name="formatString_alert_failure_closed">उपस्थिति को चिह्नित करने में असमर्थ %1$s. उपस्थिति बंद</string>
+    <string name="formatString_alert_failure_duplicate">आपने पहले से ही अपनी उपस्थिति को चिह्नित कर लिया है %1$s.</string>
+    <string name="formatString_confirm_delete">क्या आप पक्का इसे हटाना चाहते हैं %1$s?</string>
+    <string name="formatString_confirm_delete_lecture">क्या आप वाकई इस व्याख्यान को हटाना चाहते हैं %1$s?</string>
+
+    <!--Alerts-->
+    <string name="alert_attendance_saved">उपस्थिति विवरण सहेजा गया</string>
+    <string name="alert_canceled_or_incomplete_form">अधूरा फॉर्म</string>
+    <string name="alert_course_updated">पाठ्यक्रम अपडेट किया गया</string>
+    <string name="alert_new_course_added">नया कोर्स जोड़ा गया</string>
+    <string name="alert_course_deleted">पाठ्यक्रम हटा दिया गया</string>
+
+    <!--Activity Titles-->
+    <string name="title_attendance_list">उपस्थिति सूची</string>
+    <string name="title_lecture_list_hist">व्याख्यान इतिहास</string>
+    <string name="title_attendance_list_hist">उपस्थिति सूची (ऐतिहासिक)</string>
+    <string name="title_welcome">स्वागत हे</string>
+    <string name="title_attendance_home">उपस्थिति चिह्नित करें</string>
+    <string name="title_class_attendance">कक्षा उपस्थिति लें</string>
+    <string name="title_course_list">एक कोर्स का चयन करें</string>
+    <string name="title_course_history">एक तिथि का चयन करें</string>
+    <string name="title_edit_course">पाठ्यक्रम संपादित करें</string>
+    <string name="title_add_course">पाठ्यक्रम जोड़ें</string>
+
+    <!--Toast Text-->
+    <string name="toast_welcome_enter_id">कृपया पहले अपना आईडी दर्ज करें</string>
+    <string name="toast_welcome_only_enter_letter_number">कृपया केवल अपनी आईडी के लिए अक्षर और संख्या दर्ज करें</string>
+    <string name="toast_welcome_save">सफलतापूर्वक संचित करना</string>
+    <string name="toast_historychecked_error">त्रुटि, पुनः प्रयास करें</string>
+
+    <!--String array for context menu-->
+    <string-array name="stringArray_course_list_menu">
+        <item>संपादित करें</item>
+        <item>हटाना</item>
+        <item>इतिहास</item>
+    </string-array>
+
+</resources>
