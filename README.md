@@ -13,6 +13,8 @@
 
 Code Available on [our public Github repo](https://github.com/Navkaran0105/EasyAttendance)
 
+We recommend you to view the dev branch, but you may also view the master branch, which is the same as the dev branch.
+
 # Project Summary
 The Easy Attendance application is a Productivity application for Android platform with the promise to simplify the attendance taking process for both teachers and students. It is an app that aims to replace the old way of taking attendance through a paper sheet with the new way of taking attendance through Easy Attendance on Android phones.
 
@@ -49,6 +51,7 @@ Below are the valid API endpoints and their usage syntax:
 
 ## ERD of Local Database
 Below is the schema for the local SQLite database with Room Persistence
+
 ![Local Database Schema](readme_images/local_db.png)
 
 ## Libraries
@@ -73,10 +76,10 @@ To install the application on your device, please follow the following instructi
 Our app features a one-time user setup where the user will be prompted to select their role (Teacher or
 Student), and then their User ID. This information is then stored as a `SharedPreference` to be retrieved at future app launches.
 ```java
-SharedPreferences sp = getSharedPreferences("CONTAINER",Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sp.edit();
-                        editor.putString("userID", id);
-                        editor.putString("userRole", role);
+    SharedPreferences sp = getSharedPreferences("CONTAINER",Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = sp.edit();
+    editor.putString("userID", id);
+    editor.putString("userRole", role);
 ```
 After the user has sucessfully gone through the initial setup, he/she will be routed to the Home Activity for the user's selected role (`CheckAttendanceActivity` class for a *Student* user and `CourseListActivity` class for a *Teacher* user). 
 
@@ -89,12 +92,12 @@ devices (or emulators). The location service must be turned on and functional.
 If we do not check permission before we request location, the app may crash with the "permission denied" error
 
 ```java
-    if (ContextCompat.checkSelfPermission(this, 
-            Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                EasyAttendanceConstants.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) 
+        != PackageManager.PERMISSION_GRANTED) 
+    {
+        ActivityCompat.requestPermissions(this, 
+            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+            EasyAttendanceConstants.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
     }
 ```
 Source: [4]
