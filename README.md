@@ -14,63 +14,43 @@
 Code Available on [our public Github repo](https://github.com/Navkaran0105/EasyAttendance)
 
 # Project Summary
-The Easy Attendance application is a Productivity application for Android platform with the promise 
-to simplify the attendance taking process for both teachers and students. 
-It is an app that aims to replace the old way of taking attendance through a paper sheet with the 
-new way of taking attendance through Easy Attendance on Android phones.
+The Easy Attendance application is a Productivity application for Android platform with the promise to simplify the attendance taking process for both teachers and students. It is an app that aims to replace the old way of taking attendance through a paper sheet with the new way of taking attendance through Easy Attendance on Android phones.
+
 This application was developed to be very intuitive and simple to use for the **target audience: 
 instructors in academic institutions and their students**.
-The application allows instructors to manage a list of the courses they teach. Instructors can 
-click a course and enable students to take attendance for that course. Students can then see the courses
-that they can check-in to and check-in to a course. Instrcutors can see how many students had checked-in 
-and can disable check-in for a course after a time period. Then, instructors can see a list of all 
-students who checked-in and the list is stored so instructors can access in the future. Accessing the 
-attendance history is simple, instructors just have to long-click a course in the course list, and they will 
-see the history option. Apart from the check-in feature, we also used an iterative approach to feature enhancement, 
-the app incorporates some features to improve the user experience incuding Multiple Locales 
-(English, French, Hindi, and Chinese), Haptic Feedback for important buttons, and GPS Location Verification of students.
+The application allows instructors to manage a list of the courses they teach. Instructors can select a course and allow students to take attendance for that course. Students can then see the courses that are available for check-in and then check-in to a course. Instrcutors can see how many students have checked-in 
+and can disable check-in for a course after at his discression. After closing the check-in window, the instructor can then see a list of all 
+students who checked-in susscessfully; this list is then saved so instructors can access the attendance history in the future. 
+
+The development process featured an agile iterative approach to feature enhancement; with the app incorporating essential features to improve the user experience incuding Multiple Locales (English, French, Hindi, and Chinese), Haptic Feedback, and GPS Location Verification.
 
 ![Why Easy Attendance](readme_images/why.png)
 
 ## Backend Logic
-The features of the application is implemented by some important backend logics. They will be described here.
-The application has location verification, which ensures only students who are actually present in class may 
-check-in. This is implemented with the help of the GPS feature. When instructors enabe check-in for a course, 
-the application obtains the instructors' GPS location and stores it in a remote database along with course ID and 
-course name. Then, students' client queries the remote database's REST API interface to obtain a list of the courses 
-and GPS locations, then, the students' GPS location is obtained and compared so only courses within a certain range of 
-the students are displayed to the students, so the students will not see a huge list of courses. Now, students can select 
-a course and check-in to it, the students' GPS and course (instructor) GPS is compared to make sure students are present 
-in the class room. When students check-in successfully, their information are stored in the remote database, and instructors 
-can obtain that list from the remote database and stores it in a local SQLite database for future reference. 
-When an instructor disables check-in, the list of students who checked-in is pulled from the remote database 
-and the remote database clears the related entries so the process can be repeated for future lectures.
+The application has a location verification feature, which ensures only students who are actually present in class may check-in. This is implemented with the help of the GPS feature and a custom lightweight `DistanceChecker` utility class. When instructors enabe check-in for a course, the application obtains the instructor's GPS location and stores it in a remote database along with the selected *Course ID* and *Course Name* as active lectures. 
+
+On the student client, a query is sent to the remote database's REST API endpoint to obtain the list of active lectures and their GPS locations. The student's client then compared the student's GPS location against the location of each active lecture received from the API using the `DistanceChecker` utility class. Only lectures within the range of the students location will be available for the student to check-in to ensure students are present in the class room. 
+
+When students check-in successfully, their information are stored in the remote database. The teacher client retrieves this list from the remote database and stores it in a local SQLite database–after closing the attendance window–for future reference. 
 
 ## Backend Service
-The backend service for exchanging information between instructor and student includes a database on 
-Dalhousie Bluenose and a set of custom REST APIs. When the instructor starts the attendance, 
-The app will send information about the lecture and it's GPS location to the database. 
-Then student side app will make an API call to get a list of current classes. 
-After comparing the GPS location of the student device and lecture, the app will decide which class 
-is available for the student to sign-in. Students who signed-in will add a record contains their name 
-and the course id into the database. Once the instructor stops the attendance, the app will get a list 
-of student who signed-in and clear all records related to this course in the database
+The backend service for exchanging information between instructor and student includes a database on Dalhousie Bluenose and a set of custom REST APIs written in PHP. When the instructor starts the attendance, 
 
-**Start attendance:** https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_info=[class_id],[class_name],[longitude],[latitude]
+Below are the valid API endpoints and their usage syntax:
 
-**Get Student sign-in inforamtion:** https://web.cs.dal.ca/~stang/csci5708/mark.php?student_info=[student_id],[class_id],[attendance]
+* **Start attendance:** https://web.cs.dal.ca/~stang/csci5708/start_attendance.php?class_info=[class_id],[class_name],[longitude],[latitude]
 
-**Get the current lecture list:** https://web.cs.dal.ca/~stang/csci5708/get_lecture_list.php
+* **Send student check-in information:** https://web.cs.dal.ca/~stang/csci5708/mark.php?student_info=[student_id],[class_id],[attendance]
 
-**End attendance:** https://web.cs.dal.ca/~stang/csci5708/end_attendance.php?class_id=[class_id]
+* **Get the list of active lectures:** https://web.cs.dal.ca/~stang/csci5708/get_lecture_list.php
 
-**Get the number of student who signed-in for a specific class:** https://web.cs.dal.ca/~stang/csci5708/count.php?class_id=[class_id]
+* **End attendance and Retrieve students Attendance Log:** https://web.cs.dal.ca/~stang/csci5708/end_attendance.php?class_id=[class_id]
+
+* **Get the number of student who signed-in for a specific class:** https://web.cs.dal.ca/~stang/csci5708/count.php?class_id=[class_id]
 
 ## ERD of Local Database
-add the ERD here
-
-## Sitemap and Clickstream
-add sitemap / clickstream here or not.
+Below is the schema for the local SQLite database with Room Persistence
+![Local Database Schema](readme_images/local_db.png)
 
 ## Libraries
 **Volley HTTP:** Volley is an open source HTTP library that makes networking for Android apps easier
@@ -91,18 +71,18 @@ To install the application on your device, please follow the following instructi
 3. Build and Run the project on Android Studio to your Android phone
 4. Now, the app is installed on your phone
 
-## First Time Use Notes
-Our app has one-time user setup where the user will be prompted to select their role (Teacher or
-Student), and then their User ID. This information is then stored as a `SharedPrefererence`
+## First Time Usage Notes
+Our app features a one-time user setup where the user will be prompted to select their role (Teacher or
+Student), and then their User ID. This information is then stored as a `SharedPreference` to be retrieved at future app launches.
 ```java
 SharedPreferences sp = getSharedPreferences("CONTAINER",Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sp.edit();
                         editor.putString("userID", id);
                         editor.putString("userRole", role);
 ```
-If the user has sucessfully gone through the initial setup once, he/she will be routed to the Home
-Activity for the user's selected role (`CheckAttendanceActivity` class for Students and
-`CourseListActivity` class for teachers). To test this app, you will need a minimum of two Android
+After the user has sucessfully gone through the initial setup, he/she will be routed to the Home Activity for the user's selected role (`CheckAttendanceActivity` class for a *Student* user and `CourseListActivity` class for a *Teacher* user). 
+
+To test this app, you will need a minimum of two Android
 devices (or emulators). The location service must be turned on and functional.
 
 ## Code Examples
@@ -155,13 +135,12 @@ resources.
 **Problem 3: SQL operations for the Room Database must be executed on separate threads to ensure
 main UI thread is never blocked**
 
-Whenever we need to perform a SQL operation, such as Create (Insert), Read (Select), Update, Delete,
+Whenever we need to perform an SQL operation, such as Create (Insert), Read (Select), Update, Delete,
 we must perform the operation on a separate thread because the operation might take long time and so
-it will block the UI thread if it is executed on the UI thread. After studying from one of the Google
-Codelab tutorial, we learned that we can use an AsyncTask in class object to solve this problem.
-Inside our repository class, we have AsyncTasks for each operation where we override the doInBackground
-method to do the SQL operation in the background thread. Then, a wrapper method instantiates an AsyncTask
-objects and execute it, so the SQL operation is performed in a background thread.
+it will block the UI thread if it is executed on the UI thread. After studying  one of the Google Codelab tutorials, we learned that we can use an AsyncTask in class object to solve this problem.
+
+Inside our repository class, we have `AsyncTasks` for each operation where we override the `doInBackground`
+method to do the SQL operation in the background thread. Then, a wrapper method instantiates an `AsyncTask` objects and execute it, so the SQL operation is performed in a background thread.
 
 ```java
     // AsyncTask that does insert operations on another thread
