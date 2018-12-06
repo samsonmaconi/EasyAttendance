@@ -13,6 +13,8 @@
 
 Code Available on [our public Github repo](https://github.com/Navkaran0105/EasyAttendance)
 
+We recommend you to view the dev branch, but you may also view the master branch, which is the same as the dev branch.
+
 # Project Summary
 The Easy Attendance application is a Productivity application for Android platform with the promise to simplify the attendance taking process for both teachers and students. It is an app that aims to replace the old way of taking attendance through a paper sheet with the new way of taking attendance through Easy Attendance on Android phones.
 
