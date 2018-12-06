@@ -1,3 +1,78 @@
 <resources>
-    <string name="app_name">EasyAttendance</string>
+    <string name="app_name">Easy Attendance</string>
+
+    <!--Button Text-->
+    <string name="action_done">Done</string>
+    <string name="action_save">Save</string>
+    <string name="action_i_am_a_teacher">I am a teacher</string>
+    <string name="action_i_am_a_student">I am a student</string>
+    <string name="action_start_attendance">Start Attendance</string>
+    <string name="action_stop_attendance">Stop Attendance</string>
+    <string name="action_mark_attendance">Mark Attendance</string>
+    <string name="action_delete">Delete</string>
+
+    <!--Labels-->
+    <string name="label_your_courses">Your Courses</string>
+    <string name="label_staff_id">Staff ID</string>
+    <string name="label_student_id">Student ID</string>
+    <string name="label_status">Status</string>
+    <string name="label_select_date">Select Date</string>
+    <string name="label_selected_course">Selected Course</string>
+    <string name="label_course_id">Course ID</string>
+    <string name="label_course_name">Course Name</string>
+    <string name="label_course_student_count">Student Count</string>
+
+    <!--Hints-->
+    <string name="hint_select_a_course">Select A Course</string>
+    <string name="hint_please_select_a_course">Please Select A Course</string>
+    <string name="hint_example_id">e.g B00801169</string>
+    <string name="hint_course_id">e.g CSCI 5708</string>
+    <string name="hint_course_name">e.g Mobile Computing</string>
+    <string name="hint_course_student_count">How many students in this course?</string>
+    <string name="hint_no_courses">You currently have 0 course information saved. Add a course</string>
+
+    <!--Formatted Strings-->
+    <string name="formatString_checked_in">%1$d of %2$d checked-in</string>
+    <string name="formatString_in_attendance">%1$d of %2$d in attendance</string>
+    <string name="formatString_students_registered">%1$d Students Registered</string>
+    <string name="formatString_students_checked_in">%1$d Students Checked-in</string>
+    <string name="formatString_alert_success">You have successfully marked your attendance for %1$s</string>
+    <string name="formatString_alert_failure_closed">Unable to mark attendance for %1$s. Attendance closed.</string>
+    <string name="formatString_alert_failure_duplicate">You have already marked your attendance for %1$s.</string>
+    <string name="formatString_confirm_delete">Are you sure you want to Delete %1$s?</string>
+    <string name="formatString_confirm_delete_lecture">Are you sure you want to Delete this lecture of %1$s?</string>
+
+    <!--Alerts-->
+    <string name="alert_attendance_saved">Attendance Details Saved</string>
+    <string name="alert_canceled_or_incomplete_form">Cancelled or Incomplete Form</string>
+    <string name="alert_course_updated">Course Updated</string>
+    <string name="alert_new_course_added">New Course Added</string>
+    <string name="alert_course_deleted">Course Deleted</string>
+
+    <!--Activity Titles-->
+    <string name="title_attendance_list">Attendance List</string>
+    <string name="title_lecture_list_hist">Lecture History</string>
+    <string name="title_attendance_list_hist">Attendance List (Historical)</string>
+    <string name="title_welcome">Welcome</string>
+    <string name="title_attendance_home">Mark Attendance</string>
+    <string name="title_class_attendance">Take Class Attendance</string>
+    <string name="title_course_list">Select a Course</string>
+    <string name="title_course_history">Select a Date</string>
+    <string name="title_edit_course">Edit Course</string>
+    <string name="title_add_course">Add Course</string>
+
+    <!--Toast Text-->
+    <string name="toast_welcome_enter_id">please enter your ID first</string>
+    <string name="toast_welcome_only_enter_letter_number">please only enter letter and number for your ID</string>
+    <string name="toast_welcome_save">save successfully</string>
+    <string name="toast_historychecked_error">Error, try again</string>
+
+
+    <!--String array for context menu-->
+    <string-array name="stringArray_course_list_menu">
+        <item>Edit</item>
+        <item>Delete</item>
+        <item>History</item>
+    </string-array>
+
 </resources>

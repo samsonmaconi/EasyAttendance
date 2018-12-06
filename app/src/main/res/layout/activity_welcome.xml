@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Lan Chen-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/background_gradient">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="72dp"
+            android:layout_height="80dp"
+            android:background="@drawable/logo" />
+
+        <ImageView
+            android:id="@+id/ivEasyattend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/easyattendance"/>
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/etUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:inputType="text"
+        android:hint="eg. B00809814"
+        android:maxLines="1"/>
+
+    <TextView
+        android:id="@+id/tvUserId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/etUserId"
+        android:layout_marginBottom="8dp"
+        android:text="@string/label_staff_id"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etUserId"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounded_rect_button_blue_selector"
+        android:text="Save"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp" />
+
+
+</RelativeLayout>
