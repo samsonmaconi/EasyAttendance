@@ -3,14 +3,6 @@
 
 # Identification
 ### Project Title: Easy Attendance
-### Group 14:
-- David Cui, B00788648, yq506499@dal.ca
-- Lan Chen, B00809814, lan.chen@dal.ca
-- Navkaran Kumar, B00782012, NKumar@dal.ca
-- Samson Maconi, B00801169, samson.maconi@dal.ca
-- Shengtian Tang, B00690131, sh625730@dal.ca
-- Xiaoyu Tian, B00692270, xy503482@dal.ca
-
 
 # Project Summary
 The Easy Attendance application is a Productivity application for Android platform with the promise to simplify the attendance taking process for both teachers and students. It is an app that aims to replace the old way of taking attendance through a paper sheet with the new way of taking attendance through Easy Attendance on Android phones.
